@@ -5,6 +5,7 @@
 #import "PdAudioController.h"
 #import "PdDispatcher.h"
 #import "PdBase.h"
+#import "PdBase_Extension.h"
 #import "F53OSC.h"
 #import "F53OSCProtocols.h"
 #import "F53OSCParser.h"
@@ -15,4 +16,12 @@
 #import "F53OSCClient.h"
 #import "F53OSCServer.h"
 #import "F53OSCTimeTag.h"
+#import "vas_fir_binaural.h"
+#import "rwa_binauralrir~.h"
+#import "rwa_binauralsimple~.h"
+#import "rwa_reverb~.h"
 #include <ifaddrs.h>
+
+extern void freeverb_tilde_setup(void);
+
+

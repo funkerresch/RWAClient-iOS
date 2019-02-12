@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rwa>
+<rwa version="1.0">
+    <manifest rwascript=""/>
+    <scene name="Scene 0" lon="13.40358390" lat="52.53403690" zoom="17" numberofstates="4" areatype="4" radius="200" width="200" height="200" level="-1" exitoffset="0" fallbackdisabled="0" minstaytime="4">
+        <corners>
+            <lon>13.40713978</lon>
+            <lat>52.53456322</lat>
+            <lon>13.40608835</lon>
+            <lat>52.53639051</lat>
+            <lon>13.40477943</lon>
+            <lat>52.53900079</lat>
+            <lon>13.39750528</lon>
+            <lat>52.53689952</lat>
+            <lon>13.39924335</lon>
+            <lat>52.53269670</lat>
+            <lon>13.40447903</lon>
+            <lat>52.53270975</lat>
+        </corners>
+        <exitoffsetcorners/>
+        <state name="FALLBACK" type="1" areatype="1" zoom="18" assetsfollowstate="1" defaultplaybacktype="3" lockposition="0" statewithinstate="0" leaveafterassetsfinish="0" leaveonlyafterassetsfinish="0" enteronlyonce="0" timeout="0" minstaytime="0">
+            <enterconditions>
+                <gps isgps="0" lon="13.40534806" lat="52.53559434" radius="10" width="20" height="20" enteroffset="-6" exitoffset="0"/>
+                <requiredstates/>
+                <corners/>
+                <exitoffsetcorners/>
+            </enterconditions>
+            <actions>
+                <nextstate></nextstate>
+                <hintstate></hintstate>
+            </actions>
+            <assets/>
+        </state>
+        <state name="BACKGROUND" type="2" areatype="1" zoom="18" assetsfollowstate="1" defaultplaybacktype="3" lockposition="0" statewithinstate="0" leaveafterassetsfinish="0" leaveonlyafterassetsfinish="0" enteronlyonce="0" timeout="0" minstaytime="4">
+            <enterconditions>
+                <gps isgps="0" lon="13.40435370" lat="52.53578992" radius="10" width="-1" height="-1" enteroffset="-6" exitoffset="0"/>
+                <requiredstates/>
+                <corners/>
+                <exitoffsetcorners/>
+            </enterconditions>
+            <actions>
+                <nextstate></nextstate>
+                <hintstate></hintstate>
+            </actions>
+            <assets/>
+        </state>
+        <state name="Forum" type="3" areatype="1" zoom="18" assetsfollowstate="1" defaultplaybacktype="4" lockposition="0" statewithinstate="0" leaveafterassetsfinish="0" leaveonlyafterassetsfinish="0" enteronlyonce="0" timeout="0" minstaytime="4">
+            <enterconditions>
+                <gps isgps="1" lon="13.39928627" lat="52.53640356" radius="50" width="100" height="100" enteroffset="-6" exitoffset="0"/>
+                <requiredstates/>
+                <corners/>
+                <exitoffsetcorners/>
+            </enterconditions>
+            <actions>
+                <nextstate></nextstate>
+                <hintstate></hintstate>
+            </actions>
+            <assets>
+                <asset url="/Users/admin/Desktop/AES2019ListeningTests/assets/assets/AES_Forum.pd" type="3" gain="1" hascoordinates="1" lon="13.39928627" lat="52.53640356" playbacktype="4" damping="1" dampingfactor="30" dampingtrim="2" dampingmin="0" dampingmax="1" mindistance="-1" fadein="50" fadeout="50" crossfadetime="100" duration="0" lockposition="0" alwaysplayfrombeginning="1" loop="0" mute="0" headtrackerrelative2source="1" loopuntilendposition="0" gps2pd="0" isexclusive="0" channelradius="20" rawsensors2pd="0" playonlyonce="0" speed="20" move="0" rotateoffset="0" rotatefrequency="0" rotate="0" fixedazimuth="-1" fixeddistance="-1" fixedelevation="-1" startpositionlon="13.3993" startpositionlat="52.5364" offset="0">
+                    <channelpositions/>
+                </asset>
+                <asset url="/Users/admin/Desktop/AES2019ListeningTests/assets/assets/cicerospeech.wav" type="1" gain="1" hascoordinates="1" lon="13.39928627" lat="52.53640356" playbacktype="4" damping="1" dampingfactor="30" dampingtrim="2" dampingmin="0" dampingmax="1" mindistance="-1" fadein="50" fadeout="50" crossfadetime="100" duration="48956" lockposition="0" alwaysplayfrombeginning="1" loop="0" mute="1" headtrackerrelative2source="1" loopuntilendposition="0" gps2pd="0" isexclusive="0" channelradius="20" rawsensors2pd="0" playonlyonce="0" speed="20" move="0" rotateoffset="0" rotatefrequency="0" rotate="0" fixedazimuth="-1" fixeddistance="-1" fixedelevation="-1" startpositionlon="13.3993" startpositionlat="52.5364" offset="0">
+                    <channelpositions/>
+                </asset>
+            </assets>
+        </state>
+        <state name="Forum10partitions" type="3" areatype="1" zoom="18" assetsfollowstate="1" defaultplaybacktype="4" lockposition="0" statewithinstate="0" leaveafterassetsfinish="0" leaveonlyafterassetsfinish="0" enteronlyonce="0" timeout="0" minstaytime="4">
+            <enterconditions>
+                <gps isgps="1" lon="13.39979053" lat="52.53496131" radius="50" width="100" height="100" enteroffset="-6" exitoffset="0"/>
+                <requiredstates/>
+                <corners/>
+                <exitoffsetcorners/>
+            </enterconditions>
+            <actions>
+                <nextstate></nextstate>
+                <hintstate></hintstate>
+            </actions>
+            <assets>
+                <asset url="/Users/admin/Desktop/AES2019ListeningTests/assets/assets/cicerospeech.wav" type="1" gain="1" hascoordinates="1" lon="13.39979053" lat="52.53496131" playbacktype="4" damping="1" dampingfactor="30" dampingtrim="2" dampingmin="0" dampingmax="1" mindistance="-1" fadein="50" fadeout="50" crossfadetime="100" duration="48956" lockposition="0" alwaysplayfrombeginning="1" loop="0" mute="1" headtrackerrelative2source="1" loopuntilendposition="0" gps2pd="0" isexclusive="0" channelradius="20" rawsensors2pd="0" playonlyonce="0" speed="20" move="0" rotateoffset="0" rotatefrequency="0" rotate="0" fixedazimuth="-1" fixeddistance="-1" fixedelevation="-1" startpositionlon="13.3998" startpositionlat="52.535" offset="0">
+                    <channelpositions/>
+                </asset>
+                <asset url="/Users/admin/Desktop/AES2019ListeningTests/assets/assets/AES_Forum_10Partitions.pd" type="3" gain="1" hascoordinates="1" lon="13.39979053" lat="52.53496131" playbacktype="4" damping="1" dampingfactor="30" dampingtrim="2" dampingmin="0" dampingmax="1" mindistance="-1" fadein="50" fadeout="50" crossfadetime="100" duration="0" lockposition="0" alwaysplayfrombeginning="1" loop="0" mute="0" headtrackerrelative2source="1" loopuntilendposition="0" gps2pd="0" isexclusive="0" channelradius="20" rawsensors2pd="0" playonlyonce="0" speed="20" move="0" rotateoffset="0" rotatefrequency="0" rotate="0" fixedazimuth="-1" fixeddistance="-1" fixedelevation="-1" startpositionlon="13.3998" startpositionlat="52.535" offset="0">
+                    <channelpositions/>
+                </asset>
+            </assets>
+        </state>
+    </scene>
+</rwa>

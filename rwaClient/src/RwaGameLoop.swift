@@ -42,21 +42,16 @@ class RwaGameLoop:NSObject, PdListener
         stereoOut = nil
         dispatcher = PdDispatcher()
         PdBase.setDelegate(dispatcher)
+        rwa_binauralrir_tilde_setup();
+        rwa_binauralsimple_tilde_setup();
+        rwa_reverb_tilde_setup();
+        freeverb_tilde_setup();
+        
          super.init()
        
         stereoOut = PdBase.openFile("stereoout.pd", path: Bundle.main.resourcePath)
         if stereoOut == nil {
             print("Failed to open patch!")
-        }
-        
-        for _ in 0 ..< RWA_MAXNUMBEROFPATCHERS
-        {
-            var patch:pdPatcher
-            patch = pdPatcher.init(patcherTag: PdBase.openFile("rwaplayermonobinaural.pd", path: Bundle.main.resourcePath) ,  isBusy: false, myAsset: RwaAsset())
-            binauralMonoPatchers.append(patch)
-            let tag:Int32 = PdBase.dollarZero(forFile: patch.patcherTag)
-            let receivedFromPd:String = "\(tag)-playfinished"
-            dispatcher?.add(self, forSource: receivedFromPd)
         }
         
         for _ in 0 ..< RWA_MAXNUMBEROFPATCHERS
@@ -72,28 +67,8 @@ class RwaGameLoop:NSObject, PdListener
         for _ in 0 ..< RWA_MAXNUMBEROFSTEREOPATCHERS
         {
             var patch:pdPatcher
-            patch = pdPatcher.init(patcherTag: PdBase.openFile("rwaplayerstereobinaural.pd", path: Bundle.main.resourcePath) ,  isBusy: false, myAsset: RwaAsset())
-            binauralStereoPatchers.append(patch)
-            let tag:Int32 = PdBase.dollarZero(forFile: patch.patcherTag)
-            let receivedFromPd:String = "\(tag)-playfinished"
-            dispatcher?.add(self, forSource: receivedFromPd)
-        }
-        
-        for _ in 0 ..< RWA_MAXNUMBEROFSTEREOPATCHERS
-        {
-            var patch:pdPatcher
             patch = pdPatcher.init(patcherTag: PdBase.openFile("rwaplayerstereobinaural_fabian.pd", path: Bundle.main.resourcePath) ,  isBusy: false, myAsset: RwaAsset())
             binauralStereoPatchers_fabian.append(patch)
-            let tag:Int32 = PdBase.dollarZero(forFile: patch.patcherTag)
-            let receivedFromPd:String = "\(tag)-playfinished"
-            dispatcher?.add(self, forSource: receivedFromPd)
-        }
-        
-        for _ in 0 ..< RWA_MAXNUMBEROF5CHANNELPATCHERS
-        {
-            var patch:pdPatcher
-            patch = pdPatcher.init(patcherTag: PdBase.openFile("rwaplayer5_1channelbinaural.pd", path: Bundle.main.resourcePath) ,  isBusy: false, myAsset: RwaAsset())
-            binaural5ChannelPatchers.append(patch)
             let tag:Int32 = PdBase.dollarZero(forFile: patch.patcherTag)
             let receivedFromPd:String = "\(tag)-playfinished"
             dispatcher?.add(self, forSource: receivedFromPd)
@@ -171,7 +146,6 @@ class RwaGameLoop:NSObject, PdListener
     
     func freeDynamicPatchers()
     {
-        print("FREE DYN");
         for i in 0 ..< dynamicPatchCounter
         {
             dynamicPatchers[i].isBusy = false

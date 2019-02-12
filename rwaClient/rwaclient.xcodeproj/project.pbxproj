@@ -11,30 +11,45 @@
 		8429C291215BB68700D2E5E0 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8429C290215BB68700D2E5E0 /* MapViewController.swift */; };
 		8461E16A2120377E00E7DD4F /* RwaLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461E1692120377E00E7DD4F /* RwaLocation.swift */; };
 		8461E16C21203C4D00E7DD4F /* RwaArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461E16B21203C4D00E7DD4F /* RwaArea.swift */; };
-		849142BA1F1CC3E0001A51C2 /* F53OSCBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8491429D1F1CC3E0001A51C2 /* F53OSCBundle.m */; };
-		849142BB1F1CC3E0001A51C2 /* F53OSCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 8491429F1F1CC3E0001A51C2 /* F53OSCClient.m */; };
-		849142BC1F1CC3E0001A51C2 /* F53OSCMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 849142A21F1CC3E0001A51C2 /* F53OSCMessage.m */; };
-		849142BD1F1CC3E0001A51C2 /* F53OSCPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = 849142A41F1CC3E0001A51C2 /* F53OSCPacket.m */; };
-		849142BE1F1CC3E0001A51C2 /* F53OSCParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 849142A61F1CC3E0001A51C2 /* F53OSCParser.m */; };
-		849142BF1F1CC3E0001A51C2 /* F53OSCServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 849142A91F1CC3E0001A51C2 /* F53OSCServer.m */; };
-		849142C01F1CC3E0001A51C2 /* F53OSCSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 849142AB1F1CC3E0001A51C2 /* F53OSCSocket.m */; };
-		849142C11F1CC3E0001A51C2 /* F53OSCTimeTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 849142AD1F1CC3E0001A51C2 /* F53OSCTimeTag.m */; };
-		849142C21F1CC3E0001A51C2 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 849142AF1F1CC3E0001A51C2 /* GCDAsyncSocket.m */; };
-		849142C31F1CC3E0001A51C2 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 849142B11F1CC3E0001A51C2 /* GCDAsyncUdpSocket.m */; };
-		849142C41F1CC3E0001A51C2 /* NSData+F53OSCBlob.m in Sources */ = {isa = PBXBuildFile; fileRef = 849142B31F1CC3E0001A51C2 /* NSData+F53OSCBlob.m */; };
-		849142C51F1CC3E0001A51C2 /* NSDate+F53OSCTimeTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 849142B51F1CC3E0001A51C2 /* NSDate+F53OSCTimeTag.m */; };
-		849142C61F1CC3E0001A51C2 /* NSNumber+F53OSCNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 849142B71F1CC3E0001A51C2 /* NSNumber+F53OSCNumber.m */; };
-		849142C71F1CC3E0001A51C2 /* NSString+F53OSCString.m in Sources */ = {isa = PBXBuildFile; fileRef = 849142B91F1CC3E0001A51C2 /* NSString+F53OSCString.m */; };
-		84A2C808213C18B10053BE5E /* rwaplayer7channelbinaural_fabian.pd in Resources */ = {isa = PBXBuildFile; fileRef = 84A2C807213C18B10053BE5E /* rwaplayer7channelbinaural_fabian.pd */; };
-		84A668F61F2360A000BE16B3 /* rwaloopplayermono.pd in Resources */ = {isa = PBXBuildFile; fileRef = 84A668EF1F2360A000BE16B3 /* rwaloopplayermono.pd */; };
-		84A668F71F2360A000BE16B3 /* rwaloopplayerstereo.pd in Resources */ = {isa = PBXBuildFile; fileRef = 84A668F01F2360A000BE16B3 /* rwaloopplayerstereo.pd */; };
-		84A668F81F2360A000BE16B3 /* rwaplayer5_1channelbinaural.pd in Resources */ = {isa = PBXBuildFile; fileRef = 84A668F11F2360A000BE16B3 /* rwaplayer5_1channelbinaural.pd */; };
-		84A668F91F2360A000BE16B3 /* rwaplayermonobinaural.pd in Resources */ = {isa = PBXBuildFile; fileRef = 84A668F21F2360A000BE16B3 /* rwaplayermonobinaural.pd */; };
-		84A668FB1F2360A000BE16B3 /* rwaplayerstereobinaural.pd in Resources */ = {isa = PBXBuildFile; fileRef = 84A668F41F2360A000BE16B3 /* rwaplayerstereobinaural.pd */; };
-		84A668FC1F2360A000BE16B3 /* stereoout.pd in Resources */ = {isa = PBXBuildFile; fileRef = 84A668F51F2360A000BE16B3 /* stereoout.pd */; };
+		84BD68462211B636005A22B5 /* libpd-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84BD683F2211B624005A22B5 /* libpd-ios.a */; };
+		84BD684D2211B749005A22B5 /* vas_dynamicFirChannel.c in Sources */ = {isa = PBXBuildFile; fileRef = 84BD68472211B748005A22B5 /* vas_dynamicFirChannel.c */; };
+		84BD684E2211B749005A22B5 /* vas_fir.c in Sources */ = {isa = PBXBuildFile; fileRef = 84BD68482211B748005A22B5 /* vas_fir.c */; };
+		84BD684F2211B749005A22B5 /* vas_gps_util.c in Sources */ = {isa = PBXBuildFile; fileRef = 84BD68492211B748005A22B5 /* vas_gps_util.c */; };
+		84BD68502211B749005A22B5 /* vas_fir_binaural.c in Sources */ = {isa = PBXBuildFile; fileRef = 84BD684A2211B748005A22B5 /* vas_fir_binaural.c */; };
+		84BD68512211B749005A22B5 /* vas_mem.c in Sources */ = {isa = PBXBuildFile; fileRef = 84BD684B2211B749005A22B5 /* vas_mem.c */; };
+		84BD68522211B749005A22B5 /* vas_util.c in Sources */ = {isa = PBXBuildFile; fileRef = 84BD684C2211B749005A22B5 /* vas_util.c */; };
+		84BD68572211BA6E005A22B5 /* rwa_binauralsimple~.c in Sources */ = {isa = PBXBuildFile; fileRef = 84BD68532211BA6D005A22B5 /* rwa_binauralsimple~.c */; };
+		84BD68582211BA6E005A22B5 /* rwa_binauralrir~.c in Sources */ = {isa = PBXBuildFile; fileRef = 84BD68542211BA6D005A22B5 /* rwa_binauralrir~.c */; };
+		84BD68592211BA6E005A22B5 /* rwa_firobject.c in Sources */ = {isa = PBXBuildFile; fileRef = 84BD68552211BA6E005A22B5 /* rwa_firobject.c */; };
+		84BD685A2211BA6E005A22B5 /* rwa_reverb~.c in Sources */ = {isa = PBXBuildFile; fileRef = 84BD68562211BA6E005A22B5 /* rwa_reverb~.c */; };
+		84C70E972212E48E005C49C3 /* freeverb~.c in Sources */ = {isa = PBXBuildFile; fileRef = 84C70E962212E48E005C49C3 /* freeverb~.c */; };
+		84C70EA62212E6DA005C49C3 /* rwaplayer5_1channelbinaural_fabian.pd in Resources */ = {isa = PBXBuildFile; fileRef = 84C70E9B2212E6D9005C49C3 /* rwaplayer5_1channelbinaural_fabian.pd */; };
+		84C70EA72212E6DA005C49C3 /* rwaReferencePatch.pd in Resources */ = {isa = PBXBuildFile; fileRef = 84C70E9C2212E6D9005C49C3 /* rwaReferencePatch.pd */; };
+		84C70EA82212E6DA005C49C3 /* stereoout.pd in Resources */ = {isa = PBXBuildFile; fileRef = 84C70E9D2212E6D9005C49C3 /* stereoout.pd */; };
+		84C70EA92212E6DA005C49C3 /* fabian_dir256.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84C70E9E2212E6D9005C49C3 /* fabian_dir256.txt */; };
+		84C70EAA2212E6DA005C49C3 /* rwaloopplayermono.pd in Resources */ = {isa = PBXBuildFile; fileRef = 84C70E9F2212E6D9005C49C3 /* rwaloopplayermono.pd */; };
+		84C70EAB2212E6DA005C49C3 /* rwaplayer7channelbinaural_fabian.pd in Resources */ = {isa = PBXBuildFile; fileRef = 84C70EA02212E6D9005C49C3 /* rwaplayer7channelbinaural_fabian.pd */; };
+		84C70EAC2212E6DA005C49C3 /* rwaplayerstereobinaural_fabian.pd in Resources */ = {isa = PBXBuildFile; fileRef = 84C70EA12212E6D9005C49C3 /* rwaplayerstereobinaural_fabian.pd */; };
+		84C70EAD2212E6DA005C49C3 /* stereoout_biquad.pd in Resources */ = {isa = PBXBuildFile; fileRef = 84C70EA22212E6D9005C49C3 /* stereoout_biquad.pd */; };
+		84C70EAE2212E6DA005C49C3 /* rwaloopplayerstereo.pd in Resources */ = {isa = PBXBuildFile; fileRef = 84C70EA32212E6D9005C49C3 /* rwaloopplayerstereo.pd */; };
+		84C70EAF2212E6DA005C49C3 /* rwabinauralwrappermono.pd in Resources */ = {isa = PBXBuildFile; fileRef = 84C70EA42212E6DA005C49C3 /* rwabinauralwrappermono.pd */; };
+		84C70EB02212E6DA005C49C3 /* rwaplayermonobinaural_fabian.pd in Resources */ = {isa = PBXBuildFile; fileRef = 84C70EA52212E6DA005C49C3 /* rwaplayermonobinaural_fabian.pd */; };
+		84C70EB42212EF20005C49C3 /* PdBase_Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C70EB32212EF20005C49C3 /* PdBase_Extension.m */; };
+		84C70EC32213148A005C49C3 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C70EB52213148A005C49C3 /* GCDAsyncUdpSocket.m */; };
+		84C70EC42213148A005C49C3 /* F53OSCSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C70EB62213148A005C49C3 /* F53OSCSocket.m */; };
+		84C70EC52213148A005C49C3 /* F53OSCPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C70EB72213148A005C49C3 /* F53OSCPacket.m */; };
+		84C70EC62213148A005C49C3 /* NSDate+F53OSCTimeTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C70EB82213148A005C49C3 /* NSDate+F53OSCTimeTag.m */; };
+		84C70EC72213148A005C49C3 /* F53OSCBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C70EB92213148A005C49C3 /* F53OSCBundle.m */; };
+		84C70EC82213148A005C49C3 /* F53OSCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C70EBA2213148A005C49C3 /* F53OSCClient.m */; };
+		84C70EC92213148A005C49C3 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C70EBB2213148A005C49C3 /* GCDAsyncSocket.m */; };
+		84C70ECA2213148A005C49C3 /* NSData+F53OSCBlob.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C70EBC2213148A005C49C3 /* NSData+F53OSCBlob.m */; };
+		84C70ECB2213148A005C49C3 /* F53OSCTimeTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C70EBD2213148A005C49C3 /* F53OSCTimeTag.m */; };
+		84C70ECC2213148A005C49C3 /* NSString+F53OSCString.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C70EBE2213148A005C49C3 /* NSString+F53OSCString.m */; };
+		84C70ECD2213148A005C49C3 /* F53OSCServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C70EBF2213148A005C49C3 /* F53OSCServer.m */; };
+		84C70ECE2213148A005C49C3 /* F53OSCParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C70EC02213148A005C49C3 /* F53OSCParser.m */; };
+		84C70ECF2213148A005C49C3 /* NSNumber+F53OSCNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C70EC12213148A005C49C3 /* NSNumber+F53OSCNumber.m */; };
+		84C70ED02213148A005C49C3 /* F53OSCMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C70EC22213148A005C49C3 /* F53OSCMessage.m */; };
 		84D7F166217DDF1F0082843F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84D7F165217DDF1F0082843F /* MapKit.framework */; };
-		84D917EB2129F363000C85A2 /* rwaplayermonobinaural_fabian.pd in Resources */ = {isa = PBXBuildFile; fileRef = 84D917E92129F363000C85A2 /* rwaplayermonobinaural_fabian.pd */; };
-		84D917EC2129F363000C85A2 /* rwaplayerstereobinaural_fabian.pd in Resources */ = {isa = PBXBuildFile; fileRef = 84D917EA2129F363000C85A2 /* rwaplayerstereobinaural_fabian.pd */; };
 		84EDF460216CBD1300EBA052 /* ControlDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EDF45F216CBD1300EBA052 /* ControlDataViewController.swift */; };
 		84F48CEA1F24B14C00869BF2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F48CDB1F24B14C00869BF2 /* AppDelegate.swift */; };
 		84F48CEB1F24B14C00869BF2 /* CoreLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F48CDC1F24B14C00869BF2 /* CoreLocationController.swift */; };
@@ -52,10 +67,38 @@
 		84F48D001F24B26C00869BF2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84F48CFE1F24B26C00869BF2 /* Assets.xcassets */; };
 		84F48D061F24B2AB00869BF2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84F48D021F24B2AB00869BF2 /* LaunchScreen.storyboard */; };
 		84F48D071F24B2AB00869BF2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84F48D041F24B2AB00869BF2 /* Main.storyboard */; };
-		84FFFFEE2126C11A00294898 /* fabian_dir256.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84FFFFEA2126C11A00294898 /* fabian_dir256.txt */; };
-		84FFFFF12126C11A00294898 /* earplug_data.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84FFFFED2126C11A00294898 /* earplug_data.txt */; };
-		84FFFFF32126C8A500294898 /* rwaplayer5_1channelbinaural_fabian.pd in Resources */ = {isa = PBXBuildFile; fileRef = 84FFFFF22126C8A500294898 /* rwaplayer5_1channelbinaural_fabian.pd */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		84BD683E2211B624005A22B5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84BD68372211B624005A22B5 /* libpd.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = "libpd-ios";
+		};
+		84BD68402211B624005A22B5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84BD68372211B624005A22B5 /* libpd.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 119013AB1486450C00086F19;
+			remoteInfo = "libpd-osx";
+		};
+		84BD68422211B624005A22B5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84BD68372211B624005A22B5 /* libpd.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 30C3D36D1FAA200100C67F08;
+			remoteInfo = "libpd-ios-multi";
+		};
+		84BD68442211B624005A22B5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84BD68372211B624005A22B5 /* libpd.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 30C3D2FA1FAA1FCC00C67F08;
+			remoteInfo = "libpd-osx-multi";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		842212311F939E23004BF9C9 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
@@ -63,47 +106,46 @@
 		8436A26B1C3156F400A4E328 /* rwaclient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rwaclient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8461E1692120377E00E7DD4F /* RwaLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RwaLocation.swift; path = src/RwaLocation.swift; sourceTree = "<group>"; };
 		8461E16B21203C4D00E7DD4F /* RwaArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RwaArea.swift; path = src/RwaArea.swift; sourceTree = "<group>"; };
-		8491429B1F1CC3E0001A51C2 /* F53OSC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = F53OSC.h; path = "F53OSC-master/F53OSC.h"; sourceTree = "<group>"; };
-		8491429C1F1CC3E0001A51C2 /* F53OSCBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = F53OSCBundle.h; path = "F53OSC-master/F53OSCBundle.h"; sourceTree = "<group>"; };
-		8491429D1F1CC3E0001A51C2 /* F53OSCBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = F53OSCBundle.m; path = "F53OSC-master/F53OSCBundle.m"; sourceTree = "<group>"; };
-		8491429E1F1CC3E0001A51C2 /* F53OSCClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = F53OSCClient.h; path = "F53OSC-master/F53OSCClient.h"; sourceTree = "<group>"; };
-		8491429F1F1CC3E0001A51C2 /* F53OSCClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = F53OSCClient.m; path = "F53OSC-master/F53OSCClient.m"; sourceTree = "<group>"; };
-		849142A01F1CC3E0001A51C2 /* F53OSCFoundationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = F53OSCFoundationAdditions.h; path = "F53OSC-master/F53OSCFoundationAdditions.h"; sourceTree = "<group>"; };
-		849142A11F1CC3E0001A51C2 /* F53OSCMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = F53OSCMessage.h; path = "F53OSC-master/F53OSCMessage.h"; sourceTree = "<group>"; };
-		849142A21F1CC3E0001A51C2 /* F53OSCMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = F53OSCMessage.m; path = "F53OSC-master/F53OSCMessage.m"; sourceTree = "<group>"; };
-		849142A31F1CC3E0001A51C2 /* F53OSCPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = F53OSCPacket.h; path = "F53OSC-master/F53OSCPacket.h"; sourceTree = "<group>"; };
-		849142A41F1CC3E0001A51C2 /* F53OSCPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = F53OSCPacket.m; path = "F53OSC-master/F53OSCPacket.m"; sourceTree = "<group>"; };
-		849142A51F1CC3E0001A51C2 /* F53OSCParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = F53OSCParser.h; path = "F53OSC-master/F53OSCParser.h"; sourceTree = "<group>"; };
-		849142A61F1CC3E0001A51C2 /* F53OSCParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = F53OSCParser.m; path = "F53OSC-master/F53OSCParser.m"; sourceTree = "<group>"; };
-		849142A71F1CC3E0001A51C2 /* F53OSCProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = F53OSCProtocols.h; path = "F53OSC-master/F53OSCProtocols.h"; sourceTree = "<group>"; };
-		849142A81F1CC3E0001A51C2 /* F53OSCServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = F53OSCServer.h; path = "F53OSC-master/F53OSCServer.h"; sourceTree = "<group>"; };
-		849142A91F1CC3E0001A51C2 /* F53OSCServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = F53OSCServer.m; path = "F53OSC-master/F53OSCServer.m"; sourceTree = "<group>"; };
-		849142AA1F1CC3E0001A51C2 /* F53OSCSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = F53OSCSocket.h; path = "F53OSC-master/F53OSCSocket.h"; sourceTree = "<group>"; };
-		849142AB1F1CC3E0001A51C2 /* F53OSCSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = F53OSCSocket.m; path = "F53OSC-master/F53OSCSocket.m"; sourceTree = "<group>"; };
-		849142AC1F1CC3E0001A51C2 /* F53OSCTimeTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = F53OSCTimeTag.h; path = "F53OSC-master/F53OSCTimeTag.h"; sourceTree = "<group>"; };
-		849142AD1F1CC3E0001A51C2 /* F53OSCTimeTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = F53OSCTimeTag.m; path = "F53OSC-master/F53OSCTimeTag.m"; sourceTree = "<group>"; };
-		849142AE1F1CC3E0001A51C2 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDAsyncSocket.h; path = "F53OSC-master/GCDAsyncSocket.h"; sourceTree = "<group>"; };
-		849142AF1F1CC3E0001A51C2 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCDAsyncSocket.m; path = "F53OSC-master/GCDAsyncSocket.m"; sourceTree = "<group>"; };
-		849142B01F1CC3E0001A51C2 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDAsyncUdpSocket.h; path = "F53OSC-master/GCDAsyncUdpSocket.h"; sourceTree = "<group>"; };
-		849142B11F1CC3E0001A51C2 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCDAsyncUdpSocket.m; path = "F53OSC-master/GCDAsyncUdpSocket.m"; sourceTree = "<group>"; };
-		849142B21F1CC3E0001A51C2 /* NSData+F53OSCBlob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+F53OSCBlob.h"; path = "F53OSC-master/NSData+F53OSCBlob.h"; sourceTree = "<group>"; };
-		849142B31F1CC3E0001A51C2 /* NSData+F53OSCBlob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+F53OSCBlob.m"; path = "F53OSC-master/NSData+F53OSCBlob.m"; sourceTree = "<group>"; };
-		849142B41F1CC3E0001A51C2 /* NSDate+F53OSCTimeTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+F53OSCTimeTag.h"; path = "F53OSC-master/NSDate+F53OSCTimeTag.h"; sourceTree = "<group>"; };
-		849142B51F1CC3E0001A51C2 /* NSDate+F53OSCTimeTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+F53OSCTimeTag.m"; path = "F53OSC-master/NSDate+F53OSCTimeTag.m"; sourceTree = "<group>"; };
-		849142B61F1CC3E0001A51C2 /* NSNumber+F53OSCNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSNumber+F53OSCNumber.h"; path = "F53OSC-master/NSNumber+F53OSCNumber.h"; sourceTree = "<group>"; };
-		849142B71F1CC3E0001A51C2 /* NSNumber+F53OSCNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSNumber+F53OSCNumber.m"; path = "F53OSC-master/NSNumber+F53OSCNumber.m"; sourceTree = "<group>"; };
-		849142B81F1CC3E0001A51C2 /* NSString+F53OSCString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+F53OSCString.h"; path = "F53OSC-master/NSString+F53OSCString.h"; sourceTree = "<group>"; };
-		849142B91F1CC3E0001A51C2 /* NSString+F53OSCString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+F53OSCString.m"; path = "F53OSC-master/NSString+F53OSCString.m"; sourceTree = "<group>"; };
-		84A2C807213C18B10053BE5E /* rwaplayer7channelbinaural_fabian.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = rwaplayer7channelbinaural_fabian.pd; path = ../puredata/rwaplayer7channelbinaural_fabian.pd; sourceTree = "<group>"; };
-		84A668EF1F2360A000BE16B3 /* rwaloopplayermono.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = rwaloopplayermono.pd; path = ../puredata/rwaloopplayermono.pd; sourceTree = "<group>"; };
-		84A668F01F2360A000BE16B3 /* rwaloopplayerstereo.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = rwaloopplayerstereo.pd; path = ../puredata/rwaloopplayerstereo.pd; sourceTree = "<group>"; };
-		84A668F11F2360A000BE16B3 /* rwaplayer5_1channelbinaural.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = rwaplayer5_1channelbinaural.pd; path = ../puredata/rwaplayer5_1channelbinaural.pd; sourceTree = "<group>"; };
-		84A668F21F2360A000BE16B3 /* rwaplayermonobinaural.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = rwaplayermonobinaural.pd; path = ../puredata/rwaplayermonobinaural.pd; sourceTree = "<group>"; };
-		84A668F41F2360A000BE16B3 /* rwaplayerstereobinaural.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = rwaplayerstereobinaural.pd; path = ../puredata/rwaplayerstereobinaural.pd; sourceTree = "<group>"; };
-		84A668F51F2360A000BE16B3 /* stereoout.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = stereoout.pd; path = ../puredata/stereoout.pd; sourceTree = "<group>"; };
+		84A4CE2A221317C70057CBE7 /* PdBase_Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PdBase_Extension.h; sourceTree = "<group>"; };
+		84BD68372211B624005A22B5 /* libpd.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libpd.xcodeproj; path = ../libpd/libpd.xcodeproj; sourceTree = "<group>"; };
+		84BD68472211B748005A22B5 /* vas_dynamicFirChannel.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vas_dynamicFirChannel.c; path = ../vas_library/source/vas_dynamicFirChannel.c; sourceTree = "<group>"; };
+		84BD68482211B748005A22B5 /* vas_fir.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vas_fir.c; path = ../vas_library/source/vas_fir.c; sourceTree = "<group>"; };
+		84BD68492211B748005A22B5 /* vas_gps_util.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vas_gps_util.c; path = ../vas_library/source/vas_gps_util.c; sourceTree = "<group>"; };
+		84BD684A2211B748005A22B5 /* vas_fir_binaural.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vas_fir_binaural.c; path = ../vas_library/source/vas_fir_binaural.c; sourceTree = "<group>"; };
+		84BD684B2211B749005A22B5 /* vas_mem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vas_mem.c; path = ../vas_library/source/vas_mem.c; sourceTree = "<group>"; };
+		84BD684C2211B749005A22B5 /* vas_util.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vas_util.c; path = ../vas_library/source/vas_util.c; sourceTree = "<group>"; };
+		84BD68532211BA6D005A22B5 /* rwa_binauralsimple~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "rwa_binauralsimple~.c"; path = "../vas_library/examples/PureData/raw_binauralsimple~/rwa_binauralsimple~.c"; sourceTree = "<group>"; };
+		84BD68542211BA6D005A22B5 /* rwa_binauralrir~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "rwa_binauralrir~.c"; path = "../vas_library/examples/PureData/raw_binauralsimple~/rwa_binauralrir~.c"; sourceTree = "<group>"; };
+		84BD68552211BA6E005A22B5 /* rwa_firobject.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = rwa_firobject.c; path = "../vas_library/examples/PureData/raw_binauralsimple~/rwa_firobject.c"; sourceTree = "<group>"; };
+		84BD68562211BA6E005A22B5 /* rwa_reverb~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "rwa_reverb~.c"; path = "../vas_library/examples/PureData/raw_binauralsimple~/rwa_reverb~.c"; sourceTree = "<group>"; };
+		84C70E962212E48E005C49C3 /* freeverb~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "freeverb~.c"; path = "../pd-extra/pd/externals/freeverb~/freeverb~.c"; sourceTree = "<group>"; };
+		84C70E9B2212E6D9005C49C3 /* rwaplayer5_1channelbinaural_fabian.pd */ = {isa = PBXFileReference; lastKnownFileType = text; name = rwaplayer5_1channelbinaural_fabian.pd; path = "../pd-patches/rwaplayer5_1channelbinaural_fabian.pd"; sourceTree = "<group>"; };
+		84C70E9C2212E6D9005C49C3 /* rwaReferencePatch.pd */ = {isa = PBXFileReference; lastKnownFileType = text; name = rwaReferencePatch.pd; path = "../pd-patches/rwaReferencePatch.pd"; sourceTree = "<group>"; };
+		84C70E9D2212E6D9005C49C3 /* stereoout.pd */ = {isa = PBXFileReference; lastKnownFileType = text; name = stereoout.pd; path = "../pd-patches/stereoout.pd"; sourceTree = "<group>"; };
+		84C70E9E2212E6D9005C49C3 /* fabian_dir256.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = fabian_dir256.txt; path = "../pd-patches/fabian_dir256.txt"; sourceTree = "<group>"; };
+		84C70E9F2212E6D9005C49C3 /* rwaloopplayermono.pd */ = {isa = PBXFileReference; lastKnownFileType = text; name = rwaloopplayermono.pd; path = "../pd-patches/rwaloopplayermono.pd"; sourceTree = "<group>"; };
+		84C70EA02212E6D9005C49C3 /* rwaplayer7channelbinaural_fabian.pd */ = {isa = PBXFileReference; lastKnownFileType = text; name = rwaplayer7channelbinaural_fabian.pd; path = "../pd-patches/rwaplayer7channelbinaural_fabian.pd"; sourceTree = "<group>"; };
+		84C70EA12212E6D9005C49C3 /* rwaplayerstereobinaural_fabian.pd */ = {isa = PBXFileReference; lastKnownFileType = text; name = rwaplayerstereobinaural_fabian.pd; path = "../pd-patches/rwaplayerstereobinaural_fabian.pd"; sourceTree = "<group>"; };
+		84C70EA22212E6D9005C49C3 /* stereoout_biquad.pd */ = {isa = PBXFileReference; lastKnownFileType = text; name = stereoout_biquad.pd; path = "../pd-patches/stereoout_biquad.pd"; sourceTree = "<group>"; };
+		84C70EA32212E6D9005C49C3 /* rwaloopplayerstereo.pd */ = {isa = PBXFileReference; lastKnownFileType = text; name = rwaloopplayerstereo.pd; path = "../pd-patches/rwaloopplayerstereo.pd"; sourceTree = "<group>"; };
+		84C70EA42212E6DA005C49C3 /* rwabinauralwrappermono.pd */ = {isa = PBXFileReference; lastKnownFileType = text; name = rwabinauralwrappermono.pd; path = "../pd-patches/rwabinauralwrappermono.pd"; sourceTree = "<group>"; };
+		84C70EA52212E6DA005C49C3 /* rwaplayermonobinaural_fabian.pd */ = {isa = PBXFileReference; lastKnownFileType = text; name = rwaplayermonobinaural_fabian.pd; path = "../pd-patches/rwaplayermonobinaural_fabian.pd"; sourceTree = "<group>"; };
+		84C70EB32212EF20005C49C3 /* PdBase_Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = PdBase_Extension.m; path = src/PdBase_Extension.m; sourceTree = "<group>"; };
+		84C70EB52213148A005C49C3 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCDAsyncUdpSocket.m; path = ../F53OSC/GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		84C70EB62213148A005C49C3 /* F53OSCSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = F53OSCSocket.m; path = ../F53OSC/F53OSCSocket.m; sourceTree = "<group>"; };
+		84C70EB72213148A005C49C3 /* F53OSCPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = F53OSCPacket.m; path = ../F53OSC/F53OSCPacket.m; sourceTree = "<group>"; };
+		84C70EB82213148A005C49C3 /* NSDate+F53OSCTimeTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+F53OSCTimeTag.m"; path = "../F53OSC/NSDate+F53OSCTimeTag.m"; sourceTree = "<group>"; };
+		84C70EB92213148A005C49C3 /* F53OSCBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = F53OSCBundle.m; path = ../F53OSC/F53OSCBundle.m; sourceTree = "<group>"; };
+		84C70EBA2213148A005C49C3 /* F53OSCClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = F53OSCClient.m; path = ../F53OSC/F53OSCClient.m; sourceTree = "<group>"; };
+		84C70EBB2213148A005C49C3 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCDAsyncSocket.m; path = ../F53OSC/GCDAsyncSocket.m; sourceTree = "<group>"; };
+		84C70EBC2213148A005C49C3 /* NSData+F53OSCBlob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+F53OSCBlob.m"; path = "../F53OSC/NSData+F53OSCBlob.m"; sourceTree = "<group>"; };
+		84C70EBD2213148A005C49C3 /* F53OSCTimeTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = F53OSCTimeTag.m; path = ../F53OSC/F53OSCTimeTag.m; sourceTree = "<group>"; };
+		84C70EBE2213148A005C49C3 /* NSString+F53OSCString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+F53OSCString.m"; path = "../F53OSC/NSString+F53OSCString.m"; sourceTree = "<group>"; };
+		84C70EBF2213148A005C49C3 /* F53OSCServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = F53OSCServer.m; path = ../F53OSC/F53OSCServer.m; sourceTree = "<group>"; };
+		84C70EC02213148A005C49C3 /* F53OSCParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = F53OSCParser.m; path = ../F53OSC/F53OSCParser.m; sourceTree = "<group>"; };
+		84C70EC12213148A005C49C3 /* NSNumber+F53OSCNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSNumber+F53OSCNumber.m"; path = "../F53OSC/NSNumber+F53OSCNumber.m"; sourceTree = "<group>"; };
+		84C70EC22213148A005C49C3 /* F53OSCMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = F53OSCMessage.m; path = ../F53OSC/F53OSCMessage.m; sourceTree = "<group>"; };
 		84D7F165217DDF1F0082843F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		84D917E92129F363000C85A2 /* rwaplayermonobinaural_fabian.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = rwaplayermonobinaural_fabian.pd; path = ../puredata/rwaplayermonobinaural_fabian.pd; sourceTree = "<group>"; };
-		84D917EA2129F363000C85A2 /* rwaplayerstereobinaural_fabian.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = rwaplayerstereobinaural_fabian.pd; path = ../puredata/rwaplayerstereobinaural_fabian.pd; sourceTree = "<group>"; };
 		84EDF45F216CBD1300EBA052 /* ControlDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ControlDataViewController.swift; path = src/ControlDataViewController.swift; sourceTree = "<group>"; };
 		84F48CDB1F24B14C00869BF2 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = src/AppDelegate.swift; sourceTree = "<group>"; };
 		84F48CDC1F24B14C00869BF2 /* CoreLocationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreLocationController.swift; path = src/CoreLocationController.swift; sourceTree = "<group>"; };
@@ -123,9 +165,6 @@
 		84F48D031F24B2AB00869BF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = src/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84F48D051F24B2AB00869BF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = src/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		84F99CAC1F6046500096B64B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = src/Info.plist; sourceTree = "<group>"; };
-		84FFFFEA2126C11A00294898 /* fabian_dir256.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = fabian_dir256.txt; path = ../puredata/fabian_dir256.txt; sourceTree = "<group>"; };
-		84FFFFED2126C11A00294898 /* earplug_data.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = earplug_data.txt; path = ../puredata/earplug_data.txt; sourceTree = "<group>"; };
-		84FFFFF22126C8A500294898 /* rwaplayer5_1channelbinaural_fabian.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = rwaplayer5_1channelbinaural_fabian.pd; path = ../puredata/rwaplayer5_1channelbinaural_fabian.pd; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +172,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84BD68462211B636005A22B5 /* libpd-ios.a in Frameworks */,
 				842212321F939E23004BF9C9 /* Accelerate.framework in Frameworks */,
 				84D7F166217DDF1F0082843F /* MapKit.framework in Frameworks */,
 			);
@@ -144,6 +184,45 @@
 		8436A2621C3156F400A4E328 = {
 			isa = PBXGroup;
 			children = (
+				84C70EB32212EF20005C49C3 /* PdBase_Extension.m */,
+				84A4CE2A221317C70057CBE7 /* PdBase_Extension.h */,
+				84BD68372211B624005A22B5 /* libpd.xcodeproj */,
+				84C70EB92213148A005C49C3 /* F53OSCBundle.m */,
+				84C70EBA2213148A005C49C3 /* F53OSCClient.m */,
+				84C70EC22213148A005C49C3 /* F53OSCMessage.m */,
+				84C70EB72213148A005C49C3 /* F53OSCPacket.m */,
+				84C70EC02213148A005C49C3 /* F53OSCParser.m */,
+				84C70EBF2213148A005C49C3 /* F53OSCServer.m */,
+				84C70EB62213148A005C49C3 /* F53OSCSocket.m */,
+				84C70EBD2213148A005C49C3 /* F53OSCTimeTag.m */,
+				84C70EBB2213148A005C49C3 /* GCDAsyncSocket.m */,
+				84C70EB52213148A005C49C3 /* GCDAsyncUdpSocket.m */,
+				84C70EBC2213148A005C49C3 /* NSData+F53OSCBlob.m */,
+				84C70EB82213148A005C49C3 /* NSDate+F53OSCTimeTag.m */,
+				84C70EC12213148A005C49C3 /* NSNumber+F53OSCNumber.m */,
+				84C70EBE2213148A005C49C3 /* NSString+F53OSCString.m */,
+				84C70E9E2212E6D9005C49C3 /* fabian_dir256.txt */,
+				84C70EA42212E6DA005C49C3 /* rwabinauralwrappermono.pd */,
+				84C70E9F2212E6D9005C49C3 /* rwaloopplayermono.pd */,
+				84C70EA32212E6D9005C49C3 /* rwaloopplayerstereo.pd */,
+				84C70E9B2212E6D9005C49C3 /* rwaplayer5_1channelbinaural_fabian.pd */,
+				84C70EA02212E6D9005C49C3 /* rwaplayer7channelbinaural_fabian.pd */,
+				84C70EA52212E6DA005C49C3 /* rwaplayermonobinaural_fabian.pd */,
+				84C70EA12212E6D9005C49C3 /* rwaplayerstereobinaural_fabian.pd */,
+				84C70E9C2212E6D9005C49C3 /* rwaReferencePatch.pd */,
+				84C70EA22212E6D9005C49C3 /* stereoout_biquad.pd */,
+				84C70E9D2212E6D9005C49C3 /* stereoout.pd */,
+				84BD68542211BA6D005A22B5 /* rwa_binauralrir~.c */,
+				84BD68532211BA6D005A22B5 /* rwa_binauralsimple~.c */,
+				84BD68552211BA6E005A22B5 /* rwa_firobject.c */,
+				84BD68562211BA6E005A22B5 /* rwa_reverb~.c */,
+				84BD68472211B748005A22B5 /* vas_dynamicFirChannel.c */,
+				84BD684A2211B748005A22B5 /* vas_fir_binaural.c */,
+				84BD68482211B748005A22B5 /* vas_fir.c */,
+				84BD68492211B748005A22B5 /* vas_gps_util.c */,
+				84BD684B2211B749005A22B5 /* vas_mem.c */,
+				84BD684C2211B749005A22B5 /* vas_util.c */,
+				84C70E962212E48E005C49C3 /* freeverb~.c */,
 				84F99CAC1F6046500096B64B /* Info.plist */,
 				84F48CFE1F24B26C00869BF2 /* Assets.xcassets */,
 				84F48D021F24B2AB00869BF2 /* LaunchScreen.storyboard */,
@@ -163,8 +242,6 @@
 				84F48CE61F24B14C00869BF2 /* RwaState.swift */,
 				84F48CE71F24B14C00869BF2 /* RwaUtilities.swift */,
 				84F76B511F24A47000A05F3F /* ViewController */,
-				84F76B521F24A48700A05F3F /* PureData */,
-				849142C81F1CC3EC001A51C2 /* F53OSC */,
 				8436A26C1C3156F400A4E328 /* Products */,
 				84C4C5551F23730B001C5824 /* Frameworks */,
 			);
@@ -178,42 +255,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		849142C81F1CC3EC001A51C2 /* F53OSC */ = {
+		84BD68382211B624005A22B5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8491429B1F1CC3E0001A51C2 /* F53OSC.h */,
-				8491429C1F1CC3E0001A51C2 /* F53OSCBundle.h */,
-				8491429D1F1CC3E0001A51C2 /* F53OSCBundle.m */,
-				8491429E1F1CC3E0001A51C2 /* F53OSCClient.h */,
-				8491429F1F1CC3E0001A51C2 /* F53OSCClient.m */,
-				849142A01F1CC3E0001A51C2 /* F53OSCFoundationAdditions.h */,
-				849142A11F1CC3E0001A51C2 /* F53OSCMessage.h */,
-				849142A21F1CC3E0001A51C2 /* F53OSCMessage.m */,
-				849142A31F1CC3E0001A51C2 /* F53OSCPacket.h */,
-				849142A41F1CC3E0001A51C2 /* F53OSCPacket.m */,
-				849142A51F1CC3E0001A51C2 /* F53OSCParser.h */,
-				849142A61F1CC3E0001A51C2 /* F53OSCParser.m */,
-				849142A71F1CC3E0001A51C2 /* F53OSCProtocols.h */,
-				849142A81F1CC3E0001A51C2 /* F53OSCServer.h */,
-				849142A91F1CC3E0001A51C2 /* F53OSCServer.m */,
-				849142AA1F1CC3E0001A51C2 /* F53OSCSocket.h */,
-				849142AB1F1CC3E0001A51C2 /* F53OSCSocket.m */,
-				849142AC1F1CC3E0001A51C2 /* F53OSCTimeTag.h */,
-				849142AD1F1CC3E0001A51C2 /* F53OSCTimeTag.m */,
-				849142AE1F1CC3E0001A51C2 /* GCDAsyncSocket.h */,
-				849142AF1F1CC3E0001A51C2 /* GCDAsyncSocket.m */,
-				849142B01F1CC3E0001A51C2 /* GCDAsyncUdpSocket.h */,
-				849142B11F1CC3E0001A51C2 /* GCDAsyncUdpSocket.m */,
-				849142B21F1CC3E0001A51C2 /* NSData+F53OSCBlob.h */,
-				849142B31F1CC3E0001A51C2 /* NSData+F53OSCBlob.m */,
-				849142B41F1CC3E0001A51C2 /* NSDate+F53OSCTimeTag.h */,
-				849142B51F1CC3E0001A51C2 /* NSDate+F53OSCTimeTag.m */,
-				849142B61F1CC3E0001A51C2 /* NSNumber+F53OSCNumber.h */,
-				849142B71F1CC3E0001A51C2 /* NSNumber+F53OSCNumber.m */,
-				849142B81F1CC3E0001A51C2 /* NSString+F53OSCString.h */,
-				849142B91F1CC3E0001A51C2 /* NSString+F53OSCString.m */,
+				84BD683F2211B624005A22B5 /* libpd-ios.a */,
+				84BD68412211B624005A22B5 /* libpd-osx.a */,
+				84BD68432211B624005A22B5 /* libpd-ios-multi.a */,
+				84BD68452211B624005A22B5 /* libpd-osx-multi.a */,
 			);
-			name = F53OSC;
+			name = Products;
 			sourceTree = "<group>";
 		};
 		84C4C5551F23730B001C5824 /* Frameworks */ = {
@@ -234,25 +284,6 @@
 				8429C290215BB68700D2E5E0 /* MapViewController.swift */,
 			);
 			name = ViewController;
-			sourceTree = "<group>";
-		};
-		84F76B521F24A48700A05F3F /* PureData */ = {
-			isa = PBXGroup;
-			children = (
-				84A2C807213C18B10053BE5E /* rwaplayer7channelbinaural_fabian.pd */,
-				84D917E92129F363000C85A2 /* rwaplayermonobinaural_fabian.pd */,
-				84D917EA2129F363000C85A2 /* rwaplayerstereobinaural_fabian.pd */,
-				84FFFFF22126C8A500294898 /* rwaplayer5_1channelbinaural_fabian.pd */,
-				84FFFFED2126C11A00294898 /* earplug_data.txt */,
-				84FFFFEA2126C11A00294898 /* fabian_dir256.txt */,
-				84A668EF1F2360A000BE16B3 /* rwaloopplayermono.pd */,
-				84A668F01F2360A000BE16B3 /* rwaloopplayerstereo.pd */,
-				84A668F11F2360A000BE16B3 /* rwaplayer5_1channelbinaural.pd */,
-				84A668F21F2360A000BE16B3 /* rwaplayermonobinaural.pd */,
-				84A668F41F2360A000BE16B3 /* rwaplayerstereobinaural.pd */,
-				84A668F51F2360A000BE16B3 /* stereoout.pd */,
-			);
-			name = PureData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -312,6 +343,12 @@
 			mainGroup = 8436A2621C3156F400A4E328;
 			productRefGroup = 8436A26C1C3156F400A4E328 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 84BD68382211B624005A22B5 /* Products */;
+					ProjectRef = 84BD68372211B624005A22B5 /* libpd.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				8436A26A1C3156F400A4E328 /* rwaclient */,
@@ -319,26 +356,56 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		84BD683F2211B624005A22B5 /* libpd-ios.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libpd-ios.a";
+			remoteRef = 84BD683E2211B624005A22B5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		84BD68412211B624005A22B5 /* libpd-osx.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libpd-osx.a";
+			remoteRef = 84BD68402211B624005A22B5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		84BD68432211B624005A22B5 /* libpd-ios-multi.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libpd-ios-multi.a";
+			remoteRef = 84BD68422211B624005A22B5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		84BD68452211B624005A22B5 /* libpd-osx-multi.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libpd-osx-multi.a";
+			remoteRef = 84BD68442211B624005A22B5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		8436A2691C3156F400A4E328 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84A668FC1F2360A000BE16B3 /* stereoout.pd in Resources */,
+				84C70EA62212E6DA005C49C3 /* rwaplayer5_1channelbinaural_fabian.pd in Resources */,
+				84C70EA72212E6DA005C49C3 /* rwaReferencePatch.pd in Resources */,
+				84C70EA82212E6DA005C49C3 /* stereoout.pd in Resources */,
+				84C70EA92212E6DA005C49C3 /* fabian_dir256.txt in Resources */,
+				84C70EAA2212E6DA005C49C3 /* rwaloopplayermono.pd in Resources */,
+				84C70EAB2212E6DA005C49C3 /* rwaplayer7channelbinaural_fabian.pd in Resources */,
+				84C70EAC2212E6DA005C49C3 /* rwaplayerstereobinaural_fabian.pd in Resources */,
+				84C70EAD2212E6DA005C49C3 /* stereoout_biquad.pd in Resources */,
+				84C70EAE2212E6DA005C49C3 /* rwaloopplayerstereo.pd in Resources */,
+				84C70EAF2212E6DA005C49C3 /* rwabinauralwrappermono.pd in Resources */,
+				84C70EB02212E6DA005C49C3 /* rwaplayermonobinaural_fabian.pd in Resources */,
 				84F48D061F24B2AB00869BF2 /* LaunchScreen.storyboard in Resources */,
-				84D917EC2129F363000C85A2 /* rwaplayerstereobinaural_fabian.pd in Resources */,
-				84A668F61F2360A000BE16B3 /* rwaloopplayermono.pd in Resources */,
-				84A668FB1F2360A000BE16B3 /* rwaplayerstereobinaural.pd in Resources */,
-				84D917EB2129F363000C85A2 /* rwaplayermonobinaural_fabian.pd in Resources */,
-				84A2C808213C18B10053BE5E /* rwaplayer7channelbinaural_fabian.pd in Resources */,
-				84A668F91F2360A000BE16B3 /* rwaplayermonobinaural.pd in Resources */,
-				84FFFFEE2126C11A00294898 /* fabian_dir256.txt in Resources */,
 				84F48D001F24B26C00869BF2 /* Assets.xcassets in Resources */,
 				84F48D071F24B2AB00869BF2 /* Main.storyboard in Resources */,
-				84FFFFF12126C11A00294898 /* earplug_data.txt in Resources */,
-				84A668F71F2360A000BE16B3 /* rwaloopplayerstereo.pd in Resources */,
-				84FFFFF32126C8A500294898 /* rwaplayer5_1channelbinaural_fabian.pd in Resources */,
-				84A668F81F2360A000BE16B3 /* rwaplayer5_1channelbinaural.pd in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,37 +432,49 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				849142C01F1CC3E0001A51C2 /* F53OSCSocket.m in Sources */,
 				84F48CF01F24B14C00869BF2 /* RwaEntity.swift in Sources */,
 				84F48CEF1F24B14C00869BF2 /* RwaAsset.swift in Sources */,
+				84C70ECE2213148A005C49C3 /* F53OSCParser.m in Sources */,
 				84F48CEE1F24B14C00869BF2 /* GameManager.swift in Sources */,
+				84C70EC82213148A005C49C3 /* F53OSCClient.m in Sources */,
+				84C70ED02213148A005C49C3 /* F53OSCMessage.m in Sources */,
+				84C70EC42213148A005C49C3 /* F53OSCSocket.m in Sources */,
 				84F48CEA1F24B14C00869BF2 /* AppDelegate.swift in Sources */,
 				84F48CF61F24B14C00869BF2 /* SecondViewController.swift in Sources */,
-				849142C31F1CC3E0001A51C2 /* GCDAsyncUdpSocket.m in Sources */,
-				849142BF1F1CC3E0001A51C2 /* F53OSCServer.m in Sources */,
+				84BD684E2211B749005A22B5 /* vas_fir.c in Sources */,
+				84BD68592211BA6E005A22B5 /* rwa_firobject.c in Sources */,
 				84F48CEC1F24B14C00869BF2 /* Device.swift in Sources */,
+				84C70ECC2213148A005C49C3 /* NSString+F53OSCString.m in Sources */,
+				84C70ECD2213148A005C49C3 /* F53OSCServer.m in Sources */,
 				84F48CF51F24B14C00869BF2 /* RwaUtilities.swift in Sources */,
+				84C70EC72213148A005C49C3 /* F53OSCBundle.m in Sources */,
+				84BD68582211BA6E005A22B5 /* rwa_binauralrir~.c in Sources */,
 				84F48CF11F24B14C00869BF2 /* RwaGameLoop.swift in Sources */,
+				84C70ECB2213148A005C49C3 /* F53OSCTimeTag.m in Sources */,
 				8461E16A2120377E00E7DD4F /* RwaLocation.swift in Sources */,
+				84C70EB42212EF20005C49C3 /* PdBase_Extension.m in Sources */,
 				84F48CF41F24B14C00869BF2 /* RwaState.swift in Sources */,
 				8429C291215BB68700D2E5E0 /* MapViewController.swift in Sources */,
-				849142BC1F1CC3E0001A51C2 /* F53OSCMessage.m in Sources */,
-				849142C41F1CC3E0001A51C2 /* NSData+F53OSCBlob.m in Sources */,
+				84C70E972212E48E005C49C3 /* freeverb~.c in Sources */,
+				84C70EC32213148A005C49C3 /* GCDAsyncUdpSocket.m in Sources */,
+				84BD68572211BA6E005A22B5 /* rwa_binauralsimple~.c in Sources */,
+				84BD685A2211BA6E005A22B5 /* rwa_reverb~.c in Sources */,
+				84C70EC62213148A005C49C3 /* NSDate+F53OSCTimeTag.m in Sources */,
+				84C70EC52213148A005C49C3 /* F53OSCPacket.m in Sources */,
+				84C70EC92213148A005C49C3 /* GCDAsyncSocket.m in Sources */,
+				84BD684D2211B749005A22B5 /* vas_dynamicFirChannel.c in Sources */,
 				84EDF460216CBD1300EBA052 /* ControlDataViewController.swift in Sources */,
-				849142BB1F1CC3E0001A51C2 /* F53OSCClient.m in Sources */,
+				84BD68502211B749005A22B5 /* vas_fir_binaural.c in Sources */,
 				8461E16C21203C4D00E7DD4F /* RwaArea.swift in Sources */,
-				849142BE1F1CC3E0001A51C2 /* F53OSCParser.m in Sources */,
+				84C70ECF2213148A005C49C3 /* NSNumber+F53OSCNumber.m in Sources */,
+				84BD68512211B749005A22B5 /* vas_mem.c in Sources */,
 				84F48CF31F24B14C00869BF2 /* RwaScene.swift in Sources */,
-				849142C11F1CC3E0001A51C2 /* F53OSCTimeTag.m in Sources */,
-				849142BD1F1CC3E0001A51C2 /* F53OSCPacket.m in Sources */,
 				84F48CEB1F24B14C00869BF2 /* CoreLocationController.swift in Sources */,
-				849142C71F1CC3E0001A51C2 /* NSString+F53OSCString.m in Sources */,
-				849142C61F1CC3E0001A51C2 /* NSNumber+F53OSCNumber.m in Sources */,
+				84C70ECA2213148A005C49C3 /* NSData+F53OSCBlob.m in Sources */,
 				84F48CF21F24B14C00869BF2 /* RwaImport.swift in Sources */,
-				849142BA1F1CC3E0001A51C2 /* F53OSCBundle.m in Sources */,
 				84F48CED1F24B14C00869BF2 /* FirstViewController.swift in Sources */,
-				849142C21F1CC3E0001A51C2 /* GCDAsyncSocket.m in Sources */,
-				849142C51F1CC3E0001A51C2 /* NSDate+F53OSCTimeTag.m in Sources */,
+				84BD684F2211B749005A22B5 /* vas_gps_util.c in Sources */,
+				84BD68522211B749005A22B5 /* vas_util.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -514,6 +593,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Thomas Resch (EA234ZAS4B)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = X68HKQ3ZCY;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					PUREDATA,
+					PDINSTANCE,
+				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_MISSING_PARENTHESES = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
@@ -535,7 +618,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "src/rwa client-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../F53OSC-master\" \"$(SRCROOT)/libs\"/**";
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../F53OSC-master\" \"$(SRCROOT)/libs\"/** \"$(SRCROOT)/../vas_library\"/** \"$(SRCROOT)/../libpd/pure-data/src\" \"$(SRCROOT)/../vas_library/examples/PureData/raw_binauralsimple~\" \"$(SRCROOT)/../F53OSC\" \"$(SRCROOT)/../libpd/libpd_wrapper\" \"$(SRCROOT)/../libpd/libpd_wrapper/util\" \"$(SRCROOT)/../libpd/objc\"";
 			};
 			name = Debug;
 		};
@@ -547,6 +630,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Thomas Resch (EA234ZAS4B)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = X68HKQ3ZCY;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					PUREDATA,
+					PDINSTANCE,
+				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_MISSING_PARENTHESES = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
@@ -567,7 +654,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "src/rwa client-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../F53OSC-master\" \"$(SRCROOT)/libs\"/**";
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../F53OSC-master\" \"$(SRCROOT)/libs\"/** \"$(SRCROOT)/../vas_library\"/** \"$(SRCROOT)/../libpd/pure-data/src\" \"$(SRCROOT)/../vas_library/examples/PureData/raw_binauralsimple~\" \"$(SRCROOT)/../F53OSC\" \"$(SRCROOT)/../libpd/libpd_wrapper\" \"$(SRCROOT)/../libpd/libpd_wrapper/util\" \"$(SRCROOT)/../libpd/objc\"";
 			};
 			name = Release;
 		};
