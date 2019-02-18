@@ -85,12 +85,10 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
             print("Central Manager is already scanning!!")
             return;
         }
-        if(!newHeadtracker)
-        {
+        if(!newHeadtracker) {
             centralManager.scanForPeripherals(withServices: [CBUUID.init(string: Device.TransferService)], options: [CBCentralManagerScanOptionAllowDuplicatesKey:true])
         }
-        else
-        {
+        else {
             centralManager.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey:true])
         }
         
@@ -110,16 +108,13 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
         }
         
         guard let services = peripheral.services else {
-            // disconnect directly
             centralManager.cancelPeripheralConnection(peripheral)
             return
         }
         
         for service in services {
-            // iterate through characteristics
             if let characteristics = service.characteristics {
                 for characteristic in characteristics {
-                    // find the Transfer Characteristic we defined in our Device struct
                     if characteristic.uuid == CBUUID.init(string: Device.TransferCharacteristic) {
                         // We can return after calling CBPeripheral.setNotifyValue because CBPeripheralDelegate's
                         // didUpdateNotificationStateForCharacteristic method will be called automatically
@@ -136,23 +131,6 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
     }
     
     func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
-        
-        //---------------------------------------------------------------------------
-        // We don't need these, but it's good to know that they exist.
-        //---------------------------------------------------------------------------
-        // Retrive array of service UUIDs (represented by CBUUID objects) that
-        // contains all the services the central manager was scanning for at the time
-        // the app was terminated by the system.
-        //
-        //let scanServices = dict[CBCentralManagerRestoredStateScanServicesKey]
-        
-        // Retrieve dictionary containing all of the peripheral scan options that
-        // were being used by the central manager at the time the app was terminated
-        // by the system.
-        //
-        //let scanOptions = dict[CBCentralManagerRestoredStateScanOptionsKey]
-        //---------------------------------------------------------------------------
-        
         if let peripheralsObject = dict[CBCentralManagerRestoredStatePeripheralsKey] {
             let peripherals = peripheralsObject as! Array<CBPeripheral>
             if peripherals.count > 0 {
@@ -249,7 +227,6 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
         }
         else
         {
-            //print("\(peripheral.name)  \(headtrackerID)")
             if(peripheral.name == headtrackerID)
             {
                 if self.peripheral != peripheral {
