@@ -28,12 +28,12 @@ class RwaImport:NSObject, XMLParserDelegate
     func readRwa(_ name:String)
     {
         scenes.removeAll()
-        let parts = name.components(separatedBy: ".")
-        let filename = parts.first!.decomposedStringWithCanonicalMapping
-        print(filename)
+       // let parts = name.components(separatedBy: ".")
+       // let filename = parts.first!.decomposedStringWithCanonicalMapping
+        print(name)
         
-        let rwaGamePath = Bundle.main.path(forResource: filename, ofType: "rwa")
-        rwaGameFile = URL(fileURLWithPath: rwaGamePath!)
+      //  let rwaGamePath = Bundle.main.path(forResource: filename, ofType: "rwa")
+        rwaGameFile = URL(fileURLWithPath: name)
         xmlParser = XMLParser(contentsOf: rwaGameFile!)
         xmlParser!.delegate = self
         xmlParser!.parse()

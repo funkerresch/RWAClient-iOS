@@ -43,6 +43,8 @@ func radians2degrees(_ radians:Double) -> Double
     return radians * (180/Double.pi);
 }
 
+// calculates a new coordinate from origin coordinates with radius and bearingInDegrees
+
 func calculateDestination(_ coordinates:CLLocationCoordinate2D, _ radius:Double, _ bearingInDegrees: Double) -> CLLocationCoordinate2D
 {
     let bearing = degrees2radians(bearingInDegrees)
@@ -52,10 +54,11 @@ func calculateDestination(_ coordinates:CLLocationCoordinate2D, _ radius:Double,
     
     let lat2 = radians2degrees(asin(sin(lat1) * cos(delta) + cos(lat1) * sin(delta) * cos(bearing)));
     let long2:Double = radians2degrees(fmod( (long1 - asin(sin(bearing)*sin(delta) / cos(lat1)) + Double.pi), (2*Double.pi)) - Double.pi);
-    
-    //print("\(long2) \(coordinates.longitude)")
+
     return CLLocationCoordinate2D(latitude: lat2, longitude: long2)
 }
+
+// calculates distance between p1 and p2 in kilometers
 
 func calculateDistance(_ p1:CLLocationCoordinate2D, p2:CLLocationCoordinate2D) -> Double
 {
@@ -70,6 +73,8 @@ func calculateDistance(_ p1:CLLocationCoordinate2D, p2:CLLocationCoordinate2D) -
     return d;
 }
 
+// calculates bearing between p1 and p2
+
 func calculateBearing(_ p1:CLLocationCoordinate2D, p2:CLLocationCoordinate2D) -> Double
 {
     let phi1 = degrees2radians(p1.latitude);
@@ -81,6 +86,8 @@ func calculateBearing(_ p1:CLLocationCoordinate2D, p2:CLLocationCoordinate2D) ->
     let degrees = radians2degrees(radians);
     return (degrees+180).truncatingRemainder(dividingBy: 360);
 }
+
+// calculates bearing between p1 and p2 with head orientation
 
 func calculateBearing(_ p1:CLLocationCoordinate2D, p2:CLLocationCoordinate2D, headDirection: Double) -> Double
 {
@@ -95,6 +102,8 @@ func calculateBearing(_ p1:CLLocationCoordinate2D, p2:CLLocationCoordinate2D, he
     degrees += 360
     return (degrees+180).truncatingRemainder(dividingBy: 360);
 }
+
+// checks whether coordinate p is within polygon consisting of corners
 
 func coordinateWithinPolygon(_ p:CLLocationCoordinate2D,_ corners: [CLLocationCoordinate2D]) -> Bool
 {
@@ -116,7 +125,7 @@ func coordinateWithinPolygon(_ p:CLLocationCoordinate2D,_ corners: [CLLocationCo
     return oddNodes;
 }
 
-
+// checks whether coordinate p is within rectangle with center and width and height (in meters)
 
 func coordinateWithinRectangle(_ p:CLLocationCoordinate2D,_ center:CLLocationCoordinate2D,_ width: Double,_ height: Double) -> Bool
 {
@@ -165,6 +174,81 @@ func boolean2Double(_ booleanValue: Bool) -> Double
         return 0.0 }
 }
 
+extension FileManager {
+    
+    static public func lastModified(fileUrl: URL) -> Date
+    {
+        // let aWeekAgo = calendar.date(byAdding: .day, value: -7, to: Date())!
+        do {
+            let resources = try fileUrl.resourceValues(forKeys: [.contentModificationDateKey])
+            let modificationDate = resources.contentModificationDate!
+            return modificationDate
+        }
+        
+        catch {
+            print(error)
+        }
+        return Date(timeIntervalSince1970: Foundation.TimeInterval(0))
+    }
+    
+    static public func createDirectory(myDir: URL)
+    {
+        var isDir:ObjCBool = true
+        do {
+            if !FileManager.default.fileExists(atPath: myDir.relativePath, isDirectory: &isDir) {
+                try FileManager.default.createDirectory(at: myDir, withIntermediateDirectories: true)
+            }
+        }
+        catch {
+            print("Cannot create Folder item at \(myDir.relativePath): \(error)")
+        }
+    }
+    
+    open func removeIfExists(srcURL: URL)
+    {
+        do {
+            if FileManager.default.fileExists(atPath: srcURL.path) {
+
+
+                    try FileManager.default.removeItem(at: srcURL)
+                    print("File exists, removing it!")
+         
+            }
+            
+    
+        } catch (let error) {
+            print("Cannot move item to \(srcURL)  \(error)")
+
+        }
+        
+    }
+
+    open func secureCopyItem(at srcURL: URL, to dstURL: URL) -> Bool
+    {
+        do {
+            if FileManager.default.fileExists(atPath: dstURL.path) {
+                let srcModDate = FileManager.lastModified(fileUrl: srcURL)
+                let dstModDate = FileManager.lastModified(fileUrl: dstURL)
+                
+                if(srcModDate > dstModDate) {
+                    try FileManager.default.removeItem(at: dstURL)
+                    print("Found newer version, removed old")
+                }
+                else {
+                    print("File exists, no update necessary")
+                    return false
+                }
+            }
+            
+            try FileManager.default.copyItem(at: srcURL, to: dstURL)
+        } catch (let error) {
+            print("Cannot copy item at \(srcURL) to \(dstURL): \(error)")
+            return false
+        }
+        return true
+    }
+}
+
 extension String {
     func toBool() -> Bool? {
         switch self {
@@ -181,7 +265,6 @@ extension String {
 extension String {
     func isEmptyOrWhitespace() -> Bool
     {
-        
         if(self.isEmpty || self.trimmingCharacters(in: .whitespaces).isEmpty) {
             return true
         }
@@ -190,24 +273,33 @@ extension String {
     }
 }
 
-extension String {
-    
-    var digits: String {
-        return components(separatedBy: CharacterSet.decimalDigits.inverted)
-            .joined()
-    }
-}
-
 extension String  {
     func isNumber() -> Bool
     {
-        
         if( !self.isEmpty &&  self.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil ) {
             return true
         }
         return false
-        
-        
+    }
+    
+    func fileExists() -> Bool {
+          return FileManager().fileExists(atPath: self)
+    }
+    
+    func removeFileExtension() -> String
+    {
+        var components = self.components(separatedBy: ".")
+        if components.count > 1 { // If there is a file extension
+          components.removeLast()
+          return components.joined(separator: ".")
+        } else {
+            return components[0]
+        }
+    }
+    
+    var digits: String {
+        return components(separatedBy: CharacterSet.decimalDigits.inverted)
+            .joined()
     }
 }
 

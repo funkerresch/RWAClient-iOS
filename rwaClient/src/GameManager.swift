@@ -7,11 +7,9 @@
 //
 
 import UIKit
+import Zip
 
 var gameMgr: GameManager = GameManager();
-
-
-//var someInts = [Int]()
 
 struct rwagame
 {
@@ -21,10 +19,9 @@ struct rwagame
 
 class GameManager: NSObject
 {
-    
     var rwaGames = [rwagame]()
     var gamesPath:String = Bundle.main.resourcePath!
-    
+    var destUrl:URL = Bundle.main.resourceURL!;
     
     func addGame(_ name:String, path:String)
     {
@@ -32,17 +29,24 @@ class GameManager: NSObject
         print("APPEND GAME, COUNT IS \(rwaGames.count)")
     }
     
+    func clear()
+    {
+        rwaGames = [rwagame]()
+    }
+     
     func populateGames()
     {
         let fileManager = FileManager.default
-        let enumerator:FileManager.DirectoryEnumerator = fileManager.enumerator(atPath: gamesPath)!
+        let docuURLS = try! FileManager.default.contentsOfDirectory(at: destUrl, includingPropertiesForKeys: nil)
+        let documentsDirectory = FileManager.default.urls(for:.documentDirectory, in: .userDomainMask)[0]
+        
+        let enumerator:FileManager.DirectoryEnumerator = fileManager.enumerator(atPath: documentsDirectory.relativePath)!
         while let element = enumerator.nextObject() as? String
         {
             if element.hasSuffix("rwa")
             {
                 print(element)
-                addGame(element, path: "")
-                
+                addGame(element, path: documentsDirectory.relativePath)
             }
         }
     }

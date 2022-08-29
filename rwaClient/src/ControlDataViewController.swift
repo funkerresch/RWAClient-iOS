@@ -22,7 +22,7 @@ class ControlDataViewController: UIViewController, UITextFieldDelegate, F53OSCPa
     @IBOutlet var coordinates: UITextField!
     @IBOutlet var currentScene: UITextField!
     @IBOutlet var currentState: UITextField!
-    @IBOutlet var useLegacyHeadtracker:UISwitch!
+    @IBOutlet var useDeviceOrientation:UISwitch!
     @IBOutlet var inverseElevationSwitch:UISwitch!
     @IBOutlet var bleConnectButton: UIButton!
    
@@ -34,9 +34,7 @@ class ControlDataViewController: UIViewController, UITextFieldDelegate, F53OSCPa
         headtrackerId.delegate = self
         motherIp.text = rwaCreatorIP
         headtrackerId.text = headtrackerID
-        updateStartStopButton()
-        updateConnectBleButton()
-        
+        updateButtons()
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateButtons), name: NSNotification.Name(rawValue: "Update Buttons"), object: nil)
     }
     
@@ -64,7 +62,7 @@ class ControlDataViewController: UIViewController, UITextFieldDelegate, F53OSCPa
     {
         textField.resignFirstResponder();
         let defaults = UserDefaults.standard
-        defaults.set(motherIp.text, forKey: defaultsKeys.simulatorIp)
+        defaults.set(motherIp.text, forKey: defaultsKeys.rwaCreatorIP)
         defaults.set(headtrackerId.text, forKey: defaultsKeys.headtrackerId)
         return true;
     }
@@ -74,7 +72,7 @@ class ControlDataViewController: UIViewController, UITextFieldDelegate, F53OSCPa
         return true
     }
     
-    func update()
+    @objc func update()
     {
         DispatchQueue.main.async() {
             self.headTrackerData.text = String("\(hero.azimuth)   \(hero.elevation)   \(hero.stepCount)")
@@ -100,10 +98,10 @@ class ControlDataViewController: UIViewController, UITextFieldDelegate, F53OSCPa
                 
                 // Check for IPv4 or IPv6 interface:
                 let addrFamily = interface?.ifa_addr.pointee.sa_family
-                if addrFamily == UInt8(AF_INET) || addrFamily == UInt8(AF_INET6) {
+               // if addrFamily == UInt8(AF_INET) || addrFamily == UInt8(AF_INET6)
+                if addrFamily == UInt8(AF_INET) {
                     
                     // Check interface name:
-                    
                     
                     let name = String(cString: (interface?.ifa_name)!)
                     if name == "en0"
@@ -128,6 +126,15 @@ class ControlDataViewController: UIViewController, UITextFieldDelegate, F53OSCPa
     
     func take(_ message: F53OSCMessage!)
     {
+        if message.addressPattern == "/step"
+        {
+            if let _ = message.arguments.first as? Int {
+                hero.stepCount = hero.stepCount + 1
+                stepCount = stepCount + 1
+                print("Received Step")
+            }
+        }
+        
         if message.addressPattern == "/lon"
         {
             if let lon = message.arguments.first as? Double {
@@ -204,8 +211,19 @@ class ControlDataViewController: UIViewController, UITextFieldDelegate, F53OSCPa
         }        
     }
     
-    func updateButtons()
+    func updateUseHeadtrackerSwitch()
     {
+        if(useHeadTracker){
+            useDeviceOrientation.setOn(true, animated: false)
+        }
+        else {
+            useDeviceOrientation.setOn(false, animated: false)
+        }
+    }
+    
+    @objc func updateButtons()
+    {
+        updateUseHeadtrackerSwitch()
         updateStartStopButton()
         updateConnectBleButton()
         updateInverseElevationSwitch()
@@ -232,23 +250,23 @@ class ControlDataViewController: UIViewController, UITextFieldDelegate, F53OSCPa
     
     @IBAction func useNewHeadtracker(_ sender: UISwitch)
     {
-        if(!newHeadtracker) {
-            newHeadtracker = true;
-        }
-        else {
-            newHeadtracker = false;
-        }
+        useHeadTracker = sender.isOn;
+        let defaults = UserDefaults.standard
+        var isOn = "false"
+        if(useHeadTracker) {
+            isOn = "true" }
+        defaults.set(isOn, forKey: defaultsKeys.useHeadtracker)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Connect Headtracker"), object: nil)
     }
     
     @IBAction func inverseEle(_ sender: UISwitch)
     {
         inverseElevation = sender.isOn;
-        var inverseEle = "true"
         let defaults = UserDefaults.standard
-        if(!inverseElevation) {
-            inverseEle = "false" }
-        
-        defaults.set(inverseEle, forKey: defaultsKeys.inverseElevation)        
+        var isOn = "false"
+        if(inverseElevation) {
+            isOn = "true" }
+        defaults.set(isOn, forKey: defaultsKeys.inverseElevation)
     }
     
     @IBAction func bleConnect(_ sender: UIButton)

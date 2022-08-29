@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:/Users/admin/Qt/Projects/RWA_Client_iOS/rwa client/rwaclient.xcodeproj">
+      location = "self:">
    </FileRef>
 </Workspace>

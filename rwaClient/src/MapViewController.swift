@@ -10,13 +10,16 @@ import Foundation
 import UIKit
 import MapKit
 
+//var annotation = AttractionAnnotation(coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0),title: "UBLOX",subtitle: "", type: AttractionType.misc)
+var london = MKPointAnnotation()
+
 extension MapViewController {
     
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is MKCircle {
             let renderer = MKCircleRenderer(overlay: overlay)
-            renderer.fillColor = UIColor.black.withAlphaComponent(0.5)
+            renderer.fillColor = UIColor.black.withAlphaComponent(0.1)
             renderer.strokeColor = UIColor.blue
             renderer.lineWidth = 2
             return renderer
@@ -29,7 +32,7 @@ extension MapViewController {
             
         } else if overlay is MKPolygon {
             let renderer = MKPolygonRenderer(polygon: overlay as! MKPolygon)
-            renderer.fillColor = UIColor.black.withAlphaComponent(0.5)
+            renderer.fillColor = UIColor.black.withAlphaComponent(0.1)
             renderer.strokeColor = UIColor.orange
             renderer.lineWidth = 2
             return renderer
@@ -37,9 +40,37 @@ extension MapViewController {
         
         return MKOverlayRenderer()
     }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+
+        guard !annotation.isKind(of: MKUserLocation.self) else {
+                // Make a fast exit if the annotation is the `MKUserLocation`, as it's not an annotation view we wish to customize.
+                return nil
+            }
+            
+        guard annotation is MKPointAnnotation else { return nil }
+
+            let identifier = "Annotation"
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+
+            if annotationView == nil {
+                annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                annotationView!.canShowCallout = true
+            } else {
+                annotationView!.annotation = annotation
+            }
+        return annotationView
+       
+    }
+    
+//    func mapView( _ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+//      let annotationView = AttractionAnnotationView(
+//        annotation: annotation,
+//        reuseIdentifier: "Attraction")
+//      annotationView.canShowCallout = true
+//      return annotationView
+//    }
  }
-
-
 
 extension MKMapView {
     open var currentZoomLevel: Int {
@@ -180,6 +211,11 @@ class MapViewController: UIViewController, MKMapViewDelegate
         
         mapView.showsScale = true;
         mapView.showsUserLocation = true;
+        mapView.showAnnotations(mapView.annotations, animated: true)
+        london.coordinate = scenes[0].coordinates
+        london.title = "test"
+        london.subtitle = "test2"
+        mapView.addAnnotation(london)
     }
     
     func drawRwaArea(area: RwaArea) {
@@ -206,6 +242,11 @@ class MapViewController: UIViewController, MKMapViewDelegate
         
         super.viewDidLoad();
         
+        //mapView.addAnnotation(annotation)
+ //        london.title = "London"
+//        london.coordinate = CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275)
+        
+        
         if(!scenes.isEmpty)
         {
             for scene in scenes
@@ -222,6 +263,13 @@ class MapViewController: UIViewController, MKMapViewDelegate
                     }
                     
                     for asset in state.assets {
+//                        let annotation = AttractionAnnotation(
+//                            coordinate: CLLocationCoordinate2D(latitude: asset.coordinates.latitude, longitude: asset.coordinates.longitude),
+//                            //coordinate: hero.coordinates,
+//                            title: "UBLOX",
+//                            subtitle: "",
+//                            type: AttractionType.misc)
+//                          mapView.addAnnotation(annotation)
                         
                     }
                 }
@@ -230,3 +278,61 @@ class MapViewController: UIViewController, MKMapViewDelegate
         
     }
  }
+
+enum AttractionType: Int {
+  case misc = 0
+  case ride
+  case food
+  case firstAid
+  
+  func image() -> UIImage {
+    switch self {
+    case .misc:
+      return UIImage(imageLiteralResourceName: "star")
+    case .ride:
+      return UIImage(imageLiteralResourceName: "ride")
+    case .food:
+      return UIImage(imageLiteralResourceName: "food")
+    case .firstAid:
+      return UIImage(imageLiteralResourceName: "firstaid")
+    }
+  }
+}
+
+// 2
+class AttractionAnnotation: NSObject, MKAnnotation
+{
+  // 3
+  let coordinate: CLLocationCoordinate2D
+  let title: String?
+  let subtitle: String?
+  let type: AttractionType
+  
+  // 4
+  init(coordinate: CLLocationCoordinate2D, title: String, subtitle: String, type: AttractionType)
+  {
+    self.coordinate = coordinate
+    self.title = title
+    self.subtitle = subtitle
+    self.type = type
+  }
+}
+
+class AttractionAnnotationView: MKAnnotationView {
+  // 1
+  // Required for MKAnnotationView
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+  }
+  
+  // 2
+  override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
+    super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
+    guard
+      let attractionAnnotation = self.annotation as? AttractionAnnotation else {
+        return
+    }
+    
+    image = attractionAnnotation.type.image()
+  }
+}

@@ -16,8 +16,9 @@ var inverseElevation = true;
 
 struct defaultsKeys {
     static let headtrackerId = "rwaht01"
-    static let simulatorIp = "192.168.43.163"
+    static let rwaCreatorIP = "192.168.178.53"
     static let inverseElevation = "true";
+    static let useHeadtracker = "true";
 }
 
 @UIApplicationMain
@@ -33,11 +34,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         audioController = PdAudioController()
         
         let defaults = UserDefaults.standard
-        if let simulatorIp = defaults.string(forKey: defaultsKeys.simulatorIp) {
+        if let simulatorIp = defaults.string(forKey: defaultsKeys.rwaCreatorIP) {
             rwaCreatorIP = simulatorIp
         }
         else {
-            rwaCreatorIP = "192.168.1.1"
+            rwaCreatorIP = "192.168.178.53"
         }
         
         if let headtracker = defaults.string(forKey: defaultsKeys.headtrackerId) {
@@ -58,14 +59,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         else {
             inverseElevation = true;
         }
+        
+        if let useTracker = defaults.string(forKey: defaultsKeys.useHeadtracker) {
+            if useTracker == "true" {
+                useHeadTracker = true;
+            }
+            else {
+                useHeadTracker = false;
+            }
+        }
+        else {
+            useHeadTracker = true;
+        }
        
         if let c = audioController
         {
-            
-           // let s = c.configureAmbient(withSampleRate: 44100, numberChannels: 2, mixingEnabled: true).toPdAudioControlStatus()
-            
-          
-            let s = c.configurePlayback(withSampleRate: 44100, numberChannels: 2, inputEnabled: true, mixingEnabled: true).toPdAudioControlStatus()
+            let s = c.configurePlayback(withSampleRate: 48000, numberChannels: 2, inputEnabled: true, mixingEnabled: true).toPdAudioControlStatus()
             //let s = c.configurePlaybackWithSampleRate(44100, numberChannels: 2, inputEnabled: false, mixingEnabled: true).toPdAudioControlStatus()
             c.configureTicksPerBuffer(16)
             switch s{
@@ -85,7 +94,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillResignActive(_ application: UIApplication) {
         
-        
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     }
@@ -98,9 +106,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
-
-
-    
+   
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         

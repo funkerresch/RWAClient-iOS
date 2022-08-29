@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rwa>
+<rwa version="1.0">
+    <game currentscene="Scene 0"/>
+    <scene currentstate="State 3" name="Scene 0" lon="13.40376019" lat="52.53463501" zoom="18" numberofstates="6" areatype="4" radius="200" width="200" height="200" level="-1" exitoffset="0" fallbackdisabled="0" minstaytime="4">
+        <corners>
+            <lon>13.40496182</lon>
+            <lat>52.53660586</lat>
+            <lon>13.39982271</lon>
+            <lat>52.53611968</lat>
+            <lon>13.40197921</lon>
+            <lat>52.53308828</lat>
+            <lon>13.40615273</lon>
+            <lat>52.53340807</lat>
+        </corners>
+        <exitoffsetcorners/>
+        <state name="FALLBACK" type="1" areatype="1" zoom="18" assetsfollowstate="1" defaultplaybacktype="3" lockposition="0" statewithinstate="0" leaveafterassetsfinish="0" leaveonlyafterassetsfinish="0" enteronlyonce="0" timeout="0" minstaytime="0">
+            <enterconditions>
+                <gps isgps="0" lon="13.41045499" lat="52.53164594" radius="10" width="-1" height="-1" enteroffset="-6" exitoffset="0"/>
+                <requiredstates/>
+                <corners/>
+                <exitoffsetcorners/>
+            </enterconditions>
+            <actions>
+                <nextstate></nextstate>
+                <hintstate></hintstate>
+            </actions>
+            <assets/>
+        </state>
+        <state name="BACKGROUND" type="2" areatype="1" zoom="18" assetsfollowstate="1" defaultplaybacktype="3" lockposition="0" statewithinstate="0" leaveafterassetsfinish="0" leaveonlyafterassetsfinish="0" enteronlyonce="0" timeout="0" minstaytime="4">
+            <enterconditions>
+                <gps isgps="0" lon="13.39719414" lat="52.53352555" radius="10" width="-1" height="-1" enteroffset="-6" exitoffset="0"/>
+                <requiredstates/>
+                <corners/>
+                <exitoffsetcorners/>
+            </enterconditions>
+            <actions>
+                <nextstate></nextstate>
+                <hintstate></hintstate>
+            </actions>
+            <assets/>
+        </state>
+        <state name="State 3" type="3" areatype="1" zoom="18" assetsfollowstate="1" defaultplaybacktype="4" lockposition="0" statewithinstate="0" leaveafterassetsfinish="0" leaveonlyafterassetsfinish="0" enteronlyonce="0" timeout="0" minstaytime="4">
+            <enterconditions>
+                <gps isgps="1" lon="13.40253174" lat="52.53498089" radius="21" width="100" height="100" enteroffset="0" exitoffset="0"/>
+                <requiredstates/>
+                <corners/>
+                <exitoffsetcorners/>
+            </enterconditions>
+            <actions>
+                <nextstate></nextstate>
+                <hintstate></hintstate>
+            </actions>
+            <assets>
+                <asset url="/Users/harveykeitel/Desktop/zionskirchplatztest/zionskirchplatztest/assets/assets/anapopper.wav" uuid="{dc4a8571-2e25-4dbd-9885-cb99c524ea02}" type="1" gain="1" lon="13.40253174" lat="52.53498089" playbacktype="8" damping="1" dampingfactor="30" dampingtrim="2" dampingmin="0" dampingmax="1" mindistance="-1" fadein="50" fadeout="50" crossfadetime="2000" duration="78210" channelcount="1" lockposition="0" alwaysplayfrombeginning="1" loop="0" mute="0" headtrackerrelative2source="1" hascoordinates="0" loopuntilendposition="0" gps2pd="0" isexclusive="0" channelradius="20" rawsensors2pd="0" playonlyonce="0" speed="20" move="0" rotateoffset="0" rotatefrequency="0" rotate="0" fixedazimuth="-1" fixeddistance="-1" fixedelevation="-1" startpositionlon="13.4025" startpositionlat="52.535" offset="0" reflectioncount="0">
+                    <channelpositions/>
+                    <reflectionpositions/>
+                </asset>
+            </assets>
+        </state>
+        <state name="State 4" type="3" areatype="1" zoom="18" assetsfollowstate="1" defaultplaybacktype="4" lockposition="0" statewithinstate="0" leaveafterassetsfinish="0" leaveonlyafterassetsfinish="0" enteronlyonce="0" timeout="0" minstaytime="4">
+            <enterconditions>
+                <gps isgps="1" lon="13.40144277" lat="52.53537898" radius="25" width="100" height="100" enteroffset="0" exitoffset="0"/>
+                <requiredstates/>
+                <corners/>
+                <exitoffsetcorners/>
+            </enterconditions>
+            <actions>
+                <nextstate></nextstate>
+                <hintstate></hintstate>
+            </actions>
+            <assets>
+                <asset url="/Users/harveykeitel/Desktop/zionskirchplatztest/zionskirchplatztest/assets/assets/cicerospeech.wav" uuid="{d171d5c3-d52b-4ff0-ab9e-f69fde9ef0f2}" type="1" gain="1" lon="13.40144277" lat="52.53537898" playbacktype="8" damping="1" dampingfactor="30" dampingtrim="2" dampingmin="0" dampingmax="1" mindistance="-1" fadein="50" fadeout="50" crossfadetime="2000" duration="48956" channelcount="1" lockposition="0" alwaysplayfrombeginning="1" loop="1" mute="0" headtrackerrelative2source="1" hascoordinates="0" loopuntilendposition="0" gps2pd="0" isexclusive="0" channelradius="0" rawsensors2pd="0" playonlyonce="0" speed="20" move="0" rotateoffset="0" rotatefrequency="0" rotate="0" fixedazimuth="-1" fixeddistance="-1" fixedelevation="-1" startpositionlon="13.4014" startpositionlat="52.5354" offset="0" reflectioncount="0">
+                    <channelpositions/>
+                    <reflectionpositions/>
+                </asset>
+            </assets>
+        </state>
+        <state name="State 5" type="3" areatype="1" zoom="18" assetsfollowstate="1" defaultplaybacktype="4" lockposition="0" statewithinstate="0" leaveafterassetsfinish="0" leaveonlyafterassetsfinish="0" enteronlyonce="0" timeout="0" minstaytime="4">
+            <enterconditions>
+                <gps isgps="1" lon="13.40079367" lat="52.53564655" radius="25" width="100" height="100" enteroffset="0" exitoffset="0"/>
+                <requiredstates/>
+                <corners/>
+                <exitoffsetcorners/>
+            </enterconditions>
+            <actions>
+                <nextstate></nextstate>
+                <hintstate></hintstate>
+            </actions>
+            <assets>
+                <asset url="/Users/harveykeitel/Desktop/zionskirchplatztest/zionskirchplatztest/assets/assets/Sirenen6.wav" uuid="{377c7283-ed11-463c-aa43-8d9668970e71}" type="1" gain="1" lon="13.40079367" lat="52.53564655" playbacktype="8" damping="1" dampingfactor="30" dampingtrim="2" dampingmin="0" dampingmax="1" mindistance="-1" fadein="50" fadeout="50" crossfadetime="2000" duration="23000" channelcount="1" lockposition="0" alwaysplayfrombeginning="1" loop="0" mute="0" headtrackerrelative2source="1" hascoordinates="0" loopuntilendposition="0" gps2pd="0" isexclusive="0" channelradius="20" rawsensors2pd="0" playonlyonce="0" speed="20" move="0" rotateoffset="0" rotatefrequency="0" rotate="0" fixedazimuth="-1" fixeddistance="-1" fixedelevation="-1" startpositionlon="13.4008" startpositionlat="52.5356" offset="0" reflectioncount="0">
+                    <channelpositions/>
+                    <reflectionpositions/>
+                </asset>
+            </assets>
+        </state>
+        <state name="State 6" type="3" areatype="1" zoom="18" assetsfollowstate="1" defaultplaybacktype="4" lockposition="0" statewithinstate="0" leaveafterassetsfinish="0" leaveonlyafterassetsfinish="0" enteronlyonce="0" timeout="0" minstaytime="4">
+            <enterconditions>
+                <gps isgps="1" lon="13.40312183" lat="52.53518320" radius="21" width="100" height="100" enteroffset="0" exitoffset="0"/>
+                <requiredstates/>
+                <corners/>
+                <exitoffsetcorners/>
+            </enterconditions>
+            <actions>
+                <nextstate></nextstate>
+                <hintstate></hintstate>
+            </actions>
+            <assets>
+                <asset url="/Users/harveykeitel/Desktop/zionskirchplatztest/zionskirchplatztest/assets/assets/HarpTime2GoBack.aif" uuid="{3c645399-c59d-4133-87bb-f2da579f4737}" type="2" gain="1" lon="13.40312183" lat="52.53518320" playbacktype="8" damping="1" dampingfactor="30" dampingtrim="2" dampingmin="0" dampingmax="1" mindistance="-1" fadein="50" fadeout="50" crossfadetime="2000" duration="20000" channelcount="2" lockposition="0" alwaysplayfrombeginning="1" loop="0" mute="0" headtrackerrelative2source="1" hascoordinates="0" loopuntilendposition="0" gps2pd="0" isexclusive="0" channelradius="20" rawsensors2pd="0" playonlyonce="0" speed="20" move="0" rotateoffset="0" rotatefrequency="0" rotate="0" fixedazimuth="-1" fixeddistance="-1" fixedelevation="-1" startpositionlon="13.4031" startpositionlat="52.5352" offset="0" reflectioncount="0">
+                    <channelpositions/>
+                    <reflectionpositions/>
+                </asset>
+            </assets>
+        </state>
+    </scene>
+</rwa>

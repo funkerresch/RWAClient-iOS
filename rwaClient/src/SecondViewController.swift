@@ -8,8 +8,13 @@
 
 import UIKit
 import CoreBluetooth
+import MapKit
+import CoreMotion
 
 let schedulerRate: Double = 10
+
+var ubloxLon = Double("3.1415926536")
+var ubloxLat = Double("3.1415926536")
 var azimuth = 0
 var elevation = 0
 var step = 0;
@@ -22,7 +27,7 @@ var azimuthOrg = 0
 var elevationOrg = 0
 var pdGainVal:Float = 2.0
 var stepThresh = 0.6
-var newHeadtracker = true
+var useHeadTracker = true
 var headTrackerConnected = false
 var linAccel:Float = 0;
 var linAccelAverage:Float = 0;
@@ -54,12 +59,47 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
     var peripheral:CBPeripheral?
     var dataBuffer:NSMutableData!
     var scanAfterDisconnecting:Bool = true
+    var motion:CMMotionManager = CMMotionManager();
     
     var showMovementData = false
     var linAccelAverageCounter = 0;
     var lastAverageCounter = 0;
     var lastAccelVal = 0;
     var blockSteps = false;
+    var queue: OperationQueue = OperationQueue();
+    
+    func startQueuedUpdates() {
+       if motion.isDeviceMotionAvailable {
+          self.motion.deviceMotionUpdateInterval = 1.0 / 100.0
+          self.motion.showsDeviceMovementDisplay = true
+          self.motion.startDeviceMotionUpdates(using: .xMagneticNorthZVertical,
+                   to: self.queue, withHandler: { (data, error) in
+             // Make sure the data is valid before accessing it.
+             if let validData = data {
+                // Get the attitude relative to the magnetic north reference frame.
+                 let roll = validData.attitude.roll * (180/Double.pi);
+                 let pitch = validData.attitude.pitch * (180/Double.pi);
+                 let yaw = validData.attitude.yaw * (180/Double.pi);
+                 
+                 hero.azimuth = Int(yaw)
+                 hero.elevation = Int(roll)
+                 
+//                 print(roll);
+//                 print(yaw);
+
+                // Use the motion data in your app.
+             }
+          })
+           headTrackerConnected = true
+           updateButtons()
+       }
+    }
+    
+    func stopDeviceOrientation()
+    {
+        if motion.isDeviceMotionAvailable {
+            self.motion.stopDeviceMotionUpdates() }
+    }
     
     func setInputGain(gain: Float) {
         let audioSession = AVAudioSession.sharedInstance()
@@ -85,14 +125,15 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
             print("Central Manager is already scanning!!")
             return;
         }
-        if(!newHeadtracker) {
-            centralManager.scanForPeripherals(withServices: [CBUUID.init(string: Device.TransferService)], options: [CBCentralManagerScanOptionAllowDuplicatesKey:true])
+        
+        if(!useHeadTracker) {
+            print("App is set to use device orientation!")
+            return;
         }
         else {
             centralManager.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey:true])
+            print("Scanning Started!")
         }
-        
-        print("Scanning Started!")
     }
     
     func disconnect() {
@@ -203,44 +244,21 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        print("Discovered \(String(describing: peripheral.name)) at \(RSSI)")
-
-        if(!newHeadtracker)
+   // print("Discovered \(String(describing: peripheral.name)) at \(RSSI)")
+        if(peripheral.name == headtrackerID)
         {
-            var advdata = advertisementData
-            let rwaTrackerId:String? = String(describing: advdata.removeValue(forKey: "kCBAdvDataLocalName")!)
-        
-            print( "\(rwaTrackerId!)  \(headtrackerID)" )
-        
-            if (rwaTrackerId! == headtrackerID)
-            {
-                if self.peripheral != peripheral {
-                    
-                    // save a reference to the peripheral object so Core Bluetooth doesn't get rid of it
-                    self.peripheral = peripheral
-                    
-                    // connect to the peripheral
-                    print("Connecting to peripheral: \(peripheral)")
-                    centralManager?.connect(peripheral, options: nil)
-                }
-            }
-        }
-        else
-        {
-            if(peripheral.name == headtrackerID)
-            {
-                if self.peripheral != peripheral {
-                    
-                    // save a reference to the peripheral object so Core Bluetooth doesn't get rid of it
-                    self.peripheral = peripheral
-                    
-                    // connect to the peripheral
-                    print("Connecting to peripheral: \(peripheral)")
-                    centralManager?.connect(peripheral, options: nil)
-                }
+            if self.peripheral != peripheral {
+                
+                // save a reference to the peripheral object so Core Bluetooth doesn't get rid of it
+                self.peripheral = peripheral
+                
+                // connect to the peripheral
+                print("Connecting to peripheral: \(peripheral)")
+                centralManager?.connect(peripheral, options: nil)
             }
         }
     }
+
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("Peripheral Connected!!!")
@@ -347,32 +365,46 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
                 return;
             }
             
-            var azimuthTmp = words[0]
-            let elevationTmp = words[1]
-            let linAccTmp = words[2]
-            
-            azimuthTmp = azimuthTmp.digits
-            
-            azimuthOrg = Int(NSString(string: azimuthTmp).intValue)
-            azimuth = azimuthOrg-azimuthOffset
-            if(azimuth < 0) {
-                    azimuth += 360 }
-            
-            elevationOrg = Int(NSString(string: elevationTmp).intValue)
-            elevation = elevationOrg-elevationOffset
-            
-            if(inverseElevation) {
-                elevation = -elevation;
+            else if words[0] == "l"
+            {
+               // ubloxLon = Int(NSString(string:words[1].digits).intValue) * (1/10000000);
+               // ubloxLat = Int(NSString(string:words[2].digits).intValue) * (1/10000000);
+                ubloxLat = Double(words[1])! * (1/10000000)
+                ubloxLon = Double(words[2])! * (1/10000000)
+               // print(print("lon lat: \(ubloxLon) \(ubloxLat)"))
+               // print(print("lon lat: \(hero.coordinates.longitude) \(hero.coordinates.latitude)"))
+                london.coordinate = CLLocationCoordinate2D(latitude: ubloxLat!, longitude: ubloxLon!)
+                
             }
-            
-            linAccel = NSString(string: linAccTmp).floatValue
+            else
+            {
+                var azimuthTmp = words[0]
+                let elevationTmp = words[1]
+                let linAccTmp = words[2]
+                
+                azimuthTmp = azimuthTmp.digits
+                
+                azimuthOrg = Int(NSString(string: azimuthTmp).intValue)
+                azimuth = azimuthOrg-azimuthOffset
+                if(azimuth < 0) {
+                        azimuth += 360 }
+                
+                elevationOrg = Int(NSString(string: elevationTmp).intValue)
+                elevation = elevationOrg-elevationOffset
+                
+                if(inverseElevation) {
+                    elevation = -elevation;
+                }
+                
+                linAccel = NSString(string: linAccTmp).floatValue
 
-            linAccelAverage = Float(averageAccel.average(value: Double(linAccel)))
-            evalAccelData();
-            
-            hero.azimuth = azimuth
-            hero.elevation = elevation
-            hero.stepCount = stepCount
+                linAccelAverage = Float(averageAccel.average(value: Double(linAccel)))
+                evalAccelData();
+                
+                hero.azimuth = azimuth
+                hero.elevation = elevation
+                hero.stepCount = stepCount
+            }
         }
         else {
             print(characteristic.uuid);
@@ -415,7 +447,7 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
         }
     }
     
-    func unblockSteps()
+    @objc func unblockSteps()
     {
         blockSteps = false;
     }
@@ -456,7 +488,7 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
         }
     }
     
-    func start()
+    @objc func start()
     {
         rwagameloop.isRunning = true
         
@@ -478,17 +510,17 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Update Buttons"), object: nil)
     }
     
-    func stop()
+    @objc func stop()
     {
         rwagameloop.isRunning = false
         timer?.invalidate()
         
-        if !registered
-        {
+//        if !registered
+//        {
             if(coreLocationController != nil) {
                 coreLocationController!.locationManager.stopUpdatingLocation()
             }
-        }
+//        }
        
         currentScene.text = "Current Scene"
         currentState.text = "Current State"
@@ -496,10 +528,9 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
         rwagameloop.sendEnd2ActiveAssets()
         
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Update Buttons"), object: nil)
-        
     }
    
-    func countUp()
+    @objc func countUp()
     {
         rwagameloop.updateGameState()
         
@@ -516,7 +547,7 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
         }
      }
     
-    func gameLoaded()
+    @objc func gameLoaded()
     {
         loadingGame.stopAnimating()
         connectHeadtracker()
@@ -525,11 +556,8 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
     override func viewDidLoad()
     {
         NotificationCenter.default.addObserver(self, selector: #selector(self.gameLoaded), name: NSNotification.Name(rawValue: "Game Loaded"), object: nil)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(self.connectHeadtracker), name: NSNotification.Name(rawValue: "Connect Headtracker"), object: nil)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(self.start), name: NSNotification.Name(rawValue: "Start Game"), object: nil)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(self.stop), name: NSNotification.Name(rawValue: "Stop Game"), object: nil)
         
         pdGainSlider.value = 0.7;
@@ -548,9 +576,9 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
         // Dispose of any resources that can be recreated.
     }
     
-    func updateDisplay() {
+    @objc func updateDisplay() {
         DispatchQueue.main.async() {
-            self.headTrackerData.text = String("\(azimuth)  \(elevation) \(stepCount)")
+            self.headTrackerData.text = String("\(hero.azimuth)  \(hero.elevation) \(stepCount)")
         }
     }
     
@@ -558,7 +586,10 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
     {
         DispatchQueue.main.async() {
             if(headTrackerConnected) {
-                self.bleConnectButton.setTitle("Headtracker connected", for: UIControlState())
+                if(useHeadTracker) {
+                    self.bleConnectButton.setTitle("Headtracker connected", for: UIControlState()) }
+                else {
+                    self.bleConnectButton.setTitle("Using Device Orientation", for: UIControlState()) }
             }
             else {
                 self.bleConnectButton.setTitle("Connect Headtracker", for: UIControlState())
@@ -606,8 +637,17 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
         displayTimer?.invalidate();
     }
     
-    func connectHeadtracker() {
-        centralManager = CBCentralManager(delegate: self, queue: nil)
+    @objc func connectHeadtracker() {
+        headTrackerConnected = false
+        updateButtons()
+        if(useHeadTracker) {
+            stopDeviceOrientation()
+            centralManager = CBCentralManager(delegate: self, queue: nil)
+        }
+        else {
+            disconnect()
+            startQueuedUpdates();
+        }
     }
     
     @IBAction func bleConnect(_ sender: UIButton)
@@ -624,21 +664,20 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
     
     @IBAction func pdGain(_ sender: UISlider)
     {
-        print(pdGainSlider.value)
+        //print(pdGainSlider.value)
         pdGainVal = pdGainSlider.value * 5.0
         PdBase.send(Float(pdGainVal), toReceiver: "rwamainvolume")
+        print(pdGainVal);
     }
 
     @IBAction func startStop(_ sender: UIButton)
     {
         if(!rwagameloop.isRunning)
         {
-            
             start()
         }
         else
-        {
-            
+        {            
             stop()
         }
         updateStartStopButton()

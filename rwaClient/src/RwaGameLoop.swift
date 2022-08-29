@@ -36,15 +36,16 @@ class RwaGameLoop:NSObject, PdListener
     var dynamicPatchers:[pdPatcher] = []
     var stereoOut:UnsafeMutableRawPointer?
     var isRunning = false
+    var assetFolder:String = String();
     
     override init()
     {
         stereoOut = nil
         dispatcher = PdDispatcher()
         PdBase.setDelegate(dispatcher)
-        rwa_binauralrir_tilde_setup();
+        //rwa_binauralrir_tilde_setup();
         rwa_binauralsimple_tilde_setup();
-        rwa_reverb_tilde_setup();
+        //rwa_reverb_tilde_setup();
         freeverb_tilde_setup();
         
          super.init()
@@ -125,10 +126,10 @@ class RwaGameLoop:NSObject, PdListener
             {
                 for asset in state.assets
                 {
-                    if (Int(asset.type) == RWAASSETTYPE_PD)
+                    if (Int(asset.type) == RWAASSETTYPE_PD && !asset.mute)
                     {
                         var patch:pdPatcher
-                        patch = pdPatcher.init(patcherTag: PdBase.openFile(asset.name, path: Bundle.main.resourcePath) ,  isBusy: false, myAsset: asset)
+                        patch = pdPatcher.init(patcherTag: PdBase.openFile(asset.name, path: fullAssetPath) ,  isBusy: false, myAsset: asset)
                        // if(patch.patcherTag != nil)
                         
                         dynamicPatchers.append(patch)
@@ -1231,7 +1232,6 @@ class RwaGameLoop:NSObject, PdListener
         for mapItem in hero.activeAssets
         {
             sendData2Asset(mapItem: mapItem.value);
-          
         }
         step = 0;
     }
@@ -1317,7 +1317,8 @@ class RwaGameLoop:NSObject, PdListener
         PdBase.send(Double(asset.fadeOutAfter), toReceiver: pdReceiver)
         
         pdReceiver = "\(patcherTag)-play"
-        PdBase.sendSymbol(asset.name , toReceiver: pdReceiver)
+        let path = fullAssetPath + "/" + asset.name
+        PdBase.sendSymbol(path , toReceiver: pdReceiver)
         
         if #available(iOS 10.0, *) {
             os_log("%@", type: .debug, "NEW ACTIVE ASSET: \(asset.name) send to receiver \(pdReceiver) crossfadeafter: \(asset.fadeOutAfter)")
@@ -1406,8 +1407,6 @@ class RwaGameLoop:NSObject, PdListener
                     print("Start asset for state: \(String(describing: hero.currentState))")
                 }
                 
-                
-                
                 let patcherTag = findFreePatcher(asset: asset)
                 sendInitValues2Pd(asset, Int(patcherTag))
                 hero.activeAssets[asset.uniqueId] = RwaEntity.AssetMapItem(asset, patcherTag)
@@ -1428,11 +1427,11 @@ class RwaGameLoop:NSObject, PdListener
         }
         
         if(hero.timeSinceLastGpsUpdate > 20000) {
-            print("Please Return, Gps seems broken")
+            //print("Please Return, Gps seems broken")
         }
         
         if(hero.disconnectedFromHeadtrackerSince > 20000) {
-            print("Please Return, headtracker seems broken")
+            //print("Please Return, headtracker seems broken")
         }
     }
  

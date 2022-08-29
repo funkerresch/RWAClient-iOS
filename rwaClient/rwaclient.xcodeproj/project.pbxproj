@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,10 +18,6 @@
 		84BD68502211B749005A22B5 /* vas_fir_binaural.c in Sources */ = {isa = PBXBuildFile; fileRef = 84BD684A2211B748005A22B5 /* vas_fir_binaural.c */; };
 		84BD68512211B749005A22B5 /* vas_mem.c in Sources */ = {isa = PBXBuildFile; fileRef = 84BD684B2211B749005A22B5 /* vas_mem.c */; };
 		84BD68522211B749005A22B5 /* vas_util.c in Sources */ = {isa = PBXBuildFile; fileRef = 84BD684C2211B749005A22B5 /* vas_util.c */; };
-		84BD68572211BA6E005A22B5 /* rwa_binauralsimple~.c in Sources */ = {isa = PBXBuildFile; fileRef = 84BD68532211BA6D005A22B5 /* rwa_binauralsimple~.c */; };
-		84BD68582211BA6E005A22B5 /* rwa_binauralrir~.c in Sources */ = {isa = PBXBuildFile; fileRef = 84BD68542211BA6D005A22B5 /* rwa_binauralrir~.c */; };
-		84BD68592211BA6E005A22B5 /* rwa_firobject.c in Sources */ = {isa = PBXBuildFile; fileRef = 84BD68552211BA6E005A22B5 /* rwa_firobject.c */; };
-		84BD685A2211BA6E005A22B5 /* rwa_reverb~.c in Sources */ = {isa = PBXBuildFile; fileRef = 84BD68562211BA6E005A22B5 /* rwa_reverb~.c */; };
 		84C70E972212E48E005C49C3 /* freeverb~.c in Sources */ = {isa = PBXBuildFile; fileRef = 84C70E962212E48E005C49C3 /* freeverb~.c */; };
 		84C70EA62212E6DA005C49C3 /* rwaplayer5_1channelbinaural_fabian.pd in Resources */ = {isa = PBXBuildFile; fileRef = 84C70E9B2212E6D9005C49C3 /* rwaplayer5_1channelbinaural_fabian.pd */; };
 		84C70EA72212E6DA005C49C3 /* rwaReferencePatch.pd in Resources */ = {isa = PBXBuildFile; fileRef = 84C70E9C2212E6D9005C49C3 /* rwaReferencePatch.pd */; };
@@ -67,6 +63,11 @@
 		84F48D001F24B26C00869BF2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84F48CFE1F24B26C00869BF2 /* Assets.xcassets */; };
 		84F48D061F24B2AB00869BF2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84F48D021F24B2AB00869BF2 /* LaunchScreen.storyboard */; };
 		84F48D071F24B2AB00869BF2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84F48D041F24B2AB00869BF2 /* Main.storyboard */; };
+		E4232CB523D9C09D00E44DE3 /* rwa_binauralsimple~.c in Sources */ = {isa = PBXBuildFile; fileRef = E4232CB423D9C09D00E44DE3 /* rwa_binauralsimple~.c */; };
+		E4232CB723D9C12B00E44DE3 /* vas_firobject.c in Sources */ = {isa = PBXBuildFile; fileRef = E4232CB623D9C12B00E44DE3 /* vas_firobject.c */; };
+		E4232CB923D9C16D00E44DE3 /* vas_fir_list.c in Sources */ = {isa = PBXBuildFile; fileRef = E4232CB823D9C16C00E44DE3 /* vas_fir_list.c */; };
+		E45AB4C227CE215600D65E93 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = E45AB4C127CE215600D65E93 /* Zip */; };
+		E45AB4CD27CF5E0100D65E93 /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45AB4C827CF5E0100D65E93 /* DownloadManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,10 +115,6 @@
 		84BD684A2211B748005A22B5 /* vas_fir_binaural.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vas_fir_binaural.c; path = ../vas_library/source/vas_fir_binaural.c; sourceTree = "<group>"; };
 		84BD684B2211B749005A22B5 /* vas_mem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vas_mem.c; path = ../vas_library/source/vas_mem.c; sourceTree = "<group>"; };
 		84BD684C2211B749005A22B5 /* vas_util.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vas_util.c; path = ../vas_library/source/vas_util.c; sourceTree = "<group>"; };
-		84BD68532211BA6D005A22B5 /* rwa_binauralsimple~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "rwa_binauralsimple~.c"; path = "../vas_library/examples/PureData/raw_binauralsimple~/rwa_binauralsimple~.c"; sourceTree = "<group>"; };
-		84BD68542211BA6D005A22B5 /* rwa_binauralrir~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "rwa_binauralrir~.c"; path = "../vas_library/examples/PureData/raw_binauralsimple~/rwa_binauralrir~.c"; sourceTree = "<group>"; };
-		84BD68552211BA6E005A22B5 /* rwa_firobject.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = rwa_firobject.c; path = "../vas_library/examples/PureData/raw_binauralsimple~/rwa_firobject.c"; sourceTree = "<group>"; };
-		84BD68562211BA6E005A22B5 /* rwa_reverb~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "rwa_reverb~.c"; path = "../vas_library/examples/PureData/raw_binauralsimple~/rwa_reverb~.c"; sourceTree = "<group>"; };
 		84C70E962212E48E005C49C3 /* freeverb~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "freeverb~.c"; path = "../pd-extra/pd/externals/freeverb~/freeverb~.c"; sourceTree = "<group>"; };
 		84C70E9B2212E6D9005C49C3 /* rwaplayer5_1channelbinaural_fabian.pd */ = {isa = PBXFileReference; lastKnownFileType = text; name = rwaplayer5_1channelbinaural_fabian.pd; path = "../pd-patches/rwaplayer5_1channelbinaural_fabian.pd"; sourceTree = "<group>"; };
 		84C70E9C2212E6D9005C49C3 /* rwaReferencePatch.pd */ = {isa = PBXFileReference; lastKnownFileType = text; name = rwaReferencePatch.pd; path = "../pd-patches/rwaReferencePatch.pd"; sourceTree = "<group>"; };
@@ -165,6 +162,10 @@
 		84F48D031F24B2AB00869BF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = src/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84F48D051F24B2AB00869BF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = src/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		84F99CAC1F6046500096B64B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = src/Info.plist; sourceTree = "<group>"; };
+		E4232CB423D9C09D00E44DE3 /* rwa_binauralsimple~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "rwa_binauralsimple~.c"; path = "../vas_library/examples/PureData/rwa_binauralsimple~.c"; sourceTree = "<group>"; };
+		E4232CB623D9C12B00E44DE3 /* vas_firobject.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vas_firobject.c; path = ../vas_library/source/vas_firobject.c; sourceTree = "<group>"; };
+		E4232CB823D9C16C00E44DE3 /* vas_fir_list.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vas_fir_list.c; path = ../vas_library/source/vas_fir_list.c; sourceTree = "<group>"; };
+		E45AB4C827CF5E0100D65E93 /* DownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadManager.swift; path = src/DownloadManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +175,7 @@
 			files = (
 				84BD68462211B636005A22B5 /* libpd-ios.a in Frameworks */,
 				842212321F939E23004BF9C9 /* Accelerate.framework in Frameworks */,
+				E45AB4C227CE215600D65E93 /* Zip in Frameworks */,
 				84D7F166217DDF1F0082843F /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -212,12 +214,11 @@
 				84C70E9C2212E6D9005C49C3 /* rwaReferencePatch.pd */,
 				84C70EA22212E6D9005C49C3 /* stereoout_biquad.pd */,
 				84C70E9D2212E6D9005C49C3 /* stereoout.pd */,
-				84BD68542211BA6D005A22B5 /* rwa_binauralrir~.c */,
-				84BD68532211BA6D005A22B5 /* rwa_binauralsimple~.c */,
-				84BD68552211BA6E005A22B5 /* rwa_firobject.c */,
-				84BD68562211BA6E005A22B5 /* rwa_reverb~.c */,
+				E4232CB823D9C16C00E44DE3 /* vas_fir_list.c */,
+				E4232CB423D9C09D00E44DE3 /* rwa_binauralsimple~.c */,
 				84BD68472211B748005A22B5 /* vas_dynamicFirChannel.c */,
 				84BD684A2211B748005A22B5 /* vas_fir_binaural.c */,
+				E4232CB623D9C12B00E44DE3 /* vas_firobject.c */,
 				84BD68482211B748005A22B5 /* vas_fir.c */,
 				84BD68492211B748005A22B5 /* vas_gps_util.c */,
 				84BD684B2211B749005A22B5 /* vas_mem.c */,
@@ -227,6 +228,7 @@
 				84F48CFE1F24B26C00869BF2 /* Assets.xcassets */,
 				84F48D021F24B2AB00869BF2 /* LaunchScreen.storyboard */,
 				84F48D041F24B2AB00869BF2 /* Main.storyboard */,
+				E45AB4C827CF5E0100D65E93 /* DownloadManager.swift */,
 				84F48CDB1F24B14C00869BF2 /* AppDelegate.swift */,
 				84F48CDC1F24B14C00869BF2 /* CoreLocationController.swift */,
 				8461E1692120377E00E7DD4F /* RwaLocation.swift */,
@@ -303,6 +305,9 @@
 			dependencies = (
 			);
 			name = rwaclient;
+			packageProductDependencies = (
+				E45AB4C127CE215600D65E93 /* Zip */,
+			);
 			productName = "rwa client";
 			productReference = 8436A26B1C3156F400A4E328 /* rwaclient.app */;
 			productType = "com.apple.product-type.application";
@@ -337,10 +342,14 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
 			mainGroup = 8436A2621C3156F400A4E328;
+			packageReferences = (
+				E45AB4C027CE215600D65E93 /* XCRemoteSwiftPackageReference "Zip" */,
+			);
 			productRefGroup = 8436A26C1C3156F400A4E328 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -438,17 +447,17 @@
 				84F48CEE1F24B14C00869BF2 /* GameManager.swift in Sources */,
 				84C70EC82213148A005C49C3 /* F53OSCClient.m in Sources */,
 				84C70ED02213148A005C49C3 /* F53OSCMessage.m in Sources */,
+				E4232CB923D9C16D00E44DE3 /* vas_fir_list.c in Sources */,
 				84C70EC42213148A005C49C3 /* F53OSCSocket.m in Sources */,
 				84F48CEA1F24B14C00869BF2 /* AppDelegate.swift in Sources */,
 				84F48CF61F24B14C00869BF2 /* SecondViewController.swift in Sources */,
 				84BD684E2211B749005A22B5 /* vas_fir.c in Sources */,
-				84BD68592211BA6E005A22B5 /* rwa_firobject.c in Sources */,
 				84F48CEC1F24B14C00869BF2 /* Device.swift in Sources */,
 				84C70ECC2213148A005C49C3 /* NSString+F53OSCString.m in Sources */,
 				84C70ECD2213148A005C49C3 /* F53OSCServer.m in Sources */,
+				E4232CB723D9C12B00E44DE3 /* vas_firobject.c in Sources */,
 				84F48CF51F24B14C00869BF2 /* RwaUtilities.swift in Sources */,
 				84C70EC72213148A005C49C3 /* F53OSCBundle.m in Sources */,
-				84BD68582211BA6E005A22B5 /* rwa_binauralrir~.c in Sources */,
 				84F48CF11F24B14C00869BF2 /* RwaGameLoop.swift in Sources */,
 				84C70ECB2213148A005C49C3 /* F53OSCTimeTag.m in Sources */,
 				8461E16A2120377E00E7DD4F /* RwaLocation.swift in Sources */,
@@ -457,8 +466,6 @@
 				8429C291215BB68700D2E5E0 /* MapViewController.swift in Sources */,
 				84C70E972212E48E005C49C3 /* freeverb~.c in Sources */,
 				84C70EC32213148A005C49C3 /* GCDAsyncUdpSocket.m in Sources */,
-				84BD68572211BA6E005A22B5 /* rwa_binauralsimple~.c in Sources */,
-				84BD685A2211BA6E005A22B5 /* rwa_reverb~.c in Sources */,
 				84C70EC62213148A005C49C3 /* NSDate+F53OSCTimeTag.m in Sources */,
 				84C70EC52213148A005C49C3 /* F53OSCPacket.m in Sources */,
 				84C70EC92213148A005C49C3 /* GCDAsyncSocket.m in Sources */,
@@ -470,9 +477,11 @@
 				84BD68512211B749005A22B5 /* vas_mem.c in Sources */,
 				84F48CF31F24B14C00869BF2 /* RwaScene.swift in Sources */,
 				84F48CEB1F24B14C00869BF2 /* CoreLocationController.swift in Sources */,
+				E45AB4CD27CF5E0100D65E93 /* DownloadManager.swift in Sources */,
 				84C70ECA2213148A005C49C3 /* NSData+F53OSCBlob.m in Sources */,
 				84F48CF21F24B14C00869BF2 /* RwaImport.swift in Sources */,
 				84F48CED1F24B14C00869BF2 /* FirstViewController.swift in Sources */,
+				E4232CB523D9C09D00E44DE3 /* rwa_binauralsimple~.c in Sources */,
 				84BD684F2211B749005A22B5 /* vas_gps_util.c in Sources */,
 				84BD68522211B749005A22B5 /* vas_util.c in Sources */,
 			);
@@ -602,7 +611,11 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = src/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/libs";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
@@ -617,8 +630,18 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "src/rwa client-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../F53OSC-master\" \"$(SRCROOT)/libs\"/** \"$(SRCROOT)/../vas_library\"/** \"$(SRCROOT)/../libpd/pure-data/src\" \"$(SRCROOT)/../vas_library/examples/PureData/raw_binauralsimple~\" \"$(SRCROOT)/../F53OSC\" \"$(SRCROOT)/../libpd/libpd_wrapper\" \"$(SRCROOT)/../libpd/libpd_wrapper/util\" \"$(SRCROOT)/../libpd/objc\"";
+				SWIFT_VERSION = 4.0;
+				USER_HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../F53OSC-master\"",
+					"\"$(SRCROOT)/libs\"/**",
+					"\"$(SRCROOT)/../vas_library\"/**",
+					"\"$(SRCROOT)/../libpd/pure-data/src\"",
+					"\"$(SRCROOT)/../vas_library/examples/PureData/raw_binauralsimple~\"",
+					"\"$(SRCROOT)/../F53OSC\"",
+					"\"$(SRCROOT)/../libpd/libpd_wrapper\"",
+					"\"$(SRCROOT)/../libpd/libpd_wrapper/util\"",
+					"\"$(SRCROOT)/../libpd/objc\"",
+				);
 			};
 			name = Debug;
 		};
@@ -639,7 +662,11 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = src/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/libs";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
@@ -653,8 +680,18 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "src/rwa client-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../F53OSC-master\" \"$(SRCROOT)/libs\"/** \"$(SRCROOT)/../vas_library\"/** \"$(SRCROOT)/../libpd/pure-data/src\" \"$(SRCROOT)/../vas_library/examples/PureData/raw_binauralsimple~\" \"$(SRCROOT)/../F53OSC\" \"$(SRCROOT)/../libpd/libpd_wrapper\" \"$(SRCROOT)/../libpd/libpd_wrapper/util\" \"$(SRCROOT)/../libpd/objc\"";
+				SWIFT_VERSION = 4.0;
+				USER_HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../F53OSC-master\"",
+					"\"$(SRCROOT)/libs\"/**",
+					"\"$(SRCROOT)/../vas_library\"/**",
+					"\"$(SRCROOT)/../libpd/pure-data/src\"",
+					"\"$(SRCROOT)/../vas_library/examples/PureData/raw_binauralsimple~\"",
+					"\"$(SRCROOT)/../F53OSC\"",
+					"\"$(SRCROOT)/../libpd/libpd_wrapper\"",
+					"\"$(SRCROOT)/../libpd/libpd_wrapper/util\"",
+					"\"$(SRCROOT)/../libpd/objc\"",
+				);
 			};
 			name = Release;
 		};
@@ -680,6 +717,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E45AB4C027CE215600D65E93 /* XCRemoteSwiftPackageReference "Zip" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/marmelroy/Zip.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 2.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E45AB4C127CE215600D65E93 /* Zip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E45AB4C027CE215600D65E93 /* XCRemoteSwiftPackageReference "Zip" */;
+			productName = Zip;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8436A2631C3156F400A4E328 /* Project object */;
 }

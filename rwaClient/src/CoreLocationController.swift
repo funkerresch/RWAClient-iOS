@@ -55,6 +55,7 @@ class CoreLocationController:NSObject, CLLocationManagerDelegate{
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
+        print("Update Location")
         let location = locations.last! as CLLocation
         hero.location = location
         hero.coordinates = location.coordinate
