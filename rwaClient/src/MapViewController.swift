@@ -11,10 +11,9 @@ import UIKit
 import MapKit
 
 //var annotation = AttractionAnnotation(coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0),title: "UBLOX",subtitle: "", type: AttractionType.misc)
-var london = MKPointAnnotation()
+//var london = MKPointAnnotation()
 
 extension MapViewController {
-    
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is MKCircle {
@@ -62,14 +61,6 @@ extension MapViewController {
         return annotationView
        
     }
-    
-//    func mapView( _ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-//      let annotationView = AttractionAnnotationView(
-//        annotation: annotation,
-//        reuseIdentifier: "Attraction")
-//      annotationView.canShowCallout = true
-//      return annotationView
-//    }
  }
 
 extension MKMapView {
@@ -113,7 +104,6 @@ extension MKMapView {
         }
         
         rectCoordinates.append(nw);
-   
         
         var ne:CLLocationCoordinate2D = (calculateDestination(e, height/2, 0) );
         if(ne.longitude < 0)
@@ -132,7 +122,6 @@ extension MKMapView {
         rectCoordinates.append(se);
         let polygon = MKPolygon(coordinates: &rectCoordinates, count: rectCoordinates.count);
         return polygon;
-        
     }
 }
 
@@ -197,9 +186,45 @@ fileprivate extension MKMapView {
 class MapViewController: UIViewController, MKMapViewDelegate
 {
     @IBOutlet var mapView: MKMapView!
+    @IBOutlet var currentScene: UITextField!
+    @IBOutlet var currentState: UITextField!
+    
+    @objc func redraw() {
+        let overlays = mapView.overlays
+        mapView.removeOverlays(overlays)
+        let annotations = mapView.annotations
+        mapView.removeAnnotations(annotations)
+        if let scene = hero.currentScene {
+            drawScene(scene)
+        }
+        mapView.setNeedsDisplay();
+        print("REDRAW MAP")
+    }
+    
+    @objc func updateScene() {
+        if let scene = hero.currentScene {
+            let sceneName = scene.name
+            currentScene.text = sceneName
+        }
+        updateState()
+    }
+    
+    @objc func updateState() {
+        if let state = hero.currentState {
+            let stateName = state.stateName
+            currentState.text = stateName
+        }
+        else {
+            currentState.text = ""
+        }
+        
+    }
     
     override func viewDidLoad() {
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.redraw), name: NSNotification.Name(rawValue: "Redraw Map"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateScene), name: NSNotification.Name(rawValue: "Update Scene"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateState), name: NSNotification.Name(rawValue: "Update State"), object: nil)
         super.viewDidLoad()
         mapView.delegate = self
         if(scenes.isEmpty) {
@@ -212,10 +237,6 @@ class MapViewController: UIViewController, MKMapViewDelegate
         mapView.showsScale = true;
         mapView.showsUserLocation = true;
         mapView.showAnnotations(mapView.annotations, animated: true)
-        london.coordinate = scenes[0].coordinates
-        london.title = "test"
-        london.subtitle = "test2"
-        mapView.addAnnotation(london)
     }
     
     func drawRwaArea(area: RwaArea) {
@@ -238,45 +259,54 @@ class MapViewController: UIViewController, MKMapViewDelegate
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        redraw()
+    }
+    
+    fileprivate func drawScene(_ scene: RwaScene) {
+        drawRwaArea(area: scene);
+        
+        for state in scene.states {
+            
+            if(state.type != RWASTATETYPE_FALLBACK && state.type != RWASTATETYPE_BACKGROUND) {
+                drawRwaArea(area: state);
+                //                            let coordinate = CLLocationCoordinate2D(latitude: state.coordinates.latitude, longitude: state.coordinates.longitude)
+                //                            let london = MKPointAnnotation()
+                //                            london.title = ""
+                //                            london.coordinate = coordinate
+                //                            mapView.addAnnotation(london)
+            }
+            for asset in state.assets {
+                let coordinate = CLLocationCoordinate2D(latitude: asset.coordinates.latitude, longitude: asset.coordinates.longitude)
+                let annotation = AttractionAnnotation(coordinate: coordinate,
+                                                      title: asset.name,
+                                                      subtitle: "",
+                                                      type: AttractionType.misc)
+                mapView.addAnnotation(annotation)
+            }
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewDidLoad();
         
-        //mapView.addAnnotation(annotation)
- //        london.title = "London"
-//        london.coordinate = CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275)
-        
-        
-        if(!scenes.isEmpty)
-        {
-            for scene in scenes
-            {
-                drawRwaArea(area: scene);
-                
-              //  let polygon = MKPolygon(coordinates: &locations, count: locations.count);
-                
-                
-                for state in scene.states {
-                    
-                    if(state.type != RWASTATETYPE_FALLBACK && state.type != RWASTATETYPE_BACKGROUND) {
-                        drawRwaArea(area: state);
-                    }
-                    
-                    for asset in state.assets {
-//                        let annotation = AttractionAnnotation(
-//                            coordinate: CLLocationCoordinate2D(latitude: asset.coordinates.latitude, longitude: asset.coordinates.longitude),
-//                            //coordinate: hero.coordinates,
-//                            title: "UBLOX",
-//                            subtitle: "",
-//                            type: AttractionType.misc)
-//                          mapView.addAnnotation(annotation)
-                        
-                    }
-                }
-            }
+        if scenes.isEmpty {
+            return;
         }
         
-    }
+        if (!rwagameloop.isRunning)        {
+            drawScene(scenes[0])
+            return
+        }
+
+        for scene in scenes
+        {
+            if scene == hero.currentScene {
+                drawScene(scene)
+            }
+        }
+     }
  }
 
 enum AttractionType: Int {
@@ -302,13 +332,11 @@ enum AttractionType: Int {
 // 2
 class AttractionAnnotation: NSObject, MKAnnotation
 {
-  // 3
   let coordinate: CLLocationCoordinate2D
   let title: String?
   let subtitle: String?
   let type: AttractionType
   
-  // 4
   init(coordinate: CLLocationCoordinate2D, title: String, subtitle: String, type: AttractionType)
   {
     self.coordinate = coordinate

@@ -11,6 +11,8 @@
 		<dict>
 			<key>CFBundleTypeName</key>
 			<string>MKDirectionsRequest</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.apple.maps.directionsrequest</string>
@@ -46,13 +48,13 @@
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>Download Games in local network</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Needs Locaton</string>
+	<string>Needs Location for location-dependent audio-playback.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Needs Location</string>
+	<string>Needs Location for location-dependent audio-playback.</string>
 	<key>NSLocationUsageDescription</key>
-	<string>Soundwalk</string>
+	<string>Needs Location for location-dependent audio-playback.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>Needs Location for location-dependent audio-playback.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>For realtime input</string>
 	<key>NSMotionUsageDescription</key>

@@ -13,12 +13,17 @@ var registered = false;
 var headtrackerID = ""
 var rwaCreatorIP = ""
 var inverseElevation = true;
+var sendGPS2Creator = false;
+var oscClient = F53OSCClient.init()
+var oscServer = F53OSCServer.init()
 
 struct defaultsKeys {
     static let headtrackerId = "rwaht01"
     static let rwaCreatorIP = "192.168.178.53"
     static let inverseElevation = "true";
     static let useHeadtracker = "true";
+    static let defaultGame = ""
+    static let calibrateOnStart = "false"
 }
 
 @UIApplicationMain
@@ -32,8 +37,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     {
         // Override point for customization after application launch.
         audioController = PdAudioController()
+        coreLocationController = CoreLocationController()
+        coreLocationController?.locationManager.stopUpdatingLocation()
         
         let defaults = UserDefaults.standard
+        
+        if let dg = defaults.string(forKey: defaultsKeys.defaultGame) {
+            defaultGame = dg
+        }
+        else {
+            defaultGame = ""
+        }
+        
         if let simulatorIp = defaults.string(forKey: defaultsKeys.rwaCreatorIP) {
             rwaCreatorIP = simulatorIp
         }
@@ -71,18 +86,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         else {
             useHeadTracker = true;
         }
+        
+        if let _calibrateOnStart = defaults.string(forKey: defaultsKeys.calibrateOnStart) {
+            if _calibrateOnStart == "true" {
+                calibrateOnStart = true;
+            }
+            else {
+                calibrateOnStart = false;
+            }
+        }
+        else {
+            calibrateOnStart = false;
+        }
        
         if let c = audioController
         {
-            let s = c.configurePlayback(withSampleRate: 48000, numberChannels: 2, inputEnabled: true, mixingEnabled: true).toPdAudioControlStatus()
-            //let s = c.configurePlaybackWithSampleRate(44100, numberChannels: 2, inputEnabled: false, mixingEnabled: true).toPdAudioControlStatus()
+            let sr = sampleRate * 1000
+            let s = c.configurePlayback(withSampleRate: Int32(sr), inputChannels: 1, outputChannels: 2, inputEnabled: true).toPdAudioControlStatus()
             c.configureTicksPerBuffer(16)
             switch s{
             case .OK:
                 print("succes");
             default:
                 print("no succes");
-                
             }
         }
         else

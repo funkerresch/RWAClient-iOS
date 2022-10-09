@@ -11,8 +11,6 @@ import UIKit
 class ControlDataViewController: UIViewController, UITextFieldDelegate, F53OSCPacketDestination {
     
     var timer:Timer? = Timer()
-    var oscClient = F53OSCClient.init()
-    var oscServer = F53OSCServer.init()
   
     @IBOutlet var motherIp: UITextField!
     @IBOutlet var register: UIButton!
@@ -24,12 +22,21 @@ class ControlDataViewController: UIViewController, UITextFieldDelegate, F53OSCPa
     @IBOutlet var currentState: UITextField!
     @IBOutlet var useDeviceOrientation:UISwitch!
     @IBOutlet var inverseElevationSwitch:UISwitch!
+    @IBOutlet var sendGPS2CreatorSwitch:UISwitch!
     @IBOutlet var bleConnectButton: UIButton!
    
+    func initGui()
+    {
+        headTrackerData.isUserInteractionEnabled = false
+        coordinates.isUserInteractionEnabled = false
+        currentScene.isUserInteractionEnabled = false
+        currentState.isUserInteractionEnabled = false
+    }
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
+        initGui();
         motherIp.delegate = self
         headtrackerId.delegate = self
         motherIp.text = rwaCreatorIP
@@ -49,6 +56,7 @@ class ControlDataViewController: UIViewController, UITextFieldDelegate, F53OSCPa
         }
         
         updateButtons()
+        motherIp.text = rwaCreatorIP
     }
     
     override func viewWillDisappear(_ animated: Bool)
@@ -62,6 +70,8 @@ class ControlDataViewController: UIViewController, UITextFieldDelegate, F53OSCPa
     {
         textField.resignFirstResponder();
         let defaults = UserDefaults.standard
+        rwaCreatorIP = motherIp.text!
+        headtrackerID = headtrackerId.text!
         defaults.set(motherIp.text, forKey: defaultsKeys.rwaCreatorIP)
         defaults.set(headtrackerId.text, forKey: defaultsKeys.headtrackerId)
         return true;
@@ -114,6 +124,23 @@ class ControlDataViewController: UIViewController, UITextFieldDelegate, F53OSCPa
                                     nil, socklen_t(0), NI_NUMERICHOST)
                         address = String(cString: hostname)
                         print("MY NETWORK ADDRESS \(String(describing: address))")
+                    }
+                    if address == nil
+                    {
+                        if name == "pdp_ip0"
+                        {
+                            var addr = interface?.ifa_addr.pointee
+                            
+                            var hostname = [CChar](repeating: 0, count: Int(NI_MAXHOST))
+                            getnameinfo(&addr!, socklen_t((interface?.ifa_addr.pointee.sa_len)!),
+                                        &hostname, socklen_t(hostname.count),
+                                        nil, socklen_t(0), NI_NUMERICHOST)
+                            
+                            address = String(cString: hostname)
+                            print("MY NETWORK ADDRESS \(String(describing: address))")
+                            
+                        }
+                        
                     }
                 }
                 ptr = ptr?.pointee.ifa_next
@@ -229,22 +256,33 @@ class ControlDataViewController: UIViewController, UITextFieldDelegate, F53OSCPa
         updateInverseElevationSwitch()
     }
     
+    fileprivate func sendRegisterOscMessage() {
+        if let adress = getWiFiAddress() {
+            let message = F53OSCMessage(addressPattern: "/register", arguments: ["Gandalf", adress])
+            print("register client")
+            oscClient.send(message)
+            self.startListening()
+            coreLocationController?.locationManager.stopUpdatingLocation()
+        }
+    }
+    
     @IBAction func registerAtMother(_ sender: UIButton)
     {
+        sendDummyOscMessage();
+        sendDummyOscMessage();
+        
         if(!registered)
         {
             registered = true;
             register.setTitle("Unregister", for: UIControlState())
-            let message = F53OSCMessage(addressPattern: "/register", arguments: ["Gandalf", getWiFiAddress()!])
-            print("register client")
-            oscClient.send(message)
-            self.startListening()
+            sendRegisterOscMessage()
         }
         else
         {
             oscServer.stopListening()
             registered = false;
             register.setTitle("Register", for: UIControlState())
+            coreLocationController?.locationManager.startUpdatingLocation()
         }
     }
     
@@ -269,6 +307,11 @@ class ControlDataViewController: UIViewController, UITextFieldDelegate, F53OSCPa
         defaults.set(isOn, forKey: defaultsKeys.inverseElevation)
     }
     
+    @IBAction func sendGPS(_ sender: UISwitch)
+    {
+        sendGPS2Creator = sender.isOn;
+    }
+    
     @IBAction func bleConnect(_ sender: UIButton)
     {
         if(!headTrackerConnected) {
@@ -281,12 +324,9 @@ class ControlDataViewController: UIViewController, UITextFieldDelegate, F53OSCPa
         if(!rwagameloop.isRunning) {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Start Game"), object: nil)
         }
-        else
-        {
+        else {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Stop Game"), object: nil)
         }
-        
-       // updateStartStopButton()
     }
     
     @IBAction func calibrateHeadtracker(_ sender: UIButton)

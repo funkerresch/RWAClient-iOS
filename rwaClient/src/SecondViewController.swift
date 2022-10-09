@@ -35,6 +35,7 @@ var linAccelMovingAverage =  [Float](repeating: 0.0, count: 100)
 var linAccelAkkum:Float = 0;
 var stepCount = -1;
 var averageAccel:MovingAverage = MovingAverage(period: 128)
+var calibrateOnStart = false
 
 class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate
 {
@@ -49,6 +50,7 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
     @IBOutlet var currentScene: UITextField!
     @IBOutlet var currentState: UITextField!
     @IBOutlet var useNewHeadtracker:UIButton!
+    @IBOutlet var calibrateOnStartSwitch:UISwitch!
 
     var timer:Timer? = Timer()
     var unblockStepTime:Timer? = Timer()
@@ -72,27 +74,45 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
        if motion.isDeviceMotionAvailable {
           self.motion.deviceMotionUpdateInterval = 1.0 / 100.0
           self.motion.showsDeviceMovementDisplay = true
-          self.motion.startDeviceMotionUpdates(using: .xMagneticNorthZVertical,
-                   to: self.queue, withHandler: { (data, error) in
+          self.motion.startDeviceMotionUpdates(using: .xTrueNorthZVertical, to: self.queue, withHandler: { (data, error) in
              // Make sure the data is valid before accessing it.
              if let validData = data {
                 // Get the attitude relative to the magnetic north reference frame.
                  let roll = validData.attitude.roll * (180/Double.pi);
-                 let pitch = validData.attitude.pitch * (180/Double.pi);
                  let yaw = validData.attitude.yaw * (180/Double.pi);
                  
-                 hero.azimuth = Int(yaw)
-                 hero.elevation = Int(roll)
+                 var azi = Int(yaw)
+                 if azi <= 0 {
+                     azi = -azi
+                 }
+                 else {
+                     azi = 360 - azi
+                 }
                  
-//                 print(roll);
-//                 print(yaw);
-
-                // Use the motion data in your app.
+                 var ele = -Int(roll)
+                 if inverseElevation {
+                    ele = Int(roll)
+                 }
+                 
+                 hero.azimuth = azi
+                 hero.elevation = ele
              }
           })
            headTrackerConnected = true
            updateButtons()
        }
+        
+        if (motion.isAccelerometerAvailable) {
+            motion.accelerometerUpdateInterval = 0.02;
+            motion.startAccelerometerUpdates(to: self.queue, withHandler: { (data, error) in
+                if let validData = data {
+                    let z_acceleration = validData.acceleration.z
+                    linAccelAverage = Float(averageAccel.average(value: Double(-z_acceleration)))
+                    linAccel = Float(-z_acceleration)
+                    self.evalAccelData();
+                }
+            });
+        }
     }
     
     func stopDeviceOrientation()
@@ -244,7 +264,7 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-   // print("Discovered \(String(describing: peripheral.name)) at \(RSSI)")
+    print("Discovered \(String(describing: peripheral.name)) at \(RSSI)")
         if(peripheral.name == headtrackerID)
         {
             if self.peripheral != peripheral {
@@ -373,7 +393,7 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
                 ubloxLon = Double(words[2])! * (1/10000000)
                // print(print("lon lat: \(ubloxLon) \(ubloxLat)"))
                // print(print("lon lat: \(hero.coordinates.longitude) \(hero.coordinates.latitude)"))
-                london.coordinate = CLLocationCoordinate2D(latitude: ubloxLat!, longitude: ubloxLon!)
+                //london.coordinate = CLLocationCoordinate2D(latitude: ubloxLat!, longitude: ubloxLon!)
                 
             }
             else
@@ -450,11 +470,15 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
     @objc func unblockSteps()
     {
         blockSteps = false;
+        print("UNBLOCK")
     }
+    
+
     
     func evalAccelData()
     {
-        //print("%d", linAccelAverage);
+        //print(linAccelAverage);
+        //print("Notification STARTED on characteristic: \(linAccelAverage) \(linAccel)")
         
         if(!blockSteps)
         {
@@ -467,9 +491,14 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
                     {
                         step = 1;
                         stepCount+=1;
-                        unblockStepTime = Timer.scheduledTimer(timeInterval: 0.45, target: self, selector: #selector(SecondViewController.unblockSteps), userInfo: nil, repeats: false)
+//                        unblockStepTime = Timer.scheduledTimer(timeInterval: 0.45, target: self, selector: #selector(SecondViewController.unblockSteps), userInfo: nil, repeats: false)
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(450), execute: {
+                            self.unblockSteps()
+                        })
+                        
                         blockSteps = true;
-                       // print("STEP_1");
+                        print("STEP_1");
                     }
                 }
                 else
@@ -479,9 +508,13 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
                     {
                         stepCount+=1;
                         step = 1;
-                        unblockStepTime = Timer.scheduledTimer(timeInterval: 0.45, target: self, selector: #selector(SecondViewController.unblockSteps), userInfo: nil, repeats: false)
+//                        unblockStepTime = Timer.scheduledTimer(timeInterval: 0.45, target: self, selector: #selector(SecondViewController.unblockSteps), userInfo: nil, repeats: false)
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(450), execute: {
+                            self.unblockSteps()
+                        })
                         blockSteps = true;
-                       // print("STEP_2");
+                        print("STEP_2");
                     }
                 }
             }
@@ -490,43 +523,30 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
     
     @objc func start()
     {
-        rwagameloop.isRunning = true
-        
-        if !registered {
-            coreLocationController = CoreLocationController()
-        }
-        else {
-            
-        }
-        
         let interval:TimeInterval = schedulerRate/1000
-        
+        rwagameloop.isRunning = true
         rwagameloop.startGame()
         pdGainVal = pdGainSlider.value * 4.0
         PdBase.send(Float(pdGainVal), toReceiver: "rwamainvolume")
-        
         timer = Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(SecondViewController.countUp), userInfo: nil, repeats: true)
-        
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Update Buttons"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Redraw Map"), object: nil)
+        
+        if(headTrackerConnected && calibrateOnStart)  // this is here because something weird happend in zofingen, north was sometimes not north anymore..:(
+        {
+            azimuthOffset = azimuthOrg
+            elevationOffset = elevationOrg
+        }
     }
     
     @objc func stop()
     {
         rwagameloop.isRunning = false
         timer?.invalidate()
-        
-//        if !registered
-//        {
-            if(coreLocationController != nil) {
-                coreLocationController!.locationManager.stopUpdatingLocation()
-            }
-//        }
-       
         currentScene.text = "Current Scene"
         currentState.text = "Current State"
         rwagameloop.sendEnd2BackgroundAssets()
         rwagameloop.sendEnd2ActiveAssets()
-        
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Update Buttons"), object: nil)
     }
    
@@ -545,12 +565,20 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
             currentState.text = hero.currentState?.stateName
             stateChanged = false
         }
-     }
+    }
     
     @objc func gameLoaded()
     {
         loadingGame.stopAnimating()
         connectHeadtracker()
+    }
+    
+    func initGui()
+    {
+        txtTask.isUserInteractionEnabled = false
+        headTrackerData.isUserInteractionEnabled = false
+        currentScene.isUserInteractionEnabled = false
+        currentState.isUserInteractionEnabled = false
     }
     
     override func viewDidLoad()
@@ -560,7 +588,9 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
         NotificationCenter.default.addObserver(self, selector: #selector(self.start), name: NSNotification.Name(rawValue: "Start Game"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.stop), name: NSNotification.Name(rawValue: "Stop Game"), object: nil)
         
-        pdGainSlider.value = 0.7;
+        initGui()
+        pdGainSlider.value = 0.5;
+        
         self.navigationItem.hidesBackButton = true
         loadingGame.center = self.view.center;
         loadingGame.hidesWhenStopped = true;
@@ -623,6 +653,18 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
         updateGameLabel()
     }
     
+    @IBAction func updateCalibrateOnStartSwitch(_ sender: UISwitch)
+    {
+        let defaults = UserDefaults.standard
+        calibrateOnStart = sender.isOn
+        if(sender.isOn) {
+            defaults.set("true", forKey: defaultsKeys.calibrateOnStart)
+        }
+        else {
+            defaults.set("false", forKey: defaultsKeys.calibrateOnStart)
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool)
     {
         dataBuffer = NSMutableData()
@@ -630,6 +672,13 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
         displayTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateDisplay), userInfo: nil, repeats: true)
         
         updateButtons()
+        
+        if(calibrateOnStart) {
+            calibrateOnStartSwitch.isOn = true
+        }
+        else {
+            calibrateOnStartSwitch.isOn = false
+        }
      }
     
     override func viewWillDisappear(_ animated: Bool)
@@ -654,6 +703,7 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
     {
         if(!headTrackerConnected) {
             connectHeadtracker()
+            print(headtrackerID)
         }
         else
         {

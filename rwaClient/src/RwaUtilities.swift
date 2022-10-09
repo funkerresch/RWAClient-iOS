@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+import UIKit
 let RWA_EARTHRADIUS:Double = 6378137
 
 class MovingAverage {
@@ -71,6 +72,35 @@ func calculateDistance(_ p1:CLLocationCoordinate2D, p2:CLLocationCoordinate2D) -
     let c = 2 * atan2( sqrt(a), sqrt(1-a) ) ;
     let d = R * c;
     return d;
+}
+
+func calculateDistanceInMeters(_ p1:CLLocationCoordinate2D, p2:CLLocationCoordinate2D) -> Double
+{
+    let R = 6373000.0
+    let lat1 = degrees2radians(p1.latitude)
+    let lat2 = degrees2radians(p2.latitude)
+    let dlon = degrees2radians(p2.longitude-p1.longitude)
+    let dlat = degrees2radians(p2.latitude-p1.latitude)
+    let a = pow((sin(dlat/2)),2) + cos(lat1) * cos(lat2) * pow((sin(dlon/2)),2)
+    let c = 2 * atan2( sqrt(a), sqrt(1-a) ) ;
+    let d = R * c;
+    return d;
+}
+
+func calculateDistanceWithAltitude(_ p1:Double, p2:Double) -> Double
+{
+    let d = sqrt(pow(p1,2) + pow(p2, 2))
+    return d;
+}
+
+func calculateElevationEasy(_ p1:CLLocationCoordinate2D, p2:CLLocationCoordinate2D, elevation:Double, headDirection:Double) -> Double
+{
+    let d = calculateDistanceInMeters(p1, p2: p2)
+    let vd = elevation
+    var relativeElevation = atan(vd/d)
+    relativeElevation = radians2degrees(relativeElevation)
+    relativeElevation -= headDirection;
+    return relativeElevation
 }
 
 // calculates bearing between p1 and p2
@@ -300,6 +330,14 @@ extension String  {
     var digits: String {
         return components(separatedBy: CharacterSet.decimalDigits.inverted)
             .joined()
+    }
+}
+
+extension UIViewController {
+     func sendDummyOscMessage() {
+        let message = F53OSCMessage(addressPattern: "/dummy", arguments: ["Gandalf", "dummy"])
+        oscClient.send(message)
+        coreLocationController?.locationManager.stopUpdatingLocation()
     }
 }
 

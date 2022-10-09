@@ -19,8 +19,6 @@ class CoreLocationController:NSObject, CLLocationManagerDelegate{
         self.locationManager.requestAlwaysAuthorization()
         self.locationManager.allowsBackgroundLocationUpdates = true;
         self.locationManager.pausesLocationUpdatesAutomatically = false;
-        //self.locationManager.headingFilter = 1
-        //self.locationManager.startUpdatingHeading()
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -44,21 +42,27 @@ class CoreLocationController:NSObject, CLLocationManagerDelegate{
         default:
             print("Unhandled authorization status")
             break
-            
         }
     }
     
-   /* func locationManager(_ manager: CLLocationManager, didUpdateHeading heading: CLHeading) {
-        print (heading.magneticHeading)
-        compassAzimuth = Float(heading.magneticHeading)
-    }*/
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
-        print("Update Location")
-        let location = locations.last! as CLLocation
-        hero.location = location
-        hero.coordinates = location.coordinate
-        hero.timeSinceLastGpsUpdate = 0.0        
+        if(!registered)
+        {
+            print("Update Location")
+            let location = locations.last! as CLLocation
+            hero.location = location
+            hero.coordinates = location.coordinate
+            hero.timeSinceLastGpsUpdate = 0.0
+            
+            if(sendGPS2Creator)
+            {
+                print("Send to Creator")
+                print (hero.coordinates.longitude)
+                print (hero.coordinates.latitude)
+                let message = F53OSCMessage(addressPattern: "/position", arguments: [Float32(hero.coordinates.longitude), Float32(hero.coordinates.latitude)])
+                oscClient.send(message)
+            }
+        }
     }
 }

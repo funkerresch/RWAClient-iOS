@@ -7,6 +7,8 @@ let RWA_MAXNUMBEROFSTEREOPATCHERS = 15;
 let RWA_MAXNUMBEROF5CHANNELPATCHERS = 4;
 let RWA_MAXNUMBEROFDYNAMICPATCHERS = 50
 
+var sampleRate = 48.0
+
 var activeLoop = 0
 var sceneChanged = false
 var stateChanged = false
@@ -23,13 +25,13 @@ class RwaGameLoop:NSObject, PdListener
 {
     var dispatcher:PdDispatcher?
     var monoPatchers:[pdPatcher] = []
+    var monoPatchersOgg:[pdPatcher] = []
     var stereoPatchers:[pdPatcher] = []
-    var binauralMonoPatchers:[pdPatcher] = []
-    var binauralStereoPatchers:[pdPatcher] = []
-    var binaural5ChannelPatchers:[pdPatcher] = []
-    
+    var stereoPatchersOgg:[pdPatcher] = []
     var binauralMonoPatchers_fabian:[pdPatcher] = []
+    var binauralMonoPatchersOgg_fabian:[pdPatcher] = []
     var binauralStereoPatchers_fabian:[pdPatcher] = []
+    var binauralStereoPatchersOgg_fabian:[pdPatcher] = []
     var binaural5ChannelPatchers_fabian:[pdPatcher] = []
     var binaural7ChannelPatchers_fabian:[pdPatcher] = []
     
@@ -47,6 +49,7 @@ class RwaGameLoop:NSObject, PdListener
         rwa_binauralsimple_tilde_setup();
         //rwa_reverb_tilde_setup();
         freeverb_tilde_setup();
+        oggread_tilde_setup();
         
          super.init()
        
@@ -65,11 +68,31 @@ class RwaGameLoop:NSObject, PdListener
             dispatcher?.add(self, forSource: receivedFromPd)
         }
         
+        for _ in 0 ..< RWA_MAXNUMBEROFPATCHERS
+        {
+            var patch:pdPatcher
+            patch = pdPatcher.init(patcherTag: PdBase.openFile("rwaplayermonobinauralogg_fabian.pd", path: Bundle.main.resourcePath) ,  isBusy: false, myAsset: RwaAsset())
+            binauralMonoPatchersOgg_fabian.append(patch)
+            let tag:Int32 = PdBase.dollarZero(forFile: patch.patcherTag)
+            let receivedFromPd:String = "\(tag)-playfinished"
+            dispatcher?.add(self, forSource: receivedFromPd)
+        }
+        
         for _ in 0 ..< RWA_MAXNUMBEROFSTEREOPATCHERS
         {
             var patch:pdPatcher
             patch = pdPatcher.init(patcherTag: PdBase.openFile("rwaplayerstereobinaural_fabian.pd", path: Bundle.main.resourcePath) ,  isBusy: false, myAsset: RwaAsset())
             binauralStereoPatchers_fabian.append(patch)
+            let tag:Int32 = PdBase.dollarZero(forFile: patch.patcherTag)
+            let receivedFromPd:String = "\(tag)-playfinished"
+            dispatcher?.add(self, forSource: receivedFromPd)
+        }
+        
+        for _ in 0 ..< RWA_MAXNUMBEROFSTEREOPATCHERS
+        {
+            var patch:pdPatcher
+            patch = pdPatcher.init(patcherTag: PdBase.openFile("rwaplayerstereobinauralogg_fabian.pd", path: Bundle.main.resourcePath) ,  isBusy: false, myAsset: RwaAsset())
+            binauralStereoPatchersOgg_fabian.append(patch)
             let tag:Int32 = PdBase.dollarZero(forFile: patch.patcherTag)
             let receivedFromPd:String = "\(tag)-playfinished"
             dispatcher?.add(self, forSource: receivedFromPd)
@@ -108,8 +131,28 @@ class RwaGameLoop:NSObject, PdListener
         for _ in 0 ..< RWA_MAXNUMBEROFPATCHERS
         {
             var patch:pdPatcher
+            patch = pdPatcher.init(patcherTag: PdBase.openFile("rwaloopplayerstereoogg.pd", path: Bundle.main.resourcePath) ,  isBusy: false, myAsset: RwaAsset())
+            stereoPatchersOgg.append(patch)
+            let tag:Int32 = PdBase.dollarZero(forFile: patch.patcherTag)
+            let receivedFromPd:String = "\(tag)-playfinished"
+            dispatcher?.add(self, forSource: receivedFromPd)
+        }
+        
+        for _ in 0 ..< RWA_MAXNUMBEROFPATCHERS
+        {
+            var patch:pdPatcher
             patch = pdPatcher.init(patcherTag: PdBase.openFile("rwaloopplayermono.pd", path: Bundle.main.resourcePath) ,  isBusy: false, myAsset: RwaAsset())
             monoPatchers.append(patch)
+            let tag:Int32 = PdBase.dollarZero(forFile: patch.patcherTag)
+            let receivedFromPd:String = "\(tag)-playfinished"
+            dispatcher?.add(self, forSource: receivedFromPd)
+        }
+        
+        for _ in 0 ..< RWA_MAXNUMBEROFPATCHERS
+        {
+            var patch:pdPatcher
+            patch = pdPatcher.init(patcherTag: PdBase.openFile("rwaloopplayermonoogg.pd", path: Bundle.main.resourcePath) ,  isBusy: false, myAsset: RwaAsset())
+            monoPatchersOgg.append(patch)
             let tag:Int32 = PdBase.dollarZero(forFile: patch.patcherTag)
             let receivedFromPd:String = "\(tag)-playfinished"
             dispatcher?.add(self, forSource: receivedFromPd)
@@ -165,6 +208,26 @@ class RwaGameLoop:NSObject, PdListener
     {
         if(Int(asset.type) == RWAASSETTYPE_PD) {
             return findFreeDynamicPatcher(asset: asset) }
+        else if( Int(asset.type) == RWAASSETTYPE_OGG)
+        {
+            switch(asset.playbackType)
+            {
+                case Int32(RWAPLAYBACKTYPE_MONO):
+                    return findFreeMonoPatcherOgg()
+                
+                case Int32(RWAPLAYBACKTYPE_STEREO):
+                    return findFreeStereoPatcherOgg()
+                    
+                case Int32(RWAPLAYBACKTYPE_BINAURALMONO_FABIAN):
+                    return  findFreeBinauralMonoFabianPatcherOgg()
+                
+                case Int32(RWAPLAYBACKTYPE_BINAURALSTEREO_FABIAN):
+                    return  findFreeBinauralStereoFabianPatcherOgg()
+                
+                default:
+                    return -1
+            }
+        }
         
         else
         {
@@ -177,13 +240,13 @@ class RwaGameLoop:NSObject, PdListener
                     return findFreeStereoPatcher()
                     
                 case Int32(RWAPLAYBACKTYPE_BINAURALMONO):
-                    return  findFreeBinauralMonoPatcher()
+                    return  findFreeBinauralMonoFabianPatcher()
                 
                 case Int32(RWAPLAYBACKTYPE_BINAURALMONO_FABIAN):
                     return  findFreeBinauralMonoFabianPatcher()
                     
                 case Int32(RWAPLAYBACKTYPE_BINAURAL5CHANNEL):
-                    return findFreeBinaural5ChannelPatcher()
+                    return findFreeBinaural5ChannelFabianPatcher()
                 
                 case Int32(RWAPLAYBACKTYPE_BINAURAL5CHANNEL_FABIAN):
                     return findFreeBinaural5ChannelFabianPatcher()
@@ -192,7 +255,7 @@ class RwaGameLoop:NSObject, PdListener
                     return findFreeBinaural7ChannelFabianPatcher()
                 
                 case Int32(RWAPLAYBACKTYPE_BINAURALSTEREO):
-                    return findFreeBinauralStereoPatcher()
+                    return findFreeBinauralStereoFabianPatcher()
                 
                 case Int32(RWAPLAYBACKTYPE_BINAURALSTEREO_FABIAN):
                     return findFreeBinauralStereoFabianPatcher()
@@ -209,15 +272,19 @@ class RwaGameLoop:NSObject, PdListener
                 case Int32(RWAPLAYBACKTYPE_BINAURALAUTO):
                     
                     if(asset.numberOfChannels == 1) {
-                        return findFreeBinauralMonoPatcher()
+                        return findFreeBinauralMonoFabianPatcher()
                     }
                     
                     if(asset.numberOfChannels == 2) {
-                        return findFreeBinauralStereoPatcher()
+                        return findFreeBinauralStereoFabianPatcher()
                     }
                 
                     if(asset.numberOfChannels == 5) {
-                        return findFreeBinaural5ChannelPatcher()
+                        return findFreeBinaural5ChannelFabianPatcher()
+                    }
+                
+                    if(asset.numberOfChannels == 7) {
+                        return findFreeBinaural7ChannelFabianPatcher()
                     }
                 
                 default:
@@ -229,7 +296,6 @@ class RwaGameLoop:NSObject, PdListener
     
     func findFreeDynamicPatcher(asset: RwaAsset) ->Int32
     {
-
         for i in 0 ..< dynamicPatchCounter
         {
             if (asset.name == dynamicPatchers[i].myAsset.name )
@@ -243,7 +309,6 @@ class RwaGameLoop:NSObject, PdListener
     
     func findFreeMonoPatcher() ->Int32
     {
-
         for i in 0 ..< RWA_MAXNUMBEROFPATCHERS
         {
             if !monoPatchers[i].isBusy
@@ -255,9 +320,21 @@ class RwaGameLoop:NSObject, PdListener
         return -1
     }
     
+    func findFreeMonoPatcherOgg() ->Int32
+    {
+        for i in 0 ..< RWA_MAXNUMBEROFPATCHERS
+        {
+            if !monoPatchersOgg[i].isBusy
+            {
+                monoPatchersOgg[i].isBusy = true
+                return PdBase.dollarZero(forFile: monoPatchersOgg[i].patcherTag)
+            }
+        }
+        return -1
+    }
+    
     func findFreeStereoPatcher() ->Int32
     {
-
         for i in 0 ..< RWA_MAXNUMBEROFPATCHERS
         {
             if !stereoPatchers[i].isBusy
@@ -269,17 +346,16 @@ class RwaGameLoop:NSObject, PdListener
         return -1
     }
     
-    func findFreeBinauralMonoPatcher() -> Int32
+    func findFreeStereoPatcherOgg() ->Int32
     {
         for i in 0 ..< RWA_MAXNUMBEROFPATCHERS
         {
-            if !binauralMonoPatchers[i].isBusy
+            if !stereoPatchersOgg[i].isBusy
             {
-                binauralMonoPatchers[i].isBusy = true
-                return PdBase.dollarZero(forFile: binauralMonoPatchers[i].patcherTag)
+                stereoPatchersOgg[i].isBusy = true
+                return PdBase.dollarZero(forFile: stereoPatchersOgg[i].patcherTag)
             }
         }
-
         return -1
     }
     
@@ -297,23 +373,22 @@ class RwaGameLoop:NSObject, PdListener
         return -1
     }
     
-    func findFreeBinauralStereoPatcher() ->Int32
+    func findFreeBinauralMonoFabianPatcherOgg() -> Int32
     {
-
-        for i in 0 ..< RWA_MAXNUMBEROFSTEREOPATCHERS
+        for i in 0 ..< RWA_MAXNUMBEROFPATCHERS
         {
-            if !binauralStereoPatchers[i].isBusy
+            if !binauralMonoPatchersOgg_fabian[i].isBusy
             {
-                binauralStereoPatchers[i].isBusy = true
-                return PdBase.dollarZero(forFile: binauralStereoPatchers[i].patcherTag)
+                binauralMonoPatchersOgg_fabian[i].isBusy = true
+                return PdBase.dollarZero(forFile: binauralMonoPatchersOgg_fabian[i].patcherTag)
             }
         }
+        
         return -1
     }
     
     func findFreeBinauralStereoFabianPatcher() ->Int32
     {
-        
         for i in 0 ..< RWA_MAXNUMBEROFSTEREOPATCHERS
         {
             if !binauralStereoPatchers_fabian[i].isBusy
@@ -325,14 +400,14 @@ class RwaGameLoop:NSObject, PdListener
         return -1
     }
     
-    func findFreeBinaural5ChannelPatcher() ->Int32
+    func findFreeBinauralStereoFabianPatcherOgg() ->Int32
     {
-        for i in 0 ..< RWA_MAXNUMBEROF5CHANNELPATCHERS
+        for i in 0 ..< RWA_MAXNUMBEROFSTEREOPATCHERS
         {
-            if !binaural5ChannelPatchers[i].isBusy
+            if !binauralStereoPatchersOgg_fabian[i].isBusy
             {
-                binaural5ChannelPatchers[i].isBusy = true
-                return PdBase.dollarZero(forFile: binaural5ChannelPatchers[i].patcherTag)
+                binauralStereoPatchersOgg_fabian[i].isBusy = true
+                return PdBase.dollarZero(forFile: binauralStereoPatchersOgg_fabian[i].patcherTag)
             }
         }
         return -1
@@ -374,6 +449,37 @@ class RwaGameLoop:NSObject, PdListener
             dynamicPatchers[getDynamicPatcherIndex(patcherTag)].isBusy = false
         }
         
+        else if(Int(asset.type) == RWAASSETTYPE_OGG) {
+            switch(playbackType)
+            {
+                case Int32(RWAPLAYBACKTYPE_MONO):
+                    monoPatchersOgg[getMonoPatcherOggIndex(patcherTag)].isBusy = false
+                    break
+                
+                case Int32(RWAPLAYBACKTYPE_STEREO):
+                    stereoPatchersOgg[getStereoPatcherOggIndex(patcherTag)].isBusy = false
+                    break
+                    
+                case Int32(RWAPLAYBACKTYPE_BINAURALMONO):
+                    binauralMonoPatchersOgg_fabian[getBinauralMonoFabianPatcherOggIndex(patcherTag)].isBusy = false
+                    break
+                
+                case Int32(RWAPLAYBACKTYPE_BINAURALMONO_FABIAN):
+                    binauralMonoPatchersOgg_fabian[getBinauralMonoFabianPatcherOggIndex(patcherTag)].isBusy = false
+                    break
+                    
+                case Int32(RWAPLAYBACKTYPE_BINAURALSTEREO):
+                    binauralStereoPatchersOgg_fabian[getBinauralStereoFabianPatcherOggIndex(patcherTag)].isBusy = false
+                    break
+                
+                case Int32(RWAPLAYBACKTYPE_BINAURALSTEREO_FABIAN):
+                    binauralStereoPatchersOgg_fabian[getBinauralStereoFabianPatcherOggIndex(patcherTag)].isBusy = false
+                    break
+                
+                default: break
+            }
+        }
+        
         else
         {
             switch(playbackType)
@@ -392,11 +498,11 @@ class RwaGameLoop:NSObject, PdListener
                 case Int32(RWAPLAYBACKTYPE_BINAURALAUTO):
                     
                     if(asset.numberOfChannels == 1) {
-                        binauralMonoPatchers[getBinauralMonoPatcherIndex(patcherTag)].isBusy = false
+                        binauralMonoPatchers_fabian[getBinauralMonoFabianPatcherIndex(patcherTag)].isBusy = false
                     }
                     
                     if(asset.numberOfChannels == 2) {
-                        binauralStereoPatchers[getBinauralStereoPatcherIndex(patcherTag)].isBusy = false
+                        binauralStereoPatchers_fabian[getBinauralStereoFabianPatcherIndex(patcherTag)].isBusy = false
                     }
                     break
                 
@@ -409,7 +515,7 @@ class RwaGameLoop:NSObject, PdListener
                     break
                     
                 case Int32(RWAPLAYBACKTYPE_BINAURALMONO):
-                    binauralMonoPatchers[getBinauralMonoPatcherIndex(patcherTag)].isBusy = false
+                    binauralMonoPatchers_fabian[getBinauralMonoFabianPatcherIndex(patcherTag)].isBusy = false
                     break
                 
                 case Int32(RWAPLAYBACKTYPE_BINAURALMONO_FABIAN):
@@ -417,7 +523,7 @@ class RwaGameLoop:NSObject, PdListener
                     break
                     
                 case Int32(RWAPLAYBACKTYPE_BINAURALSTEREO):
-                    binauralStereoPatchers[getBinauralStereoPatcherIndex(patcherTag)].isBusy = false
+                    binauralStereoPatchers_fabian[getBinauralStereoFabianPatcherIndex(patcherTag)].isBusy = false
                     break
                 
                 case Int32(RWAPLAYBACKTYPE_BINAURALSTEREO_FABIAN):
@@ -425,7 +531,7 @@ class RwaGameLoop:NSObject, PdListener
                     break
                 
                 case Int32(RWAPLAYBACKTYPE_BINAURAL5CHANNEL):
-                    binaural5ChannelPatchers[getBinaural5ChannlePatcherIndex(patcherTag)].isBusy = false
+                    binaural5ChannelPatchers_fabian[getBinaural5ChannelFabianPatcherIndex(patcherTag)].isBusy = false
                     break
                 
                 case Int32(RWAPLAYBACKTYPE_BINAURAL5CHANNEL_FABIAN):
@@ -463,6 +569,17 @@ class RwaGameLoop:NSObject, PdListener
         return -1
     }
     
+    func getMonoPatcherOggIndex(_ tag:Int32) ->Int
+    {
+        for i in 0 ..< RWA_MAXNUMBEROFPATCHERS
+        {
+            if (PdBase.dollarZero(forFile: monoPatchersOgg[i].patcherTag)  == tag) {
+                return i
+            }
+        }
+        return -1
+    }
+    
     func getStereoPatcherIndex(_ tag:Int32) ->Int
     {
         for i in 0 ..< RWA_MAXNUMBEROFPATCHERS
@@ -475,11 +592,11 @@ class RwaGameLoop:NSObject, PdListener
         return -1
     }
     
-    func getBinauralMonoPatcherIndex(_ tag:Int32) ->Int
+    func getStereoPatcherOggIndex(_ tag:Int32) ->Int
     {
         for i in 0 ..< RWA_MAXNUMBEROFPATCHERS
         {
-            if (PdBase.dollarZero(forFile: binauralMonoPatchers[i].patcherTag)  == tag) {
+            if (PdBase.dollarZero(forFile: stereoPatchersOgg[i].patcherTag)  == tag) {
                 return i
             }
         }
@@ -497,11 +614,11 @@ class RwaGameLoop:NSObject, PdListener
         return -1
     }
     
-    func getBinauralStereoPatcherIndex(_ tag:Int32) ->Int
+    func getBinauralMonoFabianPatcherOggIndex(_ tag:Int32) ->Int
     {
-        for i in 0 ..< RWA_MAXNUMBEROFSTEREOPATCHERS
+        for i in 0 ..< RWA_MAXNUMBEROFPATCHERS
         {
-            if (PdBase.dollarZero(forFile: binauralStereoPatchers[i].patcherTag)  == tag) {
+            if (PdBase.dollarZero(forFile: binauralMonoPatchersOgg_fabian[i].patcherTag)  == tag) {
                 return i
             }
         }
@@ -519,14 +636,13 @@ class RwaGameLoop:NSObject, PdListener
         return -1
     }
     
-    func getBinaural5ChannlePatcherIndex(_ tag:Int32) ->Int
+    func getBinauralStereoFabianPatcherOggIndex(_ tag:Int32) ->Int
     {
-        for i in 0 ..< RWA_MAXNUMBEROF5CHANNELPATCHERS
+        for i in 0 ..< RWA_MAXNUMBEROFSTEREOPATCHERS
         {
-            if (PdBase.dollarZero(forFile: binaural5ChannelPatchers[i].patcherTag)  == tag) {
+            if (PdBase.dollarZero(forFile: binauralStereoPatchersOgg_fabian[i].patcherTag)  == tag) {
                 return i
             }
-            
         }
         return -1
     }
@@ -676,6 +792,33 @@ class RwaGameLoop:NSObject, PdListener
         return false
     }
     
+    func setScene(scene: RwaScene)
+    {
+        sendEnd2BackgroundAssets()
+        sendEnd2ActiveAssets()
+        
+        hero.currentScene = scene
+        currentScene = scene.name;
+        
+        if hero.currentState != nil {
+            hero.currentState?.blockUntilRadiusHasBeenLeft = false;}
+        if !hero.currentScene!.fallbackDisabled {
+            hero.currentState = hero.currentScene?.states[0] }
+        else {
+            hero.currentState = nil
+        }
+        
+        hero.timeInCurrentState = 0
+        hero.timeInCurrentScene = 0
+        
+        startBackgroundState()
+        sceneChanged = true
+        stateChanged = true
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Redraw Map"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Update Scene"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Update State"), object: nil)
+    }
+    
     func setEntityScene()
     {
         for scene in (scenes)
@@ -688,17 +831,7 @@ class RwaGameLoop:NSObject, PdListener
                    // print("Found different equal level Scene: \(String(describing: scene.name))")
                     if(entityIsWithinArea(scene, RWAAREAOFFSETTYPE_ENTER))
                     {
-                        sendEnd2BackgroundAssets()
-                        sendEnd2ActiveAssets()
-                        hero.currentScene = scene
-                        hero.currentState?.blockUntilRadiusHasBeenLeft = false;
-                        hero.currentState = hero.currentScene?.states[0]
-                        hero.timeInCurrentState = 0
-                        hero.timeInCurrentScene = 0
-                        startBackgroundState()
-                        sceneChanged = true
-                        stateChanged = true
-                        currentScene = scene.name;
+                        setScene(scene: scene)
                         
                         if #available(iOS 10.0, *) {
                             os_log("%@", type: .debug, "Enter Scene with new location: \(String(describing: scene.name))")
@@ -715,7 +848,6 @@ class RwaGameLoop:NSObject, PdListener
     
     func setEntityState()
     {
-        var enterConditionsFulfilled = true
         var exitState = false
         var state = RwaState()
         var scene = RwaScene();
@@ -740,25 +872,33 @@ class RwaGameLoop:NSObject, PdListener
                 print("Time in current state: \(Int(hero.timeInCurrentState))")
             }
         }*/
-        
-        if(hero.timeInCurrentState < (hero.currentState?.minStayTime)!) {
-            return; }
-        
-        if(hero.timeInCurrentScene < (hero.currentScene?.minStayTime)!) {
-            return; }
+        if(hero.currentState != nil)
+        {
+            if(hero.timeInCurrentState < (hero.currentState?.minStayTime)!) {
+                return;
+            }
+            
+            if(hero.timeInCurrentScene < (hero.currentScene?.minStayTime)!) {
+                return;
+            }
+            
+            if(hero.currentState!.leaveOnlyAfterAssetsFinish && !hero.activeAssets.isEmpty) {
+                return;
+            }
+        }
         
         setEntityScene()
         scene = hero.currentScene!;
         
         for state in (hero.currentScene?.states)!
         {
+            var enterConditionsFulfilled = true
             let requiredStates = state.requiredStates
             
             if(state.type == Int32(RWASTATETYPE_GPS) && hero.currentState != state && !state.blockUntilRadiusHasBeenLeft)
             {
                 if(entityIsWithinArea(state, RWAAREAOFFSETTYPE_ENTER))
                 {
-                
                     if(!requiredStates.isEmpty)
                     {
                         for requiredState in requiredStates
@@ -772,6 +912,9 @@ class RwaGameLoop:NSObject, PdListener
                                 }
                                 
                                 break;
+                            }
+                            else {
+                                print("found required state")
                             }
                         }
                     }
@@ -793,6 +936,7 @@ class RwaGameLoop:NSObject, PdListener
                         sendEnd2ActiveAssets()
                         state.blockUntilRadiusHasBeenLeft = true
                         hero.currentState = state
+                        
                         if(!hero.visitedStates.contains(state.stateName)) {
                             hero.visitedStates.append(state.stateName)
                         }
@@ -805,10 +949,16 @@ class RwaGameLoop:NSObject, PdListener
                         } else {
                             print("Enter State: \(String(describing: hero.currentState?.stateName))")
                         }
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Update State"), object: nil)
+                        
+                        break
                     }
                 }
             }
-            
+        }
+        
+        for state in (hero.currentScene?.states)!
+        {
             if(state.blockUntilRadiusHasBeenLeft)
             {
                 if(!entityIsWithinArea(state, RWAAREAOFFSETTYPE_EXIT)) {
@@ -816,15 +966,8 @@ class RwaGameLoop:NSObject, PdListener
                 }
             }
         }
-        
-        state = hero.currentState!
+         
         let background = hero.currentScene?.backgroundState
-   
-        if(hero.timeInCurrentState > state.timeOut && state.timeOut > 0)
-        {
-            sendEnd2ActiveAssets()
-            exitState = true
-        }
         
         if(hero.timeInCurrentScene > (background?.timeOut)! && Int((background?.timeOut)!) > 0)
         {
@@ -836,44 +979,54 @@ class RwaGameLoop:NSObject, PdListener
             }
         }
         
-        if(state.leaveAfterAssetsFinish && hero.timeInCurrentState > 0)
+        if(hero.currentState != nil)
         {
-            if(hero.activeAssets.isEmpty)
+            state = hero.currentState!
+            
+            if(hero.timeInCurrentState > state.timeOut && state.timeOut > 0)
             {
+                sendEnd2ActiveAssets()
                 exitState = true
-                
-                if #available(iOS 10.0, *) {
-                    os_log("%@", type: .debug, "Leave after Assets Finish")
-                } else {
-                    print("Leave after Assets Finish")
-                }
             }
-        }
-        
-        if(hero.currentState?.type == Int32(RWASTATETYPE_GPS))
-        {
-            if(!entityIsWithinArea(state, RWAAREAOFFSETTYPE_EXIT))
+             
+            if(state.leaveAfterAssetsFinish && hero.timeInCurrentState > 0)
             {
-                if( (!state.leaveOnlyAfterAssetsFinish && !scene.fallbackDisabled)
-                    || state.stateWithinState)
+                if(hero.activeAssets.isEmpty)
                 {
-                    
-                    sendEnd2ActiveAssets()
                     exitState = true
-                }
-                else
-                {
-                    if(hero.activeAssets.isEmpty)
-                    {
-                       // sendEnd2ActiveAssets()
-                        exitState = true
+                    
+                    if #available(iOS 10.0, *) {
+                        os_log("%@", type: .debug, "Leave after Assets Finish")
+                    } else {
+                        print("Leave after Assets Finish")
                     }
                 }
             }
-        }
-        
-        if(hint.stateName != "") {
-            exitState = true
+            
+            if(hero.currentState?.type == Int32(RWASTATETYPE_GPS))
+            {
+                if(!entityIsWithinArea(state, RWAAREAOFFSETTYPE_EXIT))
+                {
+                    if( (!state.leaveOnlyAfterAssetsFinish && !scene.fallbackDisabled)
+                        || state.stateWithinState)
+                    {
+                        
+                        sendEnd2ActiveAssets()
+                        exitState = true
+                    }
+                    else
+                    {
+                        if(hero.activeAssets.isEmpty)
+                        {
+                            exitState = true
+                        }
+                    }
+                }
+            }
+            
+            if(hint.stateName != "") {
+                exitState = true
+            }
         }
         
         if(exitState)
@@ -889,17 +1042,23 @@ class RwaGameLoop:NSObject, PdListener
                     hero.timeInCurrentState = 0
                 }
             }
+            
+            else if(newScene != "" )
+            {
+                let nextScene:RwaScene = hero.getScene(sceneName: newScene)
+                setScene(scene: nextScene)
+                
+                if #available(iOS 10.0, *) {
+                    os_log("%@", type: .debug, "Enter Scene after timeout")
+                } else {
+                    print("Enter Scene after timeout")
+                }
+            }
+            
             else if(state.nextScene != "")
             {
-                sendEnd2BackgroundAssets()
                 let nextScene:RwaScene = hero.getScene(sceneName: state.nextScene)
-                
-                hero.currentScene = nextScene
-                hero.currentState = hero.currentScene?.states[0]
-                hero.timeInCurrentState = 0
-                hero.timeInCurrentScene = 0
-                startBackgroundState()
-                sceneChanged = true
+                setScene(scene: nextScene)
                 
                 if #available(iOS 10.0, *) {
                     os_log("%@", type: .debug, "Enter Scene")
@@ -907,27 +1066,7 @@ class RwaGameLoop:NSObject, PdListener
                     print("Enter Scene")
                 }
             }
-                
-            else if(newScene != "" )
-            {
-                sendEnd2BackgroundAssets()
-                let nextScene:RwaScene = hero.getScene(sceneName: newScene)
-                
-                hero.currentScene = nextScene
-                hero.currentState = hero.currentScene?.states[0]
-                hero.timeInCurrentState = 0
-                hero.timeInCurrentScene = 0
-                startBackgroundState()
-                sceneChanged = true
-                
-                if #available(iOS 10.0, *) {
-                    os_log("%@", type: .debug, "Enter Scene after timeout")
-                } else {
-                    print("Enter Scene after timeout")
-                }
-
-            }
-            
+              
             else if(state.nextState != "")
             {
                 let nextState:RwaState = (hero.currentScene?.getState(state.nextState))!
@@ -1047,10 +1186,14 @@ class RwaGameLoop:NSObject, PdListener
         offset += (360 - asset.rotateOffset) % 360;
         
         if(asset.individuellChannelPosition[channel] == false) {
-            asset.channelCoordinates[channel] = calculateDestination(asset.currentPosition, asset.multiChannelSourceRadius, Double(Int(Float(offset)+asset.currentRotateAngleOffset)%360)) }
+            var channelRadius = asset.multiChannelSourceRadius
+            if asset.playbackType == RWAPLAYBACKTYPE_MONO || asset.playbackType == RWAPLAYBACKTYPE_STEREO {
+                channelRadius = 0
+            }
+            asset.channelCoordinates[channel] = calculateDestination(asset.currentPosition, channelRadius, Double(Int(Float(offset)+asset.currentRotateAngleOffset)%360)) }
 
         if(asset.fixedAzimuth < 0) {
-            asset.channelBearing[channel] = Float(calculateBearing(hero.coordinates, p2: asset.channelCoordinates[channel], headDirection: Double(azimuth)))
+            asset.channelBearing[channel] = Float(calculateBearing(hero.coordinates, p2: asset.channelCoordinates[channel], headDirection: Double(hero.azimuth)))
         }
         else {
             asset.channelBearing[channel] = Float(asset.fixedAzimuth + Double(offset))
@@ -1087,9 +1230,7 @@ class RwaGameLoop:NSObject, PdListener
         lon2Pd = "\(intPatcherTag)-lon"
         lat2Pd = "\(intPatcherTag)-lat"
         step2Pd = "\(intPatcherTag)-step"
-        
-        asset.elevation = -(Float)(elevation);
-        
+         
         if(Int(asset.type) == RWAASSETTYPE_PD)
         {
             PdBase.send(hero.coordinates.longitude, toReceiver: lon2Pd)
@@ -1124,9 +1265,12 @@ class RwaGameLoop:NSObject, PdListener
                 (asset.playbackType == Int32(RWAPLAYBACKTYPE_STEREO)) )
             {
                 calculateChannelBearingAndDistance(0, asset)
-                sendDistance(0, intPatcherTag , asset.channelDistance[0])
+                let elevation = calculateElevationEasy(hero.coordinates, p2: asset.channelCoordinates[0], elevation: Double(asset.elevation), headDirection: Double(hero.elevation))
+                let totalDistance = calculateDistanceWithAltitude(Double(asset.channelDistance[0]), p2: Double(asset.elevation))
+                
+                sendDistance(0, intPatcherTag , Float(totalDistance))
                 sendBearing(0, intPatcherTag , asset.channelBearing[0])
-                sendElevation(0, intPatcherTag , asset.elevation)
+                sendElevation(0, intPatcherTag , Float(elevation))
             }
             
             if(asset.playbackType == Int32(RWAPLAYBACKTYPE_BINAURALSTEREO) ||
@@ -1135,9 +1279,11 @@ class RwaGameLoop:NSObject, PdListener
                 for i in 0 ..< 2
                 {
                     calculateChannelBearingAndDistance(i, asset)
-                    sendDistance(i, intPatcherTag , asset.channelDistance[i])
+                    let elevation = calculateElevationEasy(hero.coordinates, p2: asset.channelCoordinates[i], elevation: Double(asset.elevation), headDirection: Double(hero.elevation))
+                    let totalDistance = calculateDistanceWithAltitude(Double(asset.channelDistance[i]), p2: Double(asset.elevation))
+                    sendDistance(i, intPatcherTag , Float(totalDistance))
                     sendBearing(i, intPatcherTag , asset.channelBearing[i])
-                    sendElevation(i, intPatcherTag , asset.elevation)
+                    sendElevation(i, intPatcherTag , Float(elevation))
                 }
             }
             
@@ -1147,9 +1293,11 @@ class RwaGameLoop:NSObject, PdListener
                 for i in 0 ..< 5
                 {
                     calculateChannelBearingAndDistance(i, asset)
-                    sendDistance(i, intPatcherTag , asset.channelDistance[i])
+                    let elevation = calculateElevationEasy(hero.coordinates, p2: asset.channelCoordinates[i], elevation: Double(asset.elevation), headDirection: Double(hero.elevation))
+                    let totalDistance = calculateDistanceWithAltitude(Double(asset.channelDistance[i]), p2: Double(asset.elevation))
+                    sendDistance(i, intPatcherTag , Float(totalDistance))
                     sendBearing(i, intPatcherTag , asset.channelBearing[i])
-                    sendElevation(i, intPatcherTag , asset.elevation)
+                    sendElevation(i, intPatcherTag , Float(elevation))
                 }
             }
             
@@ -1158,9 +1306,11 @@ class RwaGameLoop:NSObject, PdListener
                 for i in 0 ..< 7
                 {
                     calculateChannelBearingAndDistance(i, asset)
-                    sendDistance(i, intPatcherTag , asset.channelDistance[i])
+                    let elevation = calculateElevationEasy(hero.coordinates, p2: asset.channelCoordinates[i], elevation: Double(asset.elevation), headDirection: Double(hero.elevation))
+                    let totalDistance = calculateDistanceWithAltitude(Double(asset.channelDistance[i]), p2: Double(asset.elevation))
+                    sendDistance(i, intPatcherTag , Float(totalDistance))
                     sendBearing(i, intPatcherTag , asset.channelBearing[i])
-                    sendElevation(i, intPatcherTag , asset.elevation)
+                    sendElevation(i, intPatcherTag , Float(elevation))
                 }
             }
         }
@@ -1201,10 +1351,10 @@ class RwaGameLoop:NSObject, PdListener
         {
             asset.playheadPositionWithoutOffset += Double(schedulerRate)
             if(asset.playheadPositionWithoutOffset >= Double(asset.offset)) {
-                asset.playheadPosition += Double(schedulerRate)  * 44.1
+                asset.playheadPosition += Double(schedulerRate)  * sampleRate
             }
             
-            if(asset.playheadPosition >= asset.fadeOutAfter * 44.1)
+            if(asset.playheadPosition >= asset.fadeOutAfter * sampleRate)
             {
                 asset.playheadPosition = 0;
                 if(asset.loop == false) {
@@ -1261,7 +1411,7 @@ class RwaGameLoop:NSObject, PdListener
         }
         else
         {
-            firstCrossfadeAfter -= (asset.playheadPosition/44.1)
+            firstCrossfadeAfter -= (asset.playheadPosition/sampleRate)
             if(firstCrossfadeAfter < 0)
             {
                 firstCrossfadeAfter = asset.fadeOutAfter
@@ -1291,6 +1441,9 @@ class RwaGameLoop:NSObject, PdListener
         
         pdReceiver = "\(patcherTag)-dampingmax"
         PdBase.send(Double(asset.dampingMax), toReceiver: pdReceiver)
+        
+        pdReceiver = "\(patcherTag)-smoothdist"
+        PdBase.send(Double(asset.smoothDistance), toReceiver: pdReceiver)
         
         pdReceiver = "\(patcherTag)-offset"
         PdBase.send(Double(asset.offset), toReceiver: pdReceiver)
@@ -1361,7 +1514,6 @@ class RwaGameLoop:NSObject, PdListener
         {
             for scene in scenes
             {
-                
                 for state in scene.states {
                     state.blockUntilRadiusHasBeenLeft = false
                     
@@ -1369,6 +1521,8 @@ class RwaGameLoop:NSObject, PdListener
                         asset.playheadPosition = 0
                         asset.playheadPositionWithoutOffset = 0
                         asset.updatePlayheadPosition = true;
+                        asset.blockedForever = false;
+                        asset.blocked = false;
                     }
                 }
             }
@@ -1385,9 +1539,8 @@ class RwaGameLoop:NSObject, PdListener
             hero.currentState = hero.currentScene?.states[0]
             sceneChanged = true
             stateChanged = true
+            startBackgroundState()
         }
-        
-        startBackgroundState()
     }
     
     func processAssets()
@@ -1399,14 +1552,17 @@ class RwaGameLoop:NSObject, PdListener
         
         for asset in (hero.currentState?.assets)!
         {
-            if(!hero.isActiveAsset(asset.uniqueId) && !asset.blocked && !asset.mute)
+            if(!hero.isActiveAsset(asset.uniqueId) && !asset.blocked && !asset.mute && !asset.blockedForever)
             {
                 if #available(iOS 10.0, *) {
                     os_log("%@", type: .debug, "Start asset for state: \(String(describing: hero.currentState))")
                 } else {
                     print("Start asset for state: \(String(describing: hero.currentState))")
                 }
-                
+                if(asset.playOnce) {
+                    asset.blockedForever = true;
+                }
+                      
                 let patcherTag = findFreePatcher(asset: asset)
                 sendInitValues2Pd(asset, Int(patcherTag))
                 hero.activeAssets[asset.uniqueId] = RwaEntity.AssetMapItem(asset, patcherTag)

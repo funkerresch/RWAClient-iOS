@@ -17,6 +17,7 @@ var games2Download = [String]()
 var gameIsInDocumentsFolder:Bool = Bool();
 var fullGamePath:String = String();
 var fullAssetPath:String = String();
+var defaultGame:String = String();
 
 class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, PdListener {
 
@@ -83,6 +84,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 var filteredFiles = dirContents.filter{ $0.contains(".aif")}
                 filteredFiles += dirContents.filter{ $0.contains(".wav")}
                 filteredFiles += dirContents.filter{ $0.contains(".pd")}
+                filteredFiles += dirContents.filter{ $0.contains(".ogg")}
                 
                 if let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
                 {
@@ -119,9 +121,21 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBAction func fetchGames(_ sender: UIButton)
     {
-        self.games.clear()
-        let remoteURL = URL(string: "http://"+rwaCreatorIP+":8088/allfiles.txt")!
-        downloadManager.startDownload(url: remoteURL)
+        let alert = UIAlertController(title: "Fetch Games", message: "This will delete existing games on the device, are you sure?", preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            self.emptyDocumentsDirectory();
+            print("Received update Games")
+            self.games.clear()
+            let remoteURL = URL(string: "http://"+rwaCreatorIP+":8088/allfiles.txt")!
+            downloadManager.startDownload(url: remoteURL)
+        }))
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Abort"), style: .default, handler: { _ in
+            print("Aborted")
+        }))
+
+        self.present(alert, animated: true, completion: nil)
     }
     
     func loadGameAndInitDynamicPatchers(game: String) {
@@ -152,19 +166,20 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.games.populateGames()
         self.gameTable.reloadData()
         
-        motherIp.text = rwaCreatorIP
         hero.coordinates.latitude = 47.5546492;
         hero.coordinates.longitude = 7.5594406;
-        motherIp.delegate = self
         
-        if games.rwaGames.count == 1 {
+        if defaultGame != "" {
             print(games.rwaGames[0].path)
             print(games.rwaGames[0].name)
-//            loadGameAndInitDynamicPatchers(game: games.rwaGames[0].name)
-//            currentGame = games.rwaGames[0].name
-//            if let tabBarController = self.tabBarController {
-//                tabBarController.selectedIndex = 1
-//            }
+            print(defaultGame)
+            let dir = (defaultGame as NSString).deletingLastPathComponent
+            fullAssetPath = dir + "/" + "assets"
+            loadGameAndInitDynamicPatchers(game: defaultGame)
+            currentGame = defaultGame
+            if let tabBarController = self.tabBarController {
+                tabBarController.selectedIndex = 1
+            }
         }
     }
     
@@ -184,11 +199,47 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return games.rwaGames.count
     }
     
+    @objc func switchChanged(_ sender : UISwitch!)
+    {
+        let defaults = UserDefaults.standard
+        if(sender.isOn) {
+            defaultGame = sender.layer.name!
+            print(defaultGame)
+            defaults.set(defaultGame, forKey: defaultsKeys.defaultGame)
+        }
+        else {
+            defaultGame = ""
+            defaults.set("", forKey: defaultsKeys.defaultGame)
+        }
+        
+        for cell in gameTable.visibleCells
+        {
+            if let defaultSwitch = cell.accessoryView as? UISwitch {
+                if defaultSwitch != sender {
+                    defaultSwitch.isOn = false
+                }
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "Default")
+        let switchView = UISwitch(frame: .zero)
         cell.textLabel!.text = games.rwaGames[indexPath.row].name
         cell.detailTextLabel!.text = games.rwaGames[indexPath.row].path
+        switchView.tag = indexPath.row // for detect which row switch Changed
+        switchView.layer.name =  cell.detailTextLabel!.text! + "/" + cell.textLabel!.text!
+        
+        if(defaultGame == switchView.layer.name) {
+            switchView.setOn(true, animated: true)
+        }
+        else {
+            switchView.setOn(false, animated: true)
+        }
+        
+        switchView.addTarget(self, action: #selector(self.switchChanged(_:)), for: .valueChanged)
+        cell.accessoryView = switchView
         return cell;
     }
     
@@ -223,6 +274,8 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let defaults = UserDefaults.standard
         rwaCreatorIP = motherIp.text!
         defaults.set(motherIp.text, forKey: defaultsKeys.rwaCreatorIP)
+        sendDummyOscMessage();
+        sendDummyOscMessage();
         return true;
     }
     

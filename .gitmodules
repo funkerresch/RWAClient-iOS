@@ -10,3 +10,9 @@
 [submodule "F53OSC"]
 	path = F53OSC
 	url = https://github.com/Figure53/F53OSC.git
+[submodule "libogg"]
+	path = libogg
+	url = git@github.com:gcp/libogg.git
+[submodule "vorbis"]
+	path = vorbis
+	url = git@github.com:xiph/vorbis.git

@@ -21,5 +21,6 @@
 #include <ifaddrs.h>
 
 extern void freeverb_tilde_setup(void);
+extern void oggread_tilde_setup(void);
 
 

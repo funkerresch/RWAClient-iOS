@@ -14,6 +14,9 @@ let RWA_UNDETERMINED = 0
 let RWAASSETTYPE_WAV = 1
 let RWAASSETTYPE_AIF = 2
 let RWAASSETTYPE_PD = 3
+let RWAASSETTYPE_ITEM = 4
+let RWAASSETTYPE_ENTITY = 5
+let RWAASSETTYPE_OGG = 6
 
 let RWAPOSITIONTYPE_ASSET = 1
 let RWAPOSITIONTYPE_ASSETCHANNEL = 2
@@ -51,7 +54,6 @@ let RWAASSETATTRIBUTE_AUTOMOVE = 12
 let RWAASSETATTRIBUTE_LOOPUNTILENDPOSITION = 13
 let RWAASSETATTRIBUTE_DISTANCE2VOLUME = 14
 
-
 class RwaAsset:NSObject
 {
     override init()
@@ -61,7 +63,6 @@ class RwaAsset:NSObject
         {
             channelCoordinates.append(tmp);
         }
-
     }
     
     init(fileName:String, type: Int32)
@@ -109,6 +110,7 @@ class RwaAsset:NSObject
     var isAlive:Bool = false      // can be activated (in principle)
     var loop:Bool = false        // start again automatically while within state radius
     var blocked:Bool = false      // blocked, can't be activated (blocked by another client??)
+    var blockedForever:Bool = false      // blocked, can't be activated (blocked by another client??)
     var rawSensors2pd:Bool = false
     var gps2pd:Bool = false
     var orientation2pd:Bool = false
@@ -133,6 +135,7 @@ class RwaAsset:NSObject
     var dampingTrim: Double = 2
     var dampingMin: Double = 0
     var dampingMax: Double = 1
+    var smoothDistance: Double = 10
     var minDistance: Double = -1
     var playheadPosition: Double = 0;
     var playheadPositionWithoutOffset: Double = 0;

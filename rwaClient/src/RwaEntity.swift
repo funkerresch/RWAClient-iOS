@@ -49,8 +49,11 @@ class RwaEntity:NSObject
     func loadGameScript()
     {
         self.visitedStates.removeAll()
-        self.currentScene = scenes[0]
-        self.currentState = currentScene?.states[0]
+        if(!scenes.isEmpty)
+        {
+            self.currentScene = scenes[0]
+            self.currentState = currentScene?.states[0]
+        }
     }
     
     func isActiveAsset(_ name: UUID) -> Bool

@@ -7,8 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8411A75428BF687700205E32 /* bitwise.c in Sources */ = {isa = PBXBuildFile; fileRef = 8411A75228BF687700205E32 /* bitwise.c */; };
+		8411A75528BF687700205E32 /* framing.c in Sources */ = {isa = PBXBuildFile; fileRef = 8411A75328BF687700205E32 /* framing.c */; };
+		8411A77228BF69DB00205E32 /* block.c in Sources */ = {isa = PBXBuildFile; fileRef = 8411A75828BF69DB00205E32 /* block.c */; };
+		8411A77328BF69DB00205E32 /* smallft.c in Sources */ = {isa = PBXBuildFile; fileRef = 8411A75928BF69DB00205E32 /* smallft.c */; };
+		8411A77428BF69DB00205E32 /* floor0.c in Sources */ = {isa = PBXBuildFile; fileRef = 8411A75A28BF69DB00205E32 /* floor0.c */; };
+		8411A77528BF69DB00205E32 /* bitrate.c in Sources */ = {isa = PBXBuildFile; fileRef = 8411A75B28BF69DB00205E32 /* bitrate.c */; };
+		8411A77628BF69DB00205E32 /* vorbisfile.c in Sources */ = {isa = PBXBuildFile; fileRef = 8411A75C28BF69DB00205E32 /* vorbisfile.c */; };
+		8411A77728BF69DB00205E32 /* lsp.c in Sources */ = {isa = PBXBuildFile; fileRef = 8411A75D28BF69DB00205E32 /* lsp.c */; };
+		8411A77828BF69DB00205E32 /* res0.c in Sources */ = {isa = PBXBuildFile; fileRef = 8411A75E28BF69DB00205E32 /* res0.c */; };
+		8411A77928BF69DB00205E32 /* sharedbook.c in Sources */ = {isa = PBXBuildFile; fileRef = 8411A75F28BF69DB00205E32 /* sharedbook.c */; };
+		8411A77A28BF69DB00205E32 /* psy.c in Sources */ = {isa = PBXBuildFile; fileRef = 8411A76028BF69DB00205E32 /* psy.c */; };
+		8411A77C28BF69DB00205E32 /* envelope.c in Sources */ = {isa = PBXBuildFile; fileRef = 8411A76228BF69DB00205E32 /* envelope.c */; };
+		8411A77D28BF69DB00205E32 /* mdct.c in Sources */ = {isa = PBXBuildFile; fileRef = 8411A76328BF69DB00205E32 /* mdct.c */; };
+		8411A77E28BF69DB00205E32 /* codebook.c in Sources */ = {isa = PBXBuildFile; fileRef = 8411A76428BF69DB00205E32 /* codebook.c */; };
+		8411A77F28BF69DB00205E32 /* window.c in Sources */ = {isa = PBXBuildFile; fileRef = 8411A76528BF69DB00205E32 /* window.c */; };
+		8411A78028BF69DB00205E32 /* vorbisenc.c in Sources */ = {isa = PBXBuildFile; fileRef = 8411A76628BF69DB00205E32 /* vorbisenc.c */; };
+		8411A78128BF69DB00205E32 /* analysis.c in Sources */ = {isa = PBXBuildFile; fileRef = 8411A76728BF69DB00205E32 /* analysis.c */; };
+		8411A78228BF69DB00205E32 /* lookup.c in Sources */ = {isa = PBXBuildFile; fileRef = 8411A76828BF69DB00205E32 /* lookup.c */; };
+		8411A78528BF69DB00205E32 /* registry.c in Sources */ = {isa = PBXBuildFile; fileRef = 8411A76B28BF69DB00205E32 /* registry.c */; };
+		8411A78628BF69DB00205E32 /* floor1.c in Sources */ = {isa = PBXBuildFile; fileRef = 8411A76C28BF69DB00205E32 /* floor1.c */; };
+		8411A78728BF69DB00205E32 /* lpc.c in Sources */ = {isa = PBXBuildFile; fileRef = 8411A76D28BF69DB00205E32 /* lpc.c */; };
+		8411A78828BF69DB00205E32 /* mapping0.c in Sources */ = {isa = PBXBuildFile; fileRef = 8411A76E28BF69DB00205E32 /* mapping0.c */; };
+		8411A78928BF69DB00205E32 /* synthesis.c in Sources */ = {isa = PBXBuildFile; fileRef = 8411A76F28BF69DB00205E32 /* synthesis.c */; };
+		8411A78A28BF69DB00205E32 /* info.c in Sources */ = {isa = PBXBuildFile; fileRef = 8411A77028BF69DB00205E32 /* info.c */; };
+		8411A78B28BF69DB00205E32 /* misc.c in Sources */ = {isa = PBXBuildFile; fileRef = 8411A77128BF69DB00205E32 /* misc.c */; };
 		842212321F939E23004BF9C9 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 842212311F939E23004BF9C9 /* Accelerate.framework */; };
 		8429C291215BB68700D2E5E0 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8429C290215BB68700D2E5E0 /* MapViewController.swift */; };
+		8434F3E028BF6AFB00B38E82 /* oggread~.c in Sources */ = {isa = PBXBuildFile; fileRef = 8434F3DF28BF6AFB00B38E82 /* oggread~.c */; };
+		8434F3E528BF732500B38E82 /* rwaloopplayerstereoogg.pd in Resources */ = {isa = PBXBuildFile; fileRef = 8434F3E128BF732500B38E82 /* rwaloopplayerstereoogg.pd */; };
+		8434F3E628BF732500B38E82 /* rwaloopplayermonoogg.pd in Resources */ = {isa = PBXBuildFile; fileRef = 8434F3E228BF732500B38E82 /* rwaloopplayermonoogg.pd */; };
+		8434F3E728BF732500B38E82 /* rwaplayermonobinauralogg_fabian.pd in Resources */ = {isa = PBXBuildFile; fileRef = 8434F3E328BF732500B38E82 /* rwaplayermonobinauralogg_fabian.pd */; };
+		8434F3E828BF732500B38E82 /* rwaplayerstereobinauralogg_fabian.pd in Resources */ = {isa = PBXBuildFile; fileRef = 8434F3E428BF732500B38E82 /* rwaplayerstereobinauralogg_fabian.pd */; };
 		8461E16A2120377E00E7DD4F /* RwaLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461E1692120377E00E7DD4F /* RwaLocation.swift */; };
 		8461E16C21203C4D00E7DD4F /* RwaArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461E16B21203C4D00E7DD4F /* RwaArea.swift */; };
 		84BD68462211B636005A22B5 /* libpd-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84BD683F2211B624005A22B5 /* libpd-ios.a */; };
@@ -46,6 +76,7 @@
 		84C70ECF2213148A005C49C3 /* NSNumber+F53OSCNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C70EC12213148A005C49C3 /* NSNumber+F53OSCNumber.m */; };
 		84C70ED02213148A005C49C3 /* F53OSCMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C70EC22213148A005C49C3 /* F53OSCMessage.m */; };
 		84D7F166217DDF1F0082843F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84D7F165217DDF1F0082843F /* MapKit.framework */; };
+		84E8BC2028EF223900EF35DD /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 84E8BC1F28EF223900EF35DD /* Config.xcconfig */; };
 		84EDF460216CBD1300EBA052 /* ControlDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EDF45F216CBD1300EBA052 /* ControlDataViewController.swift */; };
 		84F48CEA1F24B14C00869BF2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F48CDB1F24B14C00869BF2 /* AppDelegate.swift */; };
 		84F48CEB1F24B14C00869BF2 /* CoreLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F48CDC1F24B14C00869BF2 /* CoreLocationController.swift */; };
@@ -66,11 +97,17 @@
 		E4232CB523D9C09D00E44DE3 /* rwa_binauralsimple~.c in Sources */ = {isa = PBXBuildFile; fileRef = E4232CB423D9C09D00E44DE3 /* rwa_binauralsimple~.c */; };
 		E4232CB723D9C12B00E44DE3 /* vas_firobject.c in Sources */ = {isa = PBXBuildFile; fileRef = E4232CB623D9C12B00E44DE3 /* vas_firobject.c */; };
 		E4232CB923D9C16D00E44DE3 /* vas_fir_list.c in Sources */ = {isa = PBXBuildFile; fileRef = E4232CB823D9C16C00E44DE3 /* vas_fir_list.c */; };
-		E45AB4C227CE215600D65E93 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = E45AB4C127CE215600D65E93 /* Zip */; };
 		E45AB4CD27CF5E0100D65E93 /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45AB4C827CF5E0100D65E93 /* DownloadManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		84203DF028ED98090067F13F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84BD68372211B624005A22B5 /* libpd.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = "libpd-ios";
+		};
 		84BD683E2211B624005A22B5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 84BD68372211B624005A22B5 /* libpd.xcodeproj */;
@@ -102,8 +139,40 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8411A75228BF687700205E32 /* bitwise.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bitwise.c; path = ../../libogg/src/bitwise.c; sourceTree = "<group>"; };
+		8411A75328BF687700205E32 /* framing.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = framing.c; path = ../../libogg/src/framing.c; sourceTree = "<group>"; };
+		8411A75628BF68B900205E32 /* os_types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = os_types.h; path = ../../libogg/include/ogg/os_types.h; sourceTree = "<group>"; };
+		8411A75728BF68B900205E32 /* ogg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ogg.h; path = ../../libogg/include/ogg/ogg.h; sourceTree = "<group>"; };
+		8411A75828BF69DB00205E32 /* block.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = block.c; path = ../../vorbis/lib/block.c; sourceTree = "<group>"; };
+		8411A75928BF69DB00205E32 /* smallft.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = smallft.c; path = ../../vorbis/lib/smallft.c; sourceTree = "<group>"; };
+		8411A75A28BF69DB00205E32 /* floor0.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = floor0.c; path = ../../vorbis/lib/floor0.c; sourceTree = "<group>"; };
+		8411A75B28BF69DB00205E32 /* bitrate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bitrate.c; path = ../../vorbis/lib/bitrate.c; sourceTree = "<group>"; };
+		8411A75C28BF69DB00205E32 /* vorbisfile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vorbisfile.c; path = ../../vorbis/lib/vorbisfile.c; sourceTree = "<group>"; };
+		8411A75D28BF69DB00205E32 /* lsp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lsp.c; path = ../../vorbis/lib/lsp.c; sourceTree = "<group>"; };
+		8411A75E28BF69DB00205E32 /* res0.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = res0.c; path = ../../vorbis/lib/res0.c; sourceTree = "<group>"; };
+		8411A75F28BF69DB00205E32 /* sharedbook.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sharedbook.c; path = ../../vorbis/lib/sharedbook.c; sourceTree = "<group>"; };
+		8411A76028BF69DB00205E32 /* psy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = psy.c; path = ../../vorbis/lib/psy.c; sourceTree = "<group>"; };
+		8411A76228BF69DB00205E32 /* envelope.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = envelope.c; path = ../../vorbis/lib/envelope.c; sourceTree = "<group>"; };
+		8411A76328BF69DB00205E32 /* mdct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = mdct.c; path = ../../vorbis/lib/mdct.c; sourceTree = "<group>"; };
+		8411A76428BF69DB00205E32 /* codebook.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = codebook.c; path = ../../vorbis/lib/codebook.c; sourceTree = "<group>"; };
+		8411A76528BF69DB00205E32 /* window.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = window.c; path = ../../vorbis/lib/window.c; sourceTree = "<group>"; };
+		8411A76628BF69DB00205E32 /* vorbisenc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vorbisenc.c; path = ../../vorbis/lib/vorbisenc.c; sourceTree = "<group>"; };
+		8411A76728BF69DB00205E32 /* analysis.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = analysis.c; path = ../../vorbis/lib/analysis.c; sourceTree = "<group>"; };
+		8411A76828BF69DB00205E32 /* lookup.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lookup.c; path = ../../vorbis/lib/lookup.c; sourceTree = "<group>"; };
+		8411A76B28BF69DB00205E32 /* registry.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = registry.c; path = ../../vorbis/lib/registry.c; sourceTree = "<group>"; };
+		8411A76C28BF69DB00205E32 /* floor1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = floor1.c; path = ../../vorbis/lib/floor1.c; sourceTree = "<group>"; };
+		8411A76D28BF69DB00205E32 /* lpc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lpc.c; path = ../../vorbis/lib/lpc.c; sourceTree = "<group>"; };
+		8411A76E28BF69DB00205E32 /* mapping0.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = mapping0.c; path = ../../vorbis/lib/mapping0.c; sourceTree = "<group>"; };
+		8411A76F28BF69DB00205E32 /* synthesis.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = synthesis.c; path = ../../vorbis/lib/synthesis.c; sourceTree = "<group>"; };
+		8411A77028BF69DB00205E32 /* info.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = info.c; path = ../../vorbis/lib/info.c; sourceTree = "<group>"; };
+		8411A77128BF69DB00205E32 /* misc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = misc.c; path = ../../vorbis/lib/misc.c; sourceTree = "<group>"; };
 		842212311F939E23004BF9C9 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		8429C290215BB68700D2E5E0 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = src/MapViewController.swift; sourceTree = "<group>"; };
+		8434F3DF28BF6AFB00B38E82 /* oggread~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "oggread~.c"; sourceTree = "<group>"; };
+		8434F3E128BF732500B38E82 /* rwaloopplayerstereoogg.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = rwaloopplayerstereoogg.pd; path = "../pd-patches/rwaloopplayerstereoogg.pd"; sourceTree = "<group>"; };
+		8434F3E228BF732500B38E82 /* rwaloopplayermonoogg.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = rwaloopplayermonoogg.pd; path = "../pd-patches/rwaloopplayermonoogg.pd"; sourceTree = "<group>"; };
+		8434F3E328BF732500B38E82 /* rwaplayermonobinauralogg_fabian.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = rwaplayermonobinauralogg_fabian.pd; path = "../pd-patches/rwaplayermonobinauralogg_fabian.pd"; sourceTree = "<group>"; };
+		8434F3E428BF732500B38E82 /* rwaplayerstereobinauralogg_fabian.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = rwaplayerstereobinauralogg_fabian.pd; path = "../pd-patches/rwaplayerstereobinauralogg_fabian.pd"; sourceTree = "<group>"; };
 		8436A26B1C3156F400A4E328 /* rwaclient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rwaclient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8461E1692120377E00E7DD4F /* RwaLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RwaLocation.swift; path = src/RwaLocation.swift; sourceTree = "<group>"; };
 		8461E16B21203C4D00E7DD4F /* RwaArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RwaArea.swift; path = src/RwaArea.swift; sourceTree = "<group>"; };
@@ -143,6 +212,7 @@
 		84C70EC12213148A005C49C3 /* NSNumber+F53OSCNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSNumber+F53OSCNumber.m"; path = "../F53OSC/NSNumber+F53OSCNumber.m"; sourceTree = "<group>"; };
 		84C70EC22213148A005C49C3 /* F53OSCMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = F53OSCMessage.m; path = ../F53OSC/F53OSCMessage.m; sourceTree = "<group>"; };
 		84D7F165217DDF1F0082843F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		84E8BC1F28EF223900EF35DD /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		84EDF45F216CBD1300EBA052 /* ControlDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ControlDataViewController.swift; path = src/ControlDataViewController.swift; sourceTree = "<group>"; };
 		84F48CDB1F24B14C00869BF2 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = src/AppDelegate.swift; sourceTree = "<group>"; };
 		84F48CDC1F24B14C00869BF2 /* CoreLocationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreLocationController.swift; path = src/CoreLocationController.swift; sourceTree = "<group>"; };
@@ -175,7 +245,6 @@
 			files = (
 				84BD68462211B636005A22B5 /* libpd-ios.a in Frameworks */,
 				842212321F939E23004BF9C9 /* Accelerate.framework in Frameworks */,
-				E45AB4C227CE215600D65E93 /* Zip in Frameworks */,
 				84D7F166217DDF1F0082843F /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -183,9 +252,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8411A75128BF685700205E32 /* oggvorbis */ = {
+			isa = PBXGroup;
+			children = (
+				8411A76728BF69DB00205E32 /* analysis.c */,
+				8411A75B28BF69DB00205E32 /* bitrate.c */,
+				8411A75828BF69DB00205E32 /* block.c */,
+				8411A76428BF69DB00205E32 /* codebook.c */,
+				8411A76228BF69DB00205E32 /* envelope.c */,
+				8411A75A28BF69DB00205E32 /* floor0.c */,
+				8411A76C28BF69DB00205E32 /* floor1.c */,
+				8411A77028BF69DB00205E32 /* info.c */,
+				8411A76828BF69DB00205E32 /* lookup.c */,
+				8411A76D28BF69DB00205E32 /* lpc.c */,
+				8411A75D28BF69DB00205E32 /* lsp.c */,
+				8411A76E28BF69DB00205E32 /* mapping0.c */,
+				8411A76328BF69DB00205E32 /* mdct.c */,
+				8411A77128BF69DB00205E32 /* misc.c */,
+				8411A76028BF69DB00205E32 /* psy.c */,
+				8411A76B28BF69DB00205E32 /* registry.c */,
+				8411A75E28BF69DB00205E32 /* res0.c */,
+				8411A75F28BF69DB00205E32 /* sharedbook.c */,
+				8411A75928BF69DB00205E32 /* smallft.c */,
+				8411A76F28BF69DB00205E32 /* synthesis.c */,
+				8411A76628BF69DB00205E32 /* vorbisenc.c */,
+				8411A75C28BF69DB00205E32 /* vorbisfile.c */,
+				8411A76528BF69DB00205E32 /* window.c */,
+				8411A75728BF68B900205E32 /* ogg.h */,
+				8411A75628BF68B900205E32 /* os_types.h */,
+				8411A75228BF687700205E32 /* bitwise.c */,
+				8411A75328BF687700205E32 /* framing.c */,
+			);
+			path = oggvorbis;
+			sourceTree = "<group>";
+		};
 		8436A2621C3156F400A4E328 = {
 			isa = PBXGroup;
 			children = (
+				84E8BC1F28EF223900EF35DD /* Config.xcconfig */,
+				8434F3DF28BF6AFB00B38E82 /* oggread~.c */,
+				8411A75128BF685700205E32 /* oggvorbis */,
 				84C70EB32212EF20005C49C3 /* PdBase_Extension.m */,
 				84A4CE2A221317C70057CBE7 /* PdBase_Extension.h */,
 				84BD68372211B624005A22B5 /* libpd.xcodeproj */,
@@ -204,6 +310,10 @@
 				84C70EC12213148A005C49C3 /* NSNumber+F53OSCNumber.m */,
 				84C70EBE2213148A005C49C3 /* NSString+F53OSCString.m */,
 				84C70E9E2212E6D9005C49C3 /* fabian_dir256.txt */,
+				8434F3E228BF732500B38E82 /* rwaloopplayermonoogg.pd */,
+				8434F3E128BF732500B38E82 /* rwaloopplayerstereoogg.pd */,
+				8434F3E328BF732500B38E82 /* rwaplayermonobinauralogg_fabian.pd */,
+				8434F3E428BF732500B38E82 /* rwaplayerstereobinauralogg_fabian.pd */,
 				84C70EA42212E6DA005C49C3 /* rwabinauralwrappermono.pd */,
 				84C70E9F2212E6D9005C49C3 /* rwaloopplayermono.pd */,
 				84C70EA32212E6D9005C49C3 /* rwaloopplayerstereo.pd */,
@@ -303,10 +413,11 @@
 			buildRules = (
 			);
 			dependencies = (
+				84203DF128ED98090067F13F /* PBXTargetDependency */,
+				84203DEF28ED97810067F13F /* PBXTargetDependency */,
 			);
 			name = rwaclient;
 			packageProductDependencies = (
-				E45AB4C127CE215600D65E93 /* Zip */,
 			);
 			productName = "rwa client";
 			productReference = 8436A26B1C3156F400A4E328 /* rwaclient.app */;
@@ -324,7 +435,6 @@
 				TargetAttributes = {
 					8436A26A1C3156F400A4E328 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = X68HKQ3ZCY;
 						LastSwiftMigration = 0820;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -401,6 +511,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8434F3E628BF732500B38E82 /* rwaloopplayermonoogg.pd in Resources */,
+				8434F3E728BF732500B38E82 /* rwaplayermonobinauralogg_fabian.pd in Resources */,
+				8434F3E828BF732500B38E82 /* rwaplayerstereobinauralogg_fabian.pd in Resources */,
 				84C70EA62212E6DA005C49C3 /* rwaplayer5_1channelbinaural_fabian.pd in Resources */,
 				84C70EA72212E6DA005C49C3 /* rwaReferencePatch.pd in Resources */,
 				84C70EA82212E6DA005C49C3 /* stereoout.pd in Resources */,
@@ -408,9 +521,11 @@
 				84C70EAA2212E6DA005C49C3 /* rwaloopplayermono.pd in Resources */,
 				84C70EAB2212E6DA005C49C3 /* rwaplayer7channelbinaural_fabian.pd in Resources */,
 				84C70EAC2212E6DA005C49C3 /* rwaplayerstereobinaural_fabian.pd in Resources */,
+				8434F3E528BF732500B38E82 /* rwaloopplayerstereoogg.pd in Resources */,
 				84C70EAD2212E6DA005C49C3 /* stereoout_biquad.pd in Resources */,
 				84C70EAE2212E6DA005C49C3 /* rwaloopplayerstereo.pd in Resources */,
 				84C70EAF2212E6DA005C49C3 /* rwabinauralwrappermono.pd in Resources */,
+				84E8BC2028EF223900EF35DD /* Config.xcconfig in Resources */,
 				84C70EB02212E6DA005C49C3 /* rwaplayermonobinaural_fabian.pd in Resources */,
 				84F48D061F24B2AB00869BF2 /* LaunchScreen.storyboard in Resources */,
 				84F48D001F24B26C00869BF2 /* Assets.xcassets in Resources */,
@@ -442,52 +557,90 @@
 			buildActionMask = 2147483647;
 			files = (
 				84F48CF01F24B14C00869BF2 /* RwaEntity.swift in Sources */,
+				8411A78B28BF69DB00205E32 /* misc.c in Sources */,
+				8411A78928BF69DB00205E32 /* synthesis.c in Sources */,
 				84F48CEF1F24B14C00869BF2 /* RwaAsset.swift in Sources */,
+				8411A77D28BF69DB00205E32 /* mdct.c in Sources */,
 				84C70ECE2213148A005C49C3 /* F53OSCParser.m in Sources */,
+				8411A77328BF69DB00205E32 /* smallft.c in Sources */,
 				84F48CEE1F24B14C00869BF2 /* GameManager.swift in Sources */,
 				84C70EC82213148A005C49C3 /* F53OSCClient.m in Sources */,
+				8411A75428BF687700205E32 /* bitwise.c in Sources */,
 				84C70ED02213148A005C49C3 /* F53OSCMessage.m in Sources */,
 				E4232CB923D9C16D00E44DE3 /* vas_fir_list.c in Sources */,
+				8411A78128BF69DB00205E32 /* analysis.c in Sources */,
 				84C70EC42213148A005C49C3 /* F53OSCSocket.m in Sources */,
 				84F48CEA1F24B14C00869BF2 /* AppDelegate.swift in Sources */,
+				8411A77428BF69DB00205E32 /* floor0.c in Sources */,
+				8411A77928BF69DB00205E32 /* sharedbook.c in Sources */,
 				84F48CF61F24B14C00869BF2 /* SecondViewController.swift in Sources */,
+				8411A77828BF69DB00205E32 /* res0.c in Sources */,
 				84BD684E2211B749005A22B5 /* vas_fir.c in Sources */,
 				84F48CEC1F24B14C00869BF2 /* Device.swift in Sources */,
+				8411A78528BF69DB00205E32 /* registry.c in Sources */,
 				84C70ECC2213148A005C49C3 /* NSString+F53OSCString.m in Sources */,
 				84C70ECD2213148A005C49C3 /* F53OSCServer.m in Sources */,
+				8411A77228BF69DB00205E32 /* block.c in Sources */,
 				E4232CB723D9C12B00E44DE3 /* vas_firobject.c in Sources */,
 				84F48CF51F24B14C00869BF2 /* RwaUtilities.swift in Sources */,
 				84C70EC72213148A005C49C3 /* F53OSCBundle.m in Sources */,
+				8411A78228BF69DB00205E32 /* lookup.c in Sources */,
+				8411A78828BF69DB00205E32 /* mapping0.c in Sources */,
 				84F48CF11F24B14C00869BF2 /* RwaGameLoop.swift in Sources */,
 				84C70ECB2213148A005C49C3 /* F53OSCTimeTag.m in Sources */,
 				8461E16A2120377E00E7DD4F /* RwaLocation.swift in Sources */,
+				8411A77628BF69DB00205E32 /* vorbisfile.c in Sources */,
 				84C70EB42212EF20005C49C3 /* PdBase_Extension.m in Sources */,
 				84F48CF41F24B14C00869BF2 /* RwaState.swift in Sources */,
 				8429C291215BB68700D2E5E0 /* MapViewController.swift in Sources */,
+				8411A78628BF69DB00205E32 /* floor1.c in Sources */,
 				84C70E972212E48E005C49C3 /* freeverb~.c in Sources */,
 				84C70EC32213148A005C49C3 /* GCDAsyncUdpSocket.m in Sources */,
 				84C70EC62213148A005C49C3 /* NSDate+F53OSCTimeTag.m in Sources */,
+				8411A77C28BF69DB00205E32 /* envelope.c in Sources */,
 				84C70EC52213148A005C49C3 /* F53OSCPacket.m in Sources */,
 				84C70EC92213148A005C49C3 /* GCDAsyncSocket.m in Sources */,
 				84BD684D2211B749005A22B5 /* vas_dynamicFirChannel.c in Sources */,
+				8411A77F28BF69DB00205E32 /* window.c in Sources */,
+				8411A77A28BF69DB00205E32 /* psy.c in Sources */,
 				84EDF460216CBD1300EBA052 /* ControlDataViewController.swift in Sources */,
+				8411A77E28BF69DB00205E32 /* codebook.c in Sources */,
+				8411A78028BF69DB00205E32 /* vorbisenc.c in Sources */,
+				8411A78728BF69DB00205E32 /* lpc.c in Sources */,
 				84BD68502211B749005A22B5 /* vas_fir_binaural.c in Sources */,
+				8411A75528BF687700205E32 /* framing.c in Sources */,
 				8461E16C21203C4D00E7DD4F /* RwaArea.swift in Sources */,
+				8411A78A28BF69DB00205E32 /* info.c in Sources */,
 				84C70ECF2213148A005C49C3 /* NSNumber+F53OSCNumber.m in Sources */,
+				8434F3E028BF6AFB00B38E82 /* oggread~.c in Sources */,
 				84BD68512211B749005A22B5 /* vas_mem.c in Sources */,
 				84F48CF31F24B14C00869BF2 /* RwaScene.swift in Sources */,
 				84F48CEB1F24B14C00869BF2 /* CoreLocationController.swift in Sources */,
 				E45AB4CD27CF5E0100D65E93 /* DownloadManager.swift in Sources */,
 				84C70ECA2213148A005C49C3 /* NSData+F53OSCBlob.m in Sources */,
 				84F48CF21F24B14C00869BF2 /* RwaImport.swift in Sources */,
+				8411A77528BF69DB00205E32 /* bitrate.c in Sources */,
 				84F48CED1F24B14C00869BF2 /* FirstViewController.swift in Sources */,
 				E4232CB523D9C09D00E44DE3 /* rwa_binauralsimple~.c in Sources */,
+				8411A77728BF69DB00205E32 /* lsp.c in Sources */,
 				84BD684F2211B749005A22B5 /* vas_gps_util.c in Sources */,
 				84BD68522211B749005A22B5 /* vas_util.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		84203DEF28ED97810067F13F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 84203DEE28ED97810067F13F /* Zip */;
+		};
+		84203DF128ED98090067F13F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "libpd-ios";
+			targetProxy = 84203DF028ED98090067F13F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		84F48D021F24B2AB00869BF2 /* LaunchScreen.storyboard */ = {
@@ -545,8 +698,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../libogg/include\"/**",
+					"\"$(SRCROOT)/../libogg/include/ogg\"",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
+				OBJROOT = /Users/admin/Repositories/buildtmp;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
 				SDKROOT = iphoneos;
@@ -585,8 +743,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../libogg/include\"/**",
+					"\"$(SRCROOT)/../libogg/include/ogg\"",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OBJROOT = /Users/admin/Repositories/buildtmp;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
 				SDKROOT = iphoneos;
@@ -596,11 +759,13 @@
 		};
 		8436A2801C3156F400A4E328 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 84E8BC1F28EF223900EF35DD /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Thomas Resch (EA234ZAS4B)";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X68HKQ3ZCY;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					PUREDATA,
@@ -609,7 +774,12 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_MISSING_PARENTHESES = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../libogg/include/ogg\"",
+					"\"$(SRCROOT)/../libogg/include\"",
+					"\"$(SRCROOT)/../vorbis/include\"/**",
+					"\"$(SRCROOT)/../vorbis/lib\"/**",
+				);
 				INFOPLIST_FILE = src/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -617,6 +787,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/libs";
+				OBJROOT = /Users/admin/Repositories/buildtmp;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-DPD",
@@ -628,6 +799,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.beryllium.rwa-client";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "src/rwa client-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -647,11 +819,13 @@
 		};
 		8436A2811C3156F400A4E328 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 84E8BC1F28EF223900EF35DD /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Thomas Resch (EA234ZAS4B)";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X68HKQ3ZCY;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					PUREDATA,
@@ -660,7 +834,12 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_MISSING_PARENTHESES = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../libogg/include/ogg\"",
+					"\"$(SRCROOT)/../libogg/include\"",
+					"\"$(SRCROOT)/../vorbis/include\"/**",
+					"\"$(SRCROOT)/../vorbis/lib\"/**",
+				);
 				INFOPLIST_FILE = src/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -668,6 +847,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/libs";
+				OBJROOT = /Users/admin/Repositories/buildtmp;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-DPD",
@@ -679,6 +859,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.beryllium.rwa-client";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "src/rwa client-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				USER_HEADER_SEARCH_PATHS = (
@@ -730,7 +911,7 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		E45AB4C127CE215600D65E93 /* Zip */ = {
+		84203DEE28ED97810067F13F /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E45AB4C027CE215600D65E93 /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;

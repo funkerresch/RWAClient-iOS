@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Zip
+//import Zip
 
 var gameMgr: GameManager = GameManager();
 

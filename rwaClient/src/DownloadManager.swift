@@ -1,6 +1,6 @@
 import os
 import SwiftUI
-import Zip
+//import Zip
 
 class DownloadManager: NSObject, ObservableObject {
     static var shared = DownloadManager()
@@ -73,18 +73,18 @@ extension DownloadManager: URLSessionDelegate, URLSessionDownloadDelegate {
             let string = urls.relativeString
             if string.hasSuffix("zip")
             {
-                print("Found Zip")
-                do {
-                    try Zip.unzipFile(urls, destination: documentsDirectory, overwrite: true, password: nil, progress: { (progress) -> () in
-                        print(progress)
-                    }) // Unzip
-                    
-                    try FileManager.default.removeItem(at: destinationUrl)
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "receivedGame"), object: nil)
-                }
-                catch {
-                    print("Something went wrong")
-                }
+//                print("Found Zip")
+//                do {
+//                    try Zip.unzipFile(urls, destination: documentsDirectory, overwrite: true, password: nil, progress: { (progress) -> () in
+//                        print(progress)
+//                    }) // Unzip
+//
+//                    try FileManager.default.removeItem(at: destinationUrl)
+//                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "receivedGame"), object: nil)
+//                }
+//                catch {
+//                    print("Something went wrong")
+//                }
             }
         }
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "copyFromBundle"), object: nil)

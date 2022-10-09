@@ -245,8 +245,8 @@ class RwaImport:NSObject, XMLParserDelegate
             let height = attributeDict.removeValue(forKey: "height")!
             statePtr?.height = Double(height)!
             
-            let enterOffset = attributeDict.removeValue(forKey: "enteroffset")!
-            statePtr?.enterOffset = Double(enterOffset)!
+//            let enterOffset = attributeDict.removeValue(forKey: "enteroffset")!
+//            statePtr?.enterOffset = Double(enterOffset)!
             
             let exitOffset = attributeDict.removeValue(forKey: "exitoffset")!
             statePtr?.exitOffset = Double(exitOffset)!
@@ -293,6 +293,15 @@ class RwaImport:NSObject, XMLParserDelegate
             newAsset.playOnce = (attributeDict.removeValue(forKey: "playonlyonce")?.toBool())!
             newAsset.rawSensors2pd = (attributeDict.removeValue(forKey: "rawsensors2pd")?.toBool())!
             newAsset.gain = Double(attributeDict.removeValue(forKey: "gain")!)!
+            
+            if let elevation = attributeDict.removeValue(forKey: "elevation") {
+                newAsset.elevation = Float32(elevation)!
+            }
+            
+            if let smoothDistance = attributeDict.removeValue(forKey: "smoothdist") {
+                newAsset.smoothDistance = Double(smoothDistance)!
+            }
+            
             newAsset.autoRotate = (attributeDict.removeValue(forKey: "rotate")?.toBool())!
             newAsset.rotateFrequency = Double(attributeDict.removeValue(forKey: "rotatefrequency")!)!
             newAsset.multiChannelSourceRadius = Double(attributeDict.removeValue(forKey: "channelradius")!)!
