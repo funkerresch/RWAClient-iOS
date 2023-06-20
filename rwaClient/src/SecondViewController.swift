@@ -126,7 +126,7 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
                     // Get the attitude relative to the magnetic north reference frame.
                      let roll = validHeadMotionData.attitude.roll * (180/Double.pi);
                      let yaw = validHeadMotionData.attitude.yaw * (180/Double.pi);
-                     var azi = Int(yaw) - 180
+                     var azi = Int(yaw)
                      if azi <= 0 {
                          azi = -azi
                      }
