@@ -37,7 +37,8 @@ var stepCount = -1;
 var averageAccel:MovingAverage = MovingAverage(period: 128)
 var calibrateOnStart = false
 
-class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate
+@available(iOS 14.0, *)
+class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate, CMHeadphoneMotionManagerDelegate
 {
     @IBOutlet var startStopButton:UIButton!
     @IBOutlet var txtTask: UITextField!
@@ -50,6 +51,7 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
     @IBOutlet var currentScene: UITextField!
     @IBOutlet var currentState: UITextField!
     @IBOutlet var useNewHeadtracker:UIButton!
+    @IBOutlet var useHeadphones:UISwitch!
     @IBOutlet var calibrateOnStartSwitch:UISwitch!
 
     var timer:Timer? = Timer()
@@ -62,6 +64,7 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
     var dataBuffer:NSMutableData!
     var scanAfterDisconnecting:Bool = true
     var motion:CMMotionManager = CMMotionManager();
+    var headphoneMotion:CMHeadphoneMotionManager = CMHeadphoneMotionManager();
     
     var showMovementData = false
     var linAccelAverageCounter = 0;
@@ -71,7 +74,8 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
     var queue: OperationQueue = OperationQueue();
     
     func startQueuedUpdates() {
-       if motion.isDeviceMotionAvailable {
+        
+      if motion.isDeviceMotionAvailable {
           self.motion.deviceMotionUpdateInterval = 1.0 / 100.0
           self.motion.showsDeviceMovementDisplay = true
           self.motion.startDeviceMotionUpdates(using: .xTrueNorthZVertical, to: self.queue, withHandler: { (data, error) in
@@ -101,7 +105,7 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
            headTrackerConnected = true
            updateButtons()
        }
-        
+       
         if (motion.isAccelerometerAvailable) {
             motion.accelerometerUpdateInterval = 0.02;
             motion.startAccelerometerUpdates(to: self.queue, withHandler: { (data, error) in
@@ -115,13 +119,56 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
         }
     }
     
+    func startQueuedHeadUpdates() {
+        if headphoneMotion.isDeviceMotionAvailable {
+            self.headphoneMotion.startDeviceMotionUpdates(to: self.queue, withHandler: {(data, error) in
+                if let validHeadMotionData  = data {
+                    // Get the attitude relative to the magnetic north reference frame.
+                     let roll = validHeadMotionData.attitude.roll * (180/Double.pi);
+                     let yaw = validHeadMotionData.attitude.yaw * (180/Double.pi);
+                     var azi = Int(yaw) - 180
+                     if azi <= 0 {
+                         azi = -azi
+                     }
+                     else {
+                         azi = 360 - azi
+                     }
+                     
+                     var ele = -Int(roll)
+                     if inverseElevation {
+                        ele = Int(roll)
+                     }
+                     
+                     hero.azimuth = azi
+                     hero.elevation = ele
+                    
+                    let z_acceleration = validHeadMotionData.userAcceleration.z
+                    linAccelAverage = Float(averageAccel.average(value: Double(-z_acceleration)))
+                    linAccel = Float(-z_acceleration)
+                    self.evalAccelData();
+                }
+            })
+            headTrackerConnected = true
+            updateButtons()
+        }
+        
+    }
+    
     func stopDeviceOrientation()
     {
+        
         if motion.isDeviceMotionAvailable {
             self.motion.stopDeviceMotionUpdates() }
     }
     
+    func stopHeadDeviceOrientationAndAccelleration()
+    {
+        if headphoneMotion.isDeviceMotionActive {
+            self.headphoneMotion.stopDeviceMotionUpdates() }
+    }
+    
     func setInputGain(gain: Float) {
+        
         let audioSession = AVAudioSession.sharedInstance()
         if audioSession.isInputGainSettable {
             do {
@@ -132,6 +179,7 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
                 print(error.localizedDescription)
             }
         }
+        
     }
     
     func stopScanning() {
@@ -157,8 +205,16 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
     }
     
     func disconnect() {
+        
+        let session = AVAudioSession.sharedInstance()
+        
         guard let peripheral = self.peripheral else {
             print("Peripheral object has not been created yet.")
+            return
+        }
+        
+        //prevent disconnection from airpods when toying around with headtracker // maybe there is a specific uuid for that instead?
+        if peripheral.name!.lowercased().contains("airpods")  {
             return
         }
         
@@ -692,11 +748,35 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
         if(useHeadTracker) {
             stopDeviceOrientation()
             centralManager = CBCentralManager(delegate: self, queue: nil)
+            stopHeadDeviceOrientationAndAccelleration()
         }
         else {
-            disconnect()
-            startQueuedUpdates();
+            if headphoneMotion.isDeviceMotionAvailable && useHeadphones.isOn == true
+            {
+                startQueuedHeadUpdates()
+            }
+            else
+            {
+                disconnect()
+                startQueuedUpdates()
+            }
+                
         }
+    }
+    
+    @IBAction func switchBetweenDevieAndHeadphoneOrientation  (_ sender:UISwitch)
+    {
+        if(sender.isOn)
+        {
+            stopDeviceOrientation()
+            startQueuedHeadUpdates()
+        }
+        else
+        {
+            startQueuedUpdates()
+            stopHeadDeviceOrientationAndAccelleration()
+        }
+            
     }
     
     @IBAction func bleConnect(_ sender: UIButton)

@@ -766,7 +766,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = X68HKQ3ZCY;
+				DEVELOPMENT_TEAM = 8B38T6252F;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					PUREDATA,
 					PDINSTANCE,
@@ -787,7 +787,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/libs";
-				OBJROOT = /Users/admin/Repositories/buildtmp;
+				OBJROOT = /Users/JonasFuellemann/Offline_Dokumente/GitHub/TestRWA/builds;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-DPD",
@@ -796,7 +796,7 @@
 					"-DUSEAPI_DUMMY",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.beryllium.rwa-client";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.beryllium.rwa-client-jrf";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -826,7 +826,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = X68HKQ3ZCY;
+				DEVELOPMENT_TEAM = 8B38T6252F;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					PUREDATA,
 					PDINSTANCE,
@@ -847,7 +847,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/libs";
-				OBJROOT = /Users/admin/Repositories/buildtmp;
+				OBJROOT = /Users/JonasFuellemann/Offline_Dokumente/GitHub/TestRWA/builds;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-DPD",
@@ -856,7 +856,7 @@
 					"-DUSEAPI_DUMMY",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.beryllium.rwa-client";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.beryllium.rwa-client-jrf";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

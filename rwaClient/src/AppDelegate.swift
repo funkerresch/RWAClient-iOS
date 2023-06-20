@@ -101,6 +101,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        
         if let c = audioController
         {
+            // allow bluetooth a2dp devices in the AVAudioSession
+            c.allowBluetoothA2DP = true
+            
             let sr = sampleRate * 1000
             let s = c.configurePlayback(withSampleRate: Int32(sr), inputChannels: 1, outputChannels: 2, inputEnabled: true).toPdAudioControlStatus()
             c.configureTicksPerBuffer(16)
