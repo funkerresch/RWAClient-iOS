@@ -145,7 +145,7 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
                     let z_acceleration = validHeadMotionData.userAcceleration.z
                     linAccelAverage = Float(averageAccel.average(value: Double(-z_acceleration)))
                     linAccel = Float(-z_acceleration)
-                    self.evalAccelData();
+                    self.evalHeadAccelData();
                 }
             })
             headTrackerConnected = true
@@ -561,6 +561,52 @@ class SecondViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
                 {
                     let dif = linAccel+linAccelAverage;
                     if(dif > 0.6)
+                    {
+                        stepCount+=1;
+                        step = 1;
+//                        unblockStepTime = Timer.scheduledTimer(timeInterval: 0.45, target: self, selector: #selector(SecondViewController.unblockSteps), userInfo: nil, repeats: false)
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(450), execute: {
+                            self.unblockSteps()
+                        })
+                        blockSteps = true;
+                        print("STEP_2");
+                    }
+                }
+            }
+        }
+    }
+    
+    func evalHeadAccelData()
+    {
+        //print(linAccelAverage);
+        //print("Notification STARTED on characteristic: \(linAccelAverage) \(linAccel)")
+        
+        if(!blockSteps)
+        {
+            if(linAccel >= 0)
+            {
+                if(linAccelAverage >= 0)
+                {
+                    let dif = linAccel-linAccelAverage;
+                    if(dif > 0.15)
+                    {
+                        step = 1;
+                        stepCount+=1;
+//                        unblockStepTime = Timer.scheduledTimer(timeInterval: 0.45, target: self, selector: #selector(SecondViewController.unblockSteps), userInfo: nil, repeats: false)
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(450), execute: {
+                            self.unblockSteps()
+                        })
+                        
+                        blockSteps = true;
+                        print("STEP_1");
+                    }
+                }
+                else
+                {
+                    let dif = linAccel+linAccelAverage;
+                    if(dif > 0.15)
                     {
                         stepCount+=1;
                         step = 1;
